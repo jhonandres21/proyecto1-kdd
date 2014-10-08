@@ -1,5 +1,5 @@
 ﻿
-/*Nombre de la base de datos: colmovildwt*/
+/*Nombre de la base de datos: colmovildwh*/
 
 CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'true', 'false' ) );
 CREATE DOMAIN dominio_genero CHAR (9) CHECK ( VALUE IN ( 'masculino', 'femenino' ) );
@@ -14,6 +14,7 @@ CREATE SEQUENCE seq_cliente INCREMENT BY 1 START WITH 1;
 create table cliente 
 (
 	id_cliente bigint NOT NULL DEFAULT nextval('seq_cliente'::regclass),
+	id_relacional bigint NOT NULL,
   	numero_identificacion INTEGER NOT NULL ,
   	nombres VARCHAR(50) NOT NULL,
   	apellidos VARCHAR(50) NOT NULL,
@@ -49,13 +50,15 @@ CREATE SEQUENCE seq_plan INCREMENT BY 1 START WITH 1;
 create table plan 
 (
 	id_plan bigint NOT NULL DEFAULT nextval('seq_plan'::regclass),
+	id_relacional_datos bigint NOT NULL,
+	id_relacional_voz bigint NOT NULL,
   	tipo_plan_datos VARCHAR(100) NOT NULL,
   	tipo_plan_voz VARCHAR(100) NOT NULL,
   	PRIMARY KEY (id_plan) 
 );
 
 /*==============================================================*/
-/* Dimensión: Teléfono                                          */
+/* Dimensión: Teléfono (hace referencia a simcard)              */
 /*==============================================================*/
 
 CREATE SEQUENCE seq_telefono INCREMENT BY 1 START WITH 1;
@@ -63,13 +66,14 @@ CREATE SEQUENCE seq_telefono INCREMENT BY 1 START WITH 1;
 create table telefono 
 (
 	id_telefono bigint NOT NULL DEFAULT nextval('seq_telefono'::regclass),
+	id_relacional bigint NOT NULL, /*id_sim_card*/
   	numero_serie VARCHAR(50) NOT NULL,
   	numero_telefonico VARCHAR(50) NOT NULL,
   	PRIMARY KEY (id_telefono) 
 );
 
 /*==============================================================*/
-/* Dimensión: Sucursal                                          */
+/* Dimensión: Sucursal  (hace referencia a oficina)             */
 /*==============================================================*/
 
 CREATE SEQUENCE seq_sucursal INCREMENT BY 1 START WITH 1;
@@ -77,6 +81,7 @@ CREATE SEQUENCE seq_sucursal INCREMENT BY 1 START WITH 1;
 create table sucursal 
 (
 	id_sucursal bigint NOT NULL DEFAULT nextval('seq_sucursal'::regclass),
+	id_relacional bigint NOT NULL,
   	direccion VARCHAR(200) NOT NULL,
   	ciudad VARCHAR(100) NOT NULL,
   	departamento VARCHAR(100) NOT NULL,
@@ -93,6 +98,7 @@ CREATE SEQUENCE seq_operador INCREMENT BY 1 START WITH 1;
 create table operador 
 (
 	id_operador bigint NOT NULL DEFAULT nextval('seq_operador'::regclass),
+	id_relacional bigint NOT NULL,
   	nombre VARCHAR(50) NOT NULL,
   	pais VARCHAR(100) NOT NULL,
   	PRIMARY KEY (id_operador)
