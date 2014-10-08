@@ -1,4 +1,8 @@
+DROP SCHEMA colmovil;
+
 CREATE SCHEMA colmovil;
+
+SET SCHEMA 'colmovil';
 
 DROP TABLE IF EXISTS colmovil.cliente CASCADE;
 DROP TABLE IF EXISTS colmovil.localizacion CASCADE;
@@ -252,21 +256,28 @@ CREATE TABLE colmovil.recarga (
     ON UPDATE NO ACTION);
     
 
-copy cliente FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/clientes.csv' DELIMITER ';' CSV;
+copy cliente FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\clientes.csv' DELIMITER ',' CSV;
 
-COPY localizacion FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/localizacion.csv' DELIMITER ';' CSV;
+COPY localizacion FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\localizacion.csv' DELIMITER ',' CSV;
 
-COPY oficina FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/oficinas.csv' DELIMITER ';' CSV;
+COPY oficina FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\oficinas.csv' DELIMITER ',' CSV;
 
-COPY operador_roaming FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/operador_roaming.csv' DELIMITER ';' CSV;
+COPY operador_roaming FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\operador_roaming.csv' DELIMITER ',' CSV;
 
-COPY equipo_celular FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/equipo_celular.csv' DELIMITER ';' CSV;
+COPY equipo_celular FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\equipo_celular.csv' DELIMITER ',' CSV;
 
-COPY plan_voz FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/plan_voz.csv' DELIMITER ';' CSV;
+COPY plan_voz FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\plan_voz.csv' DELIMITER ',' CSV;
 
-COPY plan_datos FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/plan_datos.csv' DELIMITER ';' CSV;
+COPY plan_datos FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\plan_datos.csv' DELIMITER ',' CSV;
 
-COPY sim_card FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/sim_card.csv' DELIMITER ';' CSV;
+COPY sim_card FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\sim_card.csv' DELIMITER ',' CSV;
 
-COPY contrato FROM '/afs/eisc/user/pregrado/2010/luisfemm/Escritorio/DatosColmovil/contratos_sim_card.csv' DELIMITER ';' CSV;
+COPY contrato FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\contratos_sim_carddef.csv' DELIMITER ',' CSV;
 
+COPY operador FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\operador.csv' DELIMITER ',' CSV;
+
+COPY llamada FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\llamadas_sim_card.csv' DELIMITER ',' CSV;
+
+COPY retiro FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\retiros_sim_card.csv' DELIMITER ',' CSV;
+
+COPY recarga FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\recargas_sim_card.csv' DELIMITER ',' CSV;
