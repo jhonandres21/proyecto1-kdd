@@ -1,3 +1,4 @@
+
 DROP SCHEMA 'colmovil-dwh'﻿ CASCADE;
 CREATE SCHEMA 'colmovil-dwh'﻿;
 SET SCHEMA 'colmovil-dwh';
