@@ -1,8 +1,14 @@
-﻿
-/*Nombre de la base de datos: colmovildwh*/
+DROP SCHEMA 'colmovil-dwh'﻿ CASCADE;
+CREATE SCHEMA 'colmovil-dwh'﻿;
+SET SCHEMA 'colmovil-dwh';
+/*Nombre del esquema: colmovil-dwh*/
 
+CREATE DOMAIN dominio_tipo_id CHAR (5) CHECK ( VALUE IN ( 'C.C.', 'C.E.' ) );
 CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'true', 'false' ) );
 CREATE DOMAIN dominio_genero CHAR (9) CHECK ( VALUE IN ( 'masculino', 'femenino' ) );
+CREATE DOMAIN dominio_dia_noche CHAR (5) CHECK ( VALUE IN ( 'dia', 'noche' ) );
+CREATE DOMAIN dominio_periodo_dia CHAR (20) CHECK ( VALUE IN ( 'mañana', 'mediodia', 'tarde', 'noche' ));
+CREATE DOMAIN dominio_periodo_año CHAR (30) CHECK ( VALUE IN ( 'Vacaciones_Verano', 'Vacaciones_Invierno', 'Semana_Santa', 'Navidad' ) );
 CREATE DOMAIN dominio_estado_civil CHAR (9) CHECK ( VALUE IN ( 'soltero', 'divorciado', 'union libre', 'casado', 'viudo' ) );
 
 /*==============================================================*/
@@ -13,15 +19,14 @@ CREATE SEQUENCE seq_cliente INCREMENT BY 1 START WITH 1;
 
 create table cliente 
 (
-	id_cliente bigint NOT NULL DEFAULT nextval('seq_cliente'::regclass),
-	id_relacional bigint NOT NULL,
-  	numero_identificacion INTEGER NOT NULL ,
+	SK_cliente BIGINT NOT NULL DEFAULT nextval('seq_cliente'::regclass),
+  	numero_id INTEGER NOT NULL ,
+  	tipo_id dominio_tipo_id NOT NULL,
   	nombres VARCHAR(50) NOT NULL,
   	apellidos VARCHAR(50) NOT NULL,
-  	direccion VARCHAR(200) NOT NULL,
   	fecha_nacimiento DATE NOT NULL,
-  	flag_empresa dominio_flag NOT NULL,
-  	PRIMARY KEY (id_cliente) 
+  	email VARCHAR(50) NOT NULL,
+  	PRIMARY KEY (SK_cliente) 
 );
 
 /*==============================================================*/
@@ -32,90 +37,103 @@ CREATE SEQUENCE seq_demografia INCREMENT BY 1 START WITH 1;
 
 create table demografia 
 (
-	id_demografia bigint NOT NULL DEFAULT nextval('seq_demografia'::regclass),
+	SK_demografia BIGINT NOT NULL DEFAULT nextval('seq_demografia'::regclass),
   	estado_civil dominio_estado_civil NOT NULL,
-  	estrato integer NOT NULL,
+  	estrato integer NOT NULL CHECK estrato BETWEEN 1 AND 6,
   	genero dominio_genero NOT NULL,
-  	ciudad VARCHAR(100) NOT NULL,
-  	departamento VARCHAR(100) NOT NULL,
-  	PRIMARY KEY (id_demografia) 
+  	PRIMARY KEY (SK_demografia) 
 );
 
 /*==============================================================*/
-/* Dimensión: Plan                                              */
+/* Dimensión: Plan Voz                                          */
 /*==============================================================*/
 
-CREATE SEQUENCE seq_plan INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE seq_plan_voz INCREMENT BY 1 START WITH 1;
 
-create table plan 
+create table plan_voz 
 (
-	id_plan bigint NOT NULL DEFAULT nextval('seq_plan'::regclass),
-	id_relacional_datos bigint NOT NULL,
-	id_relacional_voz bigint NOT NULL,
-  	tipo_plan_datos VARCHAR(100) NOT NULL,
+	SK_plan_voz BIGINT NOT NULL DEFAULT nextval('seq_plan_voz'::regclass),
   	tipo_plan_voz VARCHAR(100) NOT NULL,
-  	PRIMARY KEY (id_plan) 
+  	nombre_plan_voz VARCHAR(100) NOT NULL,
+  	es_corporativo dominio_flag  NOT NULL,
+  	PRIMARY KEY (SK_plan_voz) 
 );
 
 /*==============================================================*/
-/* Dimensión: Teléfono (hace referencia a simcard)              */
+/* Dimensión: Plan Datos                                        */
 /*==============================================================*/
 
-CREATE SEQUENCE seq_telefono INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE seq_plan_datos INCREMENT BY 1 START WITH 1;
 
-create table telefono 
+create table plan_datos 
 (
-	id_telefono bigint NOT NULL DEFAULT nextval('seq_telefono'::regclass),
-	id_relacional bigint NOT NULL, /*id_sim_card*/
-  	numero_serie VARCHAR(50) NOT NULL,
-  	numero_telefonico VARCHAR(50) NOT NULL,
-  	PRIMARY KEY (id_telefono) 
+	SK_plan_datos BIGINT NOT NULL DEFAULT nextval('seq_plan_datos'::regclass),
+  	nombre_plan_datos VARCHAR(100) NOT NULL,
+  	es_corporativo dominio_flag  NOT NULL,
+  	PRIMARY KEY (SK_plan_datos) 
+);
+
+
+/*==============================================================*/
+/* Dimensión: Equipo						*/
+/*==============================================================*/
+
+CREATE SEQUENCE seq_equipo INCREMENT BY 1 START WITH 1;
+
+create table equipo 
+(
+	SK_equipo BIGINT NOT NULL DEFAULT nextval('seq_equipo'::regclass),
+	id_equipo BIGINT NOT NULL,
+	marca VARCHAR(50) NOT NULL,
+	modelo VARCHAR(50) NOT NULL,
+	precio DOUBLE NOT NULL,
+  	PRIMARY KEY (SK_equipo) 
 );
 
 /*==============================================================*/
-/* Dimensión: Sucursal  (hace referencia a oficina)             */
+/* Dimensión: Sim Card						*/
 /*==============================================================*/
 
-CREATE SEQUENCE seq_sucursal INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE seq_sim_card INCREMENT BY 1 START WITH 1;
 
-create table sucursal 
+create table sim_card 
 (
-	id_sucursal bigint NOT NULL DEFAULT nextval('seq_sucursal'::regclass),
-	id_relacional bigint NOT NULL,
+	SK_sim_card BIGINT NOT NULL DEFAULT nextval('seq_sim_card'::regclass),
+	numero_serie BIGINT NOT NULL,
+	numero_telefono BIGINT NOT NULL,
+  	PRIMARY KEY (SK_sim_card) 
+);
+
+/*==============================================================*/
+/* Dimensión: Oficina						*/
+/*==============================================================*/
+
+CREATE SEQUENCE seq_oficina INCREMENT BY 1 START WITH 1;
+
+create table oficina 
+(
+	SK_oficina BIGINT NOT NULL DEFAULT nextval('seq_oficina'::regclass),
   	direccion VARCHAR(200) NOT NULL,
-  	ciudad VARCHAR(100) NOT NULL,
-  	departamento VARCHAR(100) NOT NULL,
-  	numero_empleados integer NULL,
-  	PRIMARY KEY (id_sucursal) 
+  	numero_empleados INTEGER NULL,
+  	PRIMARY KEY (SK_oficina) 
 );
 
 /*==============================================================*/
-/* Dimensión: Operador                                          */
+/* Dimensión: Tiempo						*/
 /*==============================================================*/
 
-CREATE SEQUENCE seq_operador INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE seq_tiempo INCREMENT BY 1 START WITH 1;
 
-create table operador 
+create table tiempo
 (
-	id_operador bigint NOT NULL DEFAULT nextval('seq_operador'::regclass),
-	id_relacional bigint NOT NULL,
-  	nombre VARCHAR(50) NOT NULL,
-  	pais VARCHAR(100) NOT NULL,
-  	PRIMARY KEY (id_operador)
-);
-
-/*==============================================================*/
-/* Dimensión: Hora                                              */
-/*==============================================================*/
-
-CREATE SEQUENCE seq_hora INCREMENT BY 1 START WITH 1;
-
-create table hora 
-(
-	id_hora bigint NOT NULL DEFAULT nextval('seq_hora'::regclass),
-  	horario_inicio time without time zone NOT NULL,
-  	horario_fin time without time zone NOT NULL,
-  	PRIMARY KEY (id_hora)
+	SK_tiempo BIGINT NOT NULL DEFAULT nextval('seq_tiempo'::regclass),
+  	tiempo TIME WITHOUT TIME ZONE NOT NULL,
+  	hora TIME WITHOUT TIME ZONE NOT NULL,
+	cuarto_de_hora INTEGER NOT NULL,
+	minuto INTEGER NOT NULL,
+	periodo_del_dia dominio_periodo_dia NOT NULL,
+	dia_noche_flag dominio_dia_noche NOT NULL,
+  	PRIMARY KEY (SK_tiempo)
 );
 
 /*==============================================================*/
@@ -126,10 +144,41 @@ CREATE SEQUENCE seq_fecha INCREMENT BY 1 START WITH 1;
 
 create table fecha 
 (
-	id_fecha bigint NOT NULL DEFAULT nextval('seq_fecha'::regclass),
-  	PRIMARY KEY (id_fecha)
+	SK_fecha BIGINT NOT NULL DEFAULT nextval('seq_fecha'::regclass),
+	fecha DATE NOT NULL,
+	anio INTEGER NOT NULL,
+	mes INTEGER NOT NULL,
+	nombre_mes VARCHAR (20) NOT NULL,
+	dia INTEGER NOT NULL,
+	dia_del_anio INTEGER NOT NULL,
+	nombre_dia VARCHAR (10),
+	numero_semana INTEGER NOT NULL,
+	fecha_formateada DATE NOT NULL,
+	trimestre INTEGER NOT NULL,
+	mes_del_anio INTEGER NOT NULL,
+	fin_de_semestre dominio_flag,
+	dia_festivo dominio_flag NOT NULL,
+	periodo dominio_periodo_anio NOT NULL,
+	fecha_comienzo_semana dominio_flag NOT NULL,
+	fecha_fin_semana dominio_flag NOT NULL,
+	fecha_comienzo_mes dominio_flag NOT NULL,
+  	PRIMARY KEY (SK_fecha)
 );
 
+/*==============================================================*/
+/* Dimensión: Localización                                       */
+/*==============================================================*/
+
+CREATE SEQUENCE seq_localizacion INCREMENT BY 1 START WITH 1;
+
+create table localizacion 
+(
+	SK_localizacion BIGINT NOT NULL DEFAULT nextval('seq_localizacion'::regclass),
+  	departamento VARCHAR (30) NOT NULL,
+  	ciudad VARCHAR (30) NOT NULL,
+  	pais VARCHAR (30) NOT NULL,
+  	PRIMARY KEY (SK_localizacion) 
+);
 
 /*============================================================================================================================*/
 /*=========================================================== HECHOS  =========================================================*/
@@ -137,41 +186,45 @@ create table fecha
 
 
 /*==============================================================*/
-/* Hecho: abandono colmovil                                     */
+/* Hecho: Retiros                                   */
 /*==============================================================*/
 
-CREATE SEQUENCE seq_abandono INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE seq_retiro INCREMENT BY 1 START WITH 1;
 
-create table abandono 
+create table retiro
 (
-	id_abandono bigint NOT NULL DEFAULT nextval('seq_abandono'::regclass),
-	fecha bigint references fecha (id_fecha),
-  	cliente bigint references cliente (id_cliente),
-  	demografia bigint references demografia (id_demografia),
-  	flag_abandono dominio_flag NOT NULL,
-  	PRIMARY KEY (id_abandono)
+	SK_retiro BIGINT NOT NULL DEFAULT nextval('seq_retiro'::regclass),
+	localizacion BIGINT REFERENCES localizacion (SK_localizacion), 	
+	fecha BIGINT references fecha (SK_fecha),
+  	cliente BIGINT references cliente (SK_cliente),
+  	demografia BIGINT references demografia (SK_demografia),
+	plan_voz BIGINT references plan_voz (SK_plan_voz),
+	plan_datos BIGINT references plan_datos (SK_plan_datos),
+  	PRIMARY KEY (SK_retiro)
 );
 
 /*==============================================================*/
-/* Hecho: ventas                                                */
+/* Hecho: Ventas                                                */
 /*==============================================================*/
 
 CREATE SEQUENCE seq_venta INCREMENT BY 1 START WITH 1;
 
 create table venta 
 (
-	id_venta bigint NOT NULL DEFAULT nextval('seq_venta'::regclass),
-	fecha bigint references fecha (id_fecha),
-  	cliente bigint references cliente (id_cliente),
-  	demografia bigint references demografia (id_demografia),
-  	plan bigint references plan (id_plan),
-  	telefono bigint references telefono (id_telefono),
-  	sucursal bigint references sucursal (id_sucursal),
-  	operador bigint references operador (id_operador),
-  	tarifa_minuto numeric NOT NULL, 
-  	tarifa_datos numeric NOT NULL, 
-  	valor_total numeric NOT NULL, 
-  	PRIMARY KEY (id_venta)
+	SK_venta BIGINT NOT NULL DEFAULT nextval('seq_venta'::regclass),
+	fecha BIGINT references fecha (SK_fecha),
+	localizacion BIGINT REFERENCES localizacion (SK_localizacion), 	
+  	cliente BIGINT references cliente (SK_cliente),
+  	demografia BIGINT references demografia (SK_demografia),
+  	plan_voz BIGINT references plan_voz (SK_plan_voz),
+	plan_datos BIGINT references plan_datos (SK_plan_datos),
+  	equipo BIGINT references equipo (SK_equipo),
+  	oficina BIGINT references oficina (SK_oficina),
+  	sim_card BIGINT references sim_card (SK_sim_card),
+  	sub_total DOUBLE NOT NULL, 
+  	iva DOUBLE NOT NULL, 
+  	total DOUBLE NOT NULL, 
+  	PRIMARY KEY (SK_venta)
 );
 
 /*==============================================================*/
@@ -182,31 +235,17 @@ CREATE SEQUENCE seq_llamada INCREMENT BY 1 START WITH 1;
 
 create table llamada 
 (
-	id_llamada bigint NOT NULL DEFAULT nextval('seq_llamada'::regclass),
-	fecha bigint references fecha (id_fecha),
-	hora bigint references hora (id_hora),
-  	cliente bigint references cliente (id_cliente),
-  	demografia bigint references demografia (id_demografia),
-  	telefono bigint references telefono (id_telefono),
-  	duracion_llamada integer NOT NULL, /*asumiendo duracion en minutos*/
-  	flag_roaming dominio_flag NOT NULL, 
+	SK_llamada BIGINT NOT NULL DEFAULT nextval('seq_llamada'::regclass),
+	fecha BIGINT references fecha (SK_fecha),
+	localizacion BIGINT references localizacion (SK_localizacion),
+	tiempo BIGINT references tiempo (SK_tiempo),
+  	cliente BIGINT references cliente (SK_cliente),
+  	demografia BIGINT references demografia (SK_demografia),
+  	sim_card BIGINT references sim_card (SK_sim_card),
+	plan_voz BIGINT references plan_voz (SK_plan_voz),
+	nombre_operador VARCHAR (30) NOT NULL,
+  	duracion_llamada INTEGER NOT NULL, /*asumiendo duracion en minutos*/
+  	flag_roaming dominio_flag NOT NULL,
   	PRIMARY KEY (id_llamada)
 );
 
-/*==============================================================*/
-/* Hecho: uso_datos                                                 */
-/*==============================================================*/
-
-CREATE SEQUENCE seq_datos INCREMENT BY 1 START WITH 1;
-
-create table uso_datos
-(
-	id_datos bigint NOT NULL DEFAULT nextval('seq_datos'::regclass),
-	fecha bigint references fecha (id_fecha),
-	hora bigint references hora (id_hora),
-  	cliente bigint references cliente (id_cliente),
-  	demografia bigint references demografia (id_demografia),
-  	telefono bigint references telefono (id_telefono),
-  	duracion_uso_datos integer NOT NULL, /*asumiendo duracion en minutos*/
-  	PRIMARY KEY (id_datos)
-);
