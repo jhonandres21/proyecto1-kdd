@@ -178,7 +178,6 @@ create table localizacion
 	SK_localizacion BIGINT NOT NULL DEFAULT nextval('seq_localizacion'::regclass),
   	departamento VARCHAR (30) NOT NULL,
   	ciudad VARCHAR (30) NOT NULL,
-  	pais VARCHAR (30) NOT NULL,
   	PRIMARY KEY (SK_localizacion) 
 );
 
