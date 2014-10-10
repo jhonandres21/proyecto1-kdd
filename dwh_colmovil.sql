@@ -5,12 +5,13 @@ SET SCHEMA 'colmovil-dwh';
 /*Nombre del esquema: colmovil-dwh*/
 
 CREATE DOMAIN dominio_tipo_id CHAR (5) CHECK ( VALUE IN ( 'C.C.', 'C.E.' ) );
-CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'true', 'false' ) );
-CREATE DOMAIN dominio_genero CHAR (9) CHECK ( VALUE IN ( 'masculino', 'femenino' ) );
+CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'True', 'False' ) );
+CREATE DOMAIN dominio_genero CHAR (9) CHECK ( VALUE IN ( 'Masculino', 'Femenino' ) );
 CREATE DOMAIN dominio_dia_noche CHAR (5) CHECK ( VALUE IN ( 'dia', 'noche' ) );
 CREATE DOMAIN dominio_periodo_dia CHAR (20) CHECK ( VALUE IN ( 'mañana', 'mediodia', 'tarde', 'noche' ));
 CREATE DOMAIN dominio_periodo_año CHAR (30) CHECK ( VALUE IN ( 'Vacaciones_Verano', 'Vacaciones_Invierno', 'Semana_Santa', 'Navidad' ) );
-CREATE DOMAIN dominio_estado_civil CHAR (9) CHECK ( VALUE IN ( 'soltero', 'divorciado', 'union libre', 'casado', 'viudo' ) );
+CREATE DOMAIN dominio_estado_civil CHAR (9) CHECK ( VALUE IN ( 'Soltero', 'Divorciado', 'Unión Libre', 'Casado', 'Viudo' ) );
+CREATE DOMAIN dominio_recarga CHAR (30) CHECK ( VALUE IN ( 'Adelanto de saldo', 'Recarga Electronica', 'Tarjeta', 'Online') );
 
 /*==============================================================*/
 /* Dimensión: Cliente                                           */
@@ -187,15 +188,11 @@ create table localizacion
 
 
 /*==============================================================*/
-/* Hecho: Retiros                                   */
+/* Hecho: Retiros												*/
 /*==============================================================*/
-
-CREATE SEQUENCE seq_retiro INCREMENT BY 1 START WITH 1;
 
 create table retiro
 (
-	SK_retiro BIGINT NOT NULL DEFAULT nextval('seq_retiro'::regclass),
-	localizacion BIGINT REFERENCES localizacion (SK_localizacion), 	
 	fecha BIGINT references fecha (SK_fecha),
   	cliente BIGINT references cliente (SK_cliente),
   	demografia BIGINT references demografia (SK_demografia),
@@ -205,14 +202,23 @@ create table retiro
 );
 
 /*==============================================================*/
+/* Hecho: Recargas												*/
+/*==============================================================*/
+
+create table recarga
+(	
+	fecha BIGINT references fecha (SK_fecha),
+  	id_sim_card BIGINT references sim_card (SK_sim_card),
+  	valor_recarga BIGINT NOT NULL,
+  	tipo_recarga BIGINT NOT NULL
+);
+
+/*==============================================================*/
 /* Hecho: Ventas                                                */
 /*==============================================================*/
 
-CREATE SEQUENCE seq_venta INCREMENT BY 1 START WITH 1;
-
 create table venta 
 (
-	SK_venta BIGINT NOT NULL DEFAULT nextval('seq_venta'::regclass),
 	fecha BIGINT references fecha (SK_fecha),
 	localizacion BIGINT REFERENCES localizacion (SK_localizacion), 	
   	cliente BIGINT references cliente (SK_cliente),
@@ -224,19 +230,15 @@ create table venta
   	sim_card BIGINT references sim_card (SK_sim_card),
   	sub_total DOUBLE NOT NULL, 
   	iva DOUBLE NOT NULL, 
-  	total DOUBLE NOT NULL, 
-  	PRIMARY KEY (SK_venta)
+  	total DOUBLE NOT NULL
 );
 
 /*==============================================================*/
 /* Hecho: Llamadas                                              */
 /*==============================================================*/
 
-CREATE SEQUENCE seq_llamada INCREMENT BY 1 START WITH 1;
-
 create table llamada 
 (
-	SK_llamada BIGINT NOT NULL DEFAULT nextval('seq_llamada'::regclass),
 	fecha BIGINT references fecha (SK_fecha),
 	localizacion BIGINT references localizacion (SK_localizacion),
 	tiempo BIGINT references tiempo (SK_tiempo),
@@ -246,7 +248,6 @@ create table llamada
 	plan_voz BIGINT references plan_voz (SK_plan_voz),
 	nombre_operador VARCHAR (30) NOT NULL,
   	duracion_llamada INTEGER NOT NULL, /*asumiendo duracion en minutos*/
-  	flag_roaming dominio_flag NOT NULL,
-  	PRIMARY KEY (id_llamada)
+  	flag_roaming dominio_flag NOT NULL
 );
 
