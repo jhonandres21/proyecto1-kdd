@@ -153,8 +153,8 @@ CREATE SEQUENCE seq_sim_card INCREMENT BY 1 START WITH 1;
 CREATE TABLE sim_card
 (
 SK_sim_card BIGINT NOT NULL DEFAULT nextval('seq_sim_card'::regclass),
-numero_serie BIGINT NOT NULL,
-numero_telefono BIGINT NOT NULL,
+numero_serie varchar(50) NOT NULL,
+numero_telefono varchar(50) NOT NULL,
 PRIMARY KEY (SK_sim_card)
 );
 
