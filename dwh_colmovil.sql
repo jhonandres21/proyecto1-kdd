@@ -312,7 +312,7 @@ CREATE TABLE recarga
 fecha BIGINT references fecha (SK_fecha),
 id_sim_card BIGINT references sim_card (SK_sim_card),
 valor_recarga BIGINT NOT NULL,
-tipo_recarga VARCHAR(45) NOT NULL
+tipo_recarga VARCHAR(45) NOT NULL /*Hace referencia al campo medio_recarga*/
 );
 
 /*==============================================================*/
@@ -345,12 +345,12 @@ CREATE TABLE llamada
 (
 fecha BIGINT references fecha (SK_fecha),
 localizacion BIGINT references localizacion (SK_localizacion), /*Localizacion del cliente*/
-tiempo BIGINT references tiempo (SK_tiempo),
+tiempo BIGINT references tiempo (SK_tiempo), /*Hace referencia a la hora de inicio*/
 cliente BIGINT references cliente (SK_cliente),
 demografia BIGINT references demografia (SK_demografia),
 sim_card BIGINT references sim_card (SK_sim_card),
 plan_voz BIGINT references plan_voz (SK_plan_voz),
 nombre_operador VARCHAR (30) NOT NULL,
-duracion_llamada INTEGER NOT NULL, /*asumiendo duracion en minutos*/
+duracion_llamada INTEGER NOT NULL, /*Asumiendo duracion en minutos*/
 flag_roaming dominio_flag NOT NULL
 );
