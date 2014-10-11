@@ -59,7 +59,6 @@ DROP SEQUENCE IF EXISTS colmovil_dwh.seq_localizacion;
 
 CREATE DOMAIN dominio_tipo_id CHAR (5) CHECK ( VALUE IN ( 'C.C.', 'C.E.' ) );
 CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'True', 'False' ) );
-CREATE DOMAIN dominio_recarga CHAR (30) CHECK ( VALUE IN ( 'Adelanto de saldo', 'Recarga Electronica', 'Tarjeta', 'Online') );
 
 /*==============================================================*/
 /* Creación: Dimensiones					*/
