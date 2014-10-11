@@ -312,7 +312,7 @@ CREATE TABLE recarga
 fecha BIGINT references fecha (SK_fecha),
 id_sim_card BIGINT references sim_card (SK_sim_card),
 valor_recarga BIGINT NOT NULL,
-tipo_recarga BIGINT NOT NULL
+tipo_recarga VARCHAR(45) NOT NULL
 );
 
 /*==============================================================*/
@@ -330,9 +330,11 @@ plan_datos BIGINT references plan_datos (SK_plan_datos),
 equipo BIGINT references equipo (SK_equipo),
 oficina BIGINT references oficina (SK_oficina),
 sim_card BIGINT references sim_card (SK_sim_card),
-sub_total NUMERIC NOT NULL,
-iva NUMERIC NOT NULL,
-total NUMERIC NOT NULL
+precio_plan INTEGER NOT NULL 
+/*EN cuanto al precio:
+Si es voz, entonces se coloca el precio
+Si es datos FIJOS, entonces se coloca el valor de la tarifa
+Si es datos POR VOLUMEN, entonces se coloca -1 pues no hay manera de calcular el valor a pagar, porque no existen datos de consumo*/
 );
 
 /*==============================================================*/
@@ -342,7 +344,7 @@ total NUMERIC NOT NULL
 CREATE TABLE llamada
 (
 fecha BIGINT references fecha (SK_fecha),
-localizacion BIGINT references localizacion (SK_localizacion),
+localizacion BIGINT references localizacion (SK_localizacion), /*Localizacion del cliente*/
 tiempo BIGINT references tiempo (SK_tiempo),
 cliente BIGINT references cliente (SK_cliente),
 demografia BIGINT references demografia (SK_demografia),
