@@ -1,6 +1,6 @@
 
 /*==============================================================*/
-/* Eliminación y Creación: Schema				*/
+/* Eliminación y Creación: Schema	test			*/
 /*==============================================================*/
 
 DROP SCHEMA IF EXISTS colmovil_dwh﻿ CASCADE;
