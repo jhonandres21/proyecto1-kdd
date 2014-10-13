@@ -348,7 +348,6 @@ Si es datos POR VOLUMEN, entonces se coloca -1 pues no hay manera de calcular el
 CREATE TABLE llamada
 (
 fecha BIGINT references fecha (SK_fecha),
-localizacion BIGINT references localizacion (SK_localizacion), /*Localizacion del cliente*/
 tiempo BIGINT references tiempo (SK_tiempo), /*Hace referencia a la hora de inicio*/
 cliente BIGINT references cliente (SK_cliente),
 demografia BIGINT references demografia (SK_demografia),
