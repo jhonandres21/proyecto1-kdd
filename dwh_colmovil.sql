@@ -58,7 +58,7 @@ DROP SEQUENCE IF EXISTS colmovil_dwh.seq_localizacion;
 /* Creación: Dominios 						*/
 /*==============================================================*/
 
-CREATE DOMAIN dominio_tipo_id CHAR (5)   ( VALUE IN ( 'C.C.', 'C.E.' ) );
+CREATE DOMAIN dominio_tipo_id CHAR (5) CHECK ( VALUE IN ( 'C.C.', 'C.E.' ) );
 CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'True', 'False' ) );
 
 /*==============================================================*/
