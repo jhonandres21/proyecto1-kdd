@@ -140,7 +140,7 @@ CREATE  TABLE colmovil.sim_card (
 -- -----------------------------------------------------
 
 CREATE  TABLE colmovil.contrato (
-  id_contrato SERIAL,
+  id_contrato BIGINT NOT NULL ,
   id_sim_card BIGINT NOT NULL ,
   tipo_plan VARCHAR(45) NULL ,
   id_cliente BIGINT NOT NULL ,
@@ -272,7 +272,7 @@ COPY plan_datos FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\plan_datos.csv' DELI
 
 COPY sim_card FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\sim_card.csv' DELIMITER ',' CSV;
 
-COPY contrato FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\contratos_sim_carddef.csv' DELIMITER ',' CSV;
+COPY contrato FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\contratos_sim_carddef.csv' DELIMITER ';' CSV;
 
 COPY operador FROM 'E:\GitHub\proyecto1-kdd\DatosColmovil\operador.csv' DELIMITER ',' CSV;
 
