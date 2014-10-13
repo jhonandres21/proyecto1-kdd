@@ -112,6 +112,7 @@ CREATE SEQUENCE seq_plan_voz INCREMENT BY 1 START WITH 1;
 CREATE TABLE plan_voz
 (
 SK_plan_voz BIGINT NOT NULL DEFAULT nextval('seq_plan_voz'::regclass),
+id_plan_voz bigint NOT NULL,
 tipo_plan_voz VARCHAR(100) NOT NULL,
 nombre_plan_voz VARCHAR(100) NOT NULL,
 es_corporativo dominio_flag NOT NULL,
@@ -125,6 +126,7 @@ CREATE SEQUENCE seq_plan_datos INCREMENT BY 1 START WITH 1;
 CREATE TABLE plan_datos
 (
 SK_plan_datos BIGINT NOT NULL DEFAULT nextval('seq_plan_datos'::regclass),
+id_plan_datos bigint NOT NULL,
 nombre_plan_datos VARCHAR(100) NOT NULL,
 es_corporativo dominio_flag NOT NULL,
 PRIMARY KEY (SK_plan_datos)
@@ -153,6 +155,7 @@ CREATE SEQUENCE seq_sim_card INCREMENT BY 1 START WITH 1;
 CREATE TABLE sim_card
 (
 SK_sim_card BIGINT NOT NULL DEFAULT nextval('seq_sim_card'::regclass),
+id_sim_card bigint NOT NULL,
 numero_serie varchar(50) NOT NULL,
 numero_telefono varchar(50) NOT NULL,
 PRIMARY KEY (SK_sim_card)
@@ -165,6 +168,7 @@ CREATE SEQUENCE seq_oficina INCREMENT BY 1 START WITH 1;
 CREATE TABLE oficina
 (
 SK_oficina BIGINT NOT NULL DEFAULT nextval('seq_oficina'::regclass),
+id_oficina bigint NOT NULL,
 direccion VARCHAR(200) NOT NULL,
 numero_empleados INTEGER NULL,
 PRIMARY KEY (SK_oficina)
