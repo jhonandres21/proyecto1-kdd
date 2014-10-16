@@ -49,7 +49,7 @@ public class ScriptSimCard {
                     simcard.setNumeroTelefono("" + resultSet.getObject(2));
                 }
 
-                simcard.setId_sim_card((int)resultSet.getObject(3));
+                simcard.setId_sim_card((int) resultSet.getObject(3));
 
                 simcards.add(simcard);
                 simcard = new Simcard();
@@ -67,22 +67,23 @@ public class ScriptSimCard {
 
     public void cargarDatos() {
 
-        String sql;
-        int numRegistros = simcards.size();
+        try {
+            String sql;
+            con = conexion.conectar();
+            Statement sentencia = con.createStatement();
+            int numRegistros = simcards.size();
 
-        for (int i = 0; i < numRegistros; i++) {
-            sql = "INSERT INTO colmovil_dwh.sim_card (id_sim_card, numero_serie, numero_telefono) VALUES (" + simcards.get(i).getId_sim_card()+ ", '" + simcards.get(i).getNumeroSerie() + "', '" + simcards.get(i).getNumeroTelefono() + "');";
-
-            try {
-                con = conexion.conectar();
-                Statement sentencia = con.createStatement();
+            for (int i = 0; i < numRegistros; i++) {
+                sql = "INSERT INTO bodega.sim_card (id_sim_card, numero_serie, numero_telefono) VALUES (" + simcards.get(i).getId_sim_card() + ", '" + simcards.get(i).getNumeroSerie() + "', '" + simcards.get(i).getNumeroTelefono() + "');";
                 sentencia.executeUpdate(sql);
-                conexion.desconectarBaseDeDatos(con);
+                }
+            
+            conexion.desconectarBaseDeDatos(con);
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error en base de datos!", JOptionPane.ERROR_MESSAGE);
-            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error en base de datos!", JOptionPane.ERROR_MESSAGE);
         }
+
         System.out.println("Carga Exitosa!");
 
     }
