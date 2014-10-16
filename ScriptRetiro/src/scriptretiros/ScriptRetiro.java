@@ -77,7 +77,7 @@ public class ScriptRetiro {
             con = conexion.conectar();
             Statement stmt = con.createStatement();
 
-            String consulta = "select sk_fecha from colmovil_dwh.fecha where fecha = '" + fecha + "';";
+            String consulta = "select sk_fecha from bodega.fecha where fecha = '" + fecha + "';";
 
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet.next();
@@ -101,7 +101,7 @@ public class ScriptRetiro {
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
 
-            String consultaInterna = "SELECT sk_cliente FROM colmovil_dwh.cliente WHERE numero_id = " + numero_cedula + ";";
+            String consultaInterna = "SELECT sk_cliente FROM bodega.cliente WHERE numero_id = " + numero_cedula + ";";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -122,7 +122,7 @@ public class ScriptRetiro {
             con = conexion.conectar();
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
-            String consultaInterna = "SELECT sk_demografia FROM colmovil_dwh.demografia WHERE estrato = " + estrato + " AND genero = '" + genero + "' AND estado_civil = '" + estado_civil + "';";
+            String consultaInterna = "SELECT sk_demografia FROM bodega.demografia WHERE estrato = " + estrato + " AND genero = '" + genero + "' AND estado_civil = '" + estado_civil + "';";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -144,7 +144,7 @@ public class ScriptRetiro {
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
 
-            String consultaInterna = "SELECT sk_plan_voz FROM colmovil_dwh.plan_voz WHERE id_plan_voz = " + idPlanVoz + ";";
+            String consultaInterna = "SELECT sk_plan_voz FROM bodega.plan_voz WHERE id_plan_voz = " + idPlanVoz + ";";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -166,7 +166,7 @@ public class ScriptRetiro {
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
 
-            String consultaInterna = "SELECT sk_plan_datos FROM colmovil_dwh.plan_datos WHERE id_plan_datos = " + idPlanDatos + ";";
+            String consultaInterna = "SELECT sk_plan_datos FROM bodega.plan_datos WHERE id_plan_datos = " + idPlanDatos + ";";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -193,7 +193,7 @@ public class ScriptRetiro {
 
             for (int i = 0; i < numRegistros; i++) {
 
-                sql = "INSERT INTO colmovil_dwh.retiro (fecha, cliente, demografia, plan_voz, plan_datos) VALUES ("
+                sql = "INSERT INTO bodega.retiro (fecha, cliente, demografia, plan_voz, plan_datos) VALUES ("
                         + retiros.get(i).getFecha() + ", " + retiros.get(i).getCliente() + ", " + retiros.get(i).getDemografia()
                         + ", " + retiros.get(i).getPlanVoz() + ", " + retiros.get(i).getPlanDatos() + ");";
 
