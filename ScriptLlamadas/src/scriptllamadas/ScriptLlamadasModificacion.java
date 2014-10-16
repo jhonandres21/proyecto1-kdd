@@ -46,7 +46,7 @@ public class ScriptLlamadasModificacion {
             Date fechaTemp = (Date) resultSet.getObject(1);
             resultSet.close();
 
-            consultaInterna = "SELECT sk_fecha FROM colmovil_dwh.fecha WHERE fecha = '" + fechaTemp + "'";
+            consultaInterna = "SELECT sk_fecha FROM bodega.fecha WHERE fecha = '" + fechaTemp + "'";
             resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -76,7 +76,7 @@ public class ScriptLlamadasModificacion {
             String tiempoY = tiempoX[0] + ":" + tiempoX[1];
             resultSet.close();
 
-            consultaInterna = "SELECT sk_tiempo FROM colmovil_dwh.tiempo WHERE tiempo = '" + tiempoY + "';";
+            consultaInterna = "SELECT sk_tiempo FROM bodega.tiempo WHERE tiempo = '" + tiempoY + "';";
             resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -98,7 +98,7 @@ public class ScriptLlamadasModificacion {
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
             
-            String consultaInterna = "SELECT sk_cliente FROM colmovil_dwh.cliente WHERE numero_id = " + numero_cedula + ";";
+            String consultaInterna = "SELECT sk_cliente FROM bodega.cliente WHERE numero_id = " + numero_cedula + ";";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -119,7 +119,7 @@ public class ScriptLlamadasModificacion {
             con = conexion.conectar();
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
-            String consultaInterna = "SELECT sk_demografia FROM colmovil_dwh.demografia WHERE estrato = " + estrato + " AND genero = '" + genero + "' AND estado_civil = '" + estado_civil + "';";
+            String consultaInterna = "SELECT sk_demografia FROM bodega.demografia WHERE estrato = " + estrato + " AND genero = '" + genero + "' AND estado_civil = '" + estado_civil + "';";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -140,7 +140,7 @@ public class ScriptLlamadasModificacion {
             con = conexion.conectar();
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
-            String consultaInterna = "SELECT sk_sim_card FROM colmovil_dwh.sim_card WHERE id_sim_card = " + id_sim_card + ";";
+            String consultaInterna = "SELECT sk_sim_card FROM bodega.sim_card WHERE id_sim_card = " + id_sim_card + ";";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -162,7 +162,7 @@ public class ScriptLlamadasModificacion {
             Statement stmt = con.createStatement();
             stmt = con.createStatement();
             
-            String consultaInterna = "SELECT sk_plan_voz FROM colmovil_dwh.plan_voz WHERE id_plan_voz = " + id_plan_voz + ";";
+            String consultaInterna = "SELECT sk_plan_voz FROM bodega.plan_voz WHERE id_plan_voz = " + id_plan_voz + ";";
             ResultSet resultSet = stmt.executeQuery(consultaInterna);
             resultSet.next();
 
@@ -208,10 +208,10 @@ public class ScriptLlamadasModificacion {
             int tiempo_horas = Integer.parseInt(tiempoX[0]) * 60;
             int tiempo_minutos = Integer.parseInt(tiempoX[1]);
 
-            int duracion_llamada = tiempo_horas + tiempo_minutos;
+            int duracion = tiempo_horas + tiempo_minutos;
             conexion.desconectarBaseDeDatos(con);
 
-            return duracion_llamada;
+            return duracion;
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error en base de datos!", JOptionPane.ERROR_MESSAGE);
@@ -289,7 +289,7 @@ public class ScriptLlamadasModificacion {
             Statement sentencia = con.createStatement();
 
             for (int i = 0; i < numRegistros; i++) {
-                sql = "INSERT INTO colmovil_dwh.llamada (fecha, tiempo, cliente, demografia, sim_card, plan_voz, nombre_operador, duracion_llamada, flag_roaming) VALUES ("
+                sql = "INSERT INTO bodega.llamada (fecha, tiempo, cliente, demografia, sim_card, plan_voz, nombre_operador, duracion_llamada, flag_roaming) VALUES ("
                         + llamadas.get(i).getFecha() + ", " + llamadas.get(i).getTiempo() + ", "
                         + llamadas.get(i).getCliente() + ", " + llamadas.get(i).getDemografia() + ", "
                         + llamadas.get(i).getSim_card() + ", " + llamadas.get(i).getPlan_voz() + ", '"

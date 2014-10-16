@@ -38,11 +38,9 @@ public class ScriptPlanVoz {
             Statement stmt = con.createStatement();
             String consulta = "SELECT id_plan_voz, nombre FROM colmovil.plan_voz;";
             ResultSet rs = stmt.executeQuery(consulta);
-            System.out.println("Si tira consulta");
-            rs = stmt.executeQuery(consulta);
-
+            
             while (rs.next()) {
-                if (rs.getObject(1).equals(null) || rs.getObject(1).equals("") || (long) rs.getObject(1) < 0) {
+                if (rs.getObject(1) == null || rs.getObject(1).equals("") || (long) rs.getObject(1) < 0) {
                     plan_voz.setId_plan(0);
                 } else {
                     plan_voz.setId_plan((long) rs.getObject(1));
@@ -54,7 +52,7 @@ public class ScriptPlanVoz {
                     plan_voz.setTipo_plan("postpago");
                 }
 
-                if (rs.getObject(2).equals(null) || rs.getObject(2).equals("")) {
+                if (rs.getObject(2) == null || rs.getObject(2).equals("")) {
                     plan_voz.setNombre_plan("No Registra");
                 } else {
                     plan_voz.setNombre_plan(rs.getObject(2) + "");
@@ -81,28 +79,23 @@ public class ScriptPlanVoz {
 
     public void cargarDatos() {
 
-        String sql = "";
-        int numRegistros = planes.size();
-
-        for (int i = 0; i < numRegistros; i++) {
-            System.out.println("ID: " + planes.get(i).getId_plan() + "// tipo: " + planes.get(i).getTipo_plan() + "// Nombre del Plan: " + planes.get(i).getNombre_plan() + "// Corporativo: " + planes.get(i).getEs_corporativo());
-
-            sql += "INSERT INTO colmovil_dwh.plan_voz (id_plan_voz, tipo_plan_voz, nombre_plan_voz, es_corporativo) VALUES (" + planes.get(i).getId_plan() + ", '" + planes.get(i).getTipo_plan() + "', '" + planes.get(i).getNombre_plan() + "', '" + planes.get(i).getEs_corporativo() + "');\n";
-        }
-
         try {
             con = conexion.conectar();
             Statement sentencia = con.createStatement();
-            sentencia.executeUpdate(sql);
+            String sql = "";
+            int numRegistros = planes.size();
+
+            for (int i = 0; i < numRegistros; i++) {
+                //System.out.println("ID: " + planes.get(i).getId_plan() + "// tipo: " + planes.get(i).getTipo_plan() + "// Nombre del Plan: " + planes.get(i).getNombre_plan() + "// Corporativo: " + planes.get(i).getEs_corporativo());
+                sql += "INSERT INTO bodega.plan_voz (id_plan_voz, tipo_plan_voz, nombre_plan_voz, es_corporativo) VALUES (" + planes.get(i).getId_plan() + ", '" + planes.get(i).getTipo_plan() + "', '" + planes.get(i).getNombre_plan() + "', '" + planes.get(i).getEs_corporativo() + "');";
+                sentencia.executeUpdate(sql);
+            }
             conexion.desconectarBaseDeDatos(con);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error en base de datos!", JOptionPane.ERROR_MESSAGE);
-
         }
         System.out.println("Carga Exitosa!");
-
-        System.out.println(sql);
     }
 
     public static void main(String[] args) {

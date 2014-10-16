@@ -3,56 +3,9 @@
 /* Eliminación y Creación: Schema		*/
 /*==============================================================*/
 
-DROP SCHEMA IF EXISTS colmovil_dwh﻿ CASCADE;
-CREATE SCHEMA colmovil_dwh;
-SET SCHEMA 'colmovil_dwh';
-
-/*==============================================================*/
-/* Eliminación: Dimensiones					*/
-/*==============================================================*/
-
-DROP TABLE IF EXISTS colmovil_dwh.cliente CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.demografia CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.plan_voz CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.plan_datos CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.equipo CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.sim_card CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.oficina CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.tiempo CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.fecha CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.localizacion CASCADE;
-
-/*==============================================================*/
-/* Eliminación: Hechos						*/
-/*==============================================================*/
-
-DROP TABLE IF EXISTS colmovil_dwh.retiro CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.recarga CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.venta CASCADE;
-DROP TABLE IF EXISTS colmovil_dwh.llamada CASCADE;
-
-/*==============================================================*/
-/* Eliminación: Dominios					*/
-/*==============================================================*/
-
-DROP DOMAIN IF EXISTS colmovil_dwh.dominio_tipo_id;
-DROP DOMAIN IF EXISTS colmovil_dwh.dominio_flag;
-DROP DOMAIN IF EXISTS colmovil_dwh.dominio_recarga;
-
-/*==============================================================*/
-/* Eliminación: Secuencias					*/
-/*==============================================================*/
-
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_cliente;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_demografia;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_plan_voz;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_plan_datos;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_equipo;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_sim_card;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_oficina;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_tiempo;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_fecha;
-DROP SEQUENCE IF EXISTS colmovil_dwh.seq_localizacion;
+DROP SCHEMA IF EXISTS bodega CASCADE;
+CREATE SCHEMA bodega;
+SET SCHEMA 'bodega';
 
 /*==============================================================*/
 /* Creación: Dominios 						*/
