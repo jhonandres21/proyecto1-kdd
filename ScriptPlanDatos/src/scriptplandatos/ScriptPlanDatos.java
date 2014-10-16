@@ -52,9 +52,9 @@ public class ScriptPlanDatos {
                     plan_datos.setNombra_plan_datos(rs.getObject(2) + "");
                 }
                 if (plan_datos.getNombre_plan_datos().toLowerCase().contains("corporativo")) {
-                    plan_datos.setEs_corporativo("True");
+                    plan_datos.setEs_corporativo("SI");
                 } else {
-                    plan_datos.setEs_corporativo("False");
+                    plan_datos.setEs_corporativo("NO");
                 }
 
                 planes.add(plan_datos);

@@ -58,9 +58,9 @@ public class ScriptPlanVoz {
                     plan_voz.setNombre_plan(rs.getObject(2) + "");
                 }
                 if (plan_voz.getNombre_plan().toLowerCase().contains("corporativo")) {
-                    plan_voz.setEs_corporativo("True");
+                    plan_voz.setEs_corporativo("SI");
                 } else {
-                    plan_voz.setEs_corporativo("False");
+                    plan_voz.setEs_corporativo("NO");
                 }
 
                 planes.add(plan_voz);
