@@ -1,4 +1,4 @@
-INSERT INTO LLAMADA 
+CREATE TABLE LLAMADA AS
 SELECT 
 DFECHA.sk_fecha,
 DTIEMPO.sk_tiempo,
@@ -7,7 +7,9 @@ DDEMOGRAFIA.sk_demografia,
 DSIM.sk_sim_card,
 DPLAN.sk_plan_voz,
 COPERADOR.nombre,
-CLLAMADA.utilizo_roaming
+CLLAMADA.utilizo_roaming,
+CLLAMADA.fecha_inicio::TIME,
+CLLAMADA.fecha_finalizacion:TIME
 
 FROM 
 COLMOVIL.CLIENTE AS CCLIENTE, 

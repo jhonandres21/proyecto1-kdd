@@ -12,7 +12,6 @@ SET SCHEMA 'bodega';
 /*==============================================================*/
 
 CREATE DOMAIN dominio_tipo_id CHAR (5) CHECK ( VALUE IN ( 'C.C.', 'C.E.' ) );
-CREATE DOMAIN dominio_flag CHAR (5) CHECK ( VALUE IN ( 'True', 'False' ) );
 
 /*==============================================================*/
 /* Creación: Dimensiones					*/
@@ -307,6 +306,6 @@ demografia BIGINT references demografia (SK_demografia),
 sim_card BIGINT references sim_card (SK_sim_card),
 plan_voz BIGINT references plan_voz (SK_plan_voz),
 nombre_operador VARCHAR (30) NOT NULL,
-duracion_llamada INTEGER NOT NULL, /*Asumiendo duracion en minutos*/
-flag_roaming dominio_flag NOT NULL
+duracion_llamada TIME NOT NULL, /*Asumiendo duracion en minutos y segundos*/
+flag_roaming VARCHAR (25) NOT NULL
 );
