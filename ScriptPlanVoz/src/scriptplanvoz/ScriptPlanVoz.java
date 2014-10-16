@@ -87,7 +87,7 @@ public class ScriptPlanVoz {
 
             for (int i = 0; i < numRegistros; i++) {
                 //System.out.println("ID: " + planes.get(i).getId_plan() + "// tipo: " + planes.get(i).getTipo_plan() + "// Nombre del Plan: " + planes.get(i).getNombre_plan() + "// Corporativo: " + planes.get(i).getEs_corporativo());
-                sql += "INSERT INTO bodega.plan_voz (id_plan_voz, tipo_plan_voz, nombre_plan_voz, es_corporativo) VALUES (" + planes.get(i).getId_plan() + ", '" + planes.get(i).getTipo_plan() + "', '" + planes.get(i).getNombre_plan() + "', '" + planes.get(i).getEs_corporativo() + "');";
+                sql = "INSERT INTO bodega.plan_voz (id_plan_voz, tipo_plan_voz, nombre_plan_voz, es_corporativo) VALUES (" + planes.get(i).getId_plan() + ", '" + planes.get(i).getTipo_plan() + "', '" + planes.get(i).getNombre_plan() + "', '" + planes.get(i).getEs_corporativo() + "');";
                 sentencia.executeUpdate(sql);
             }
             conexion.desconectarBaseDeDatos(con);
