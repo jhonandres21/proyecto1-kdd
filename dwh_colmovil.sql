@@ -41,22 +41,14 @@ PRIMARY KEY (SK_cliente)
 
 CREATE SEQUENCE seq_demografia INCREMENT BY 1 START WITH 1;
 
-CREATE TABLE DEMOGRAFIA AS 
-SELECT DISTINCT ON (
-cliente.estado_civil, 
-cliente.estrato, 
-cliente.genero) 
-cliente.estado_civil, 
-cliente.estrato, 
-cliente.genero 
-FROM colmovil.cliente 
-ORDER BY cliente.genero;
-
-ALTER TABLE DEMOGRAFIA ADD SK_demografia 
-BIGINT DEFAULT NEXTVAL('seq_demografia'::regclass) PRIMARY KEY;
-ALTER TABLE DEMOGRAFIA ALTER COLUMN estado_civil SET NOT NULL;
-ALTER TABLE DEMOGRAFIA ALTER COLUMN estrato SET NOT NULL;
-ALTER TABLE DEMOGRAFIA ALTER COLUMN genero SET NOT NULL;
+CREATE TABLE DEMOGRAFIA
+(
+SK_demografia BIGINT NOT NULL DEFAULT nextval('seq_demografia'::regclass),
+estado_civil VARCHAR(45) NOT NULL DEFAULT 'N/A',
+estrato INT NOT NULL DEFAULT 0,
+genero VARCHAR(45) DEFAULT 'N/A',
+PRIMARY KEY (SK_demografia)
+);
 
 /*==============================================================*/
 /* Dimensión: Plan Voz */
@@ -230,19 +222,14 @@ ALTER TABLE FECHA ALTER COLUMN fin_de_mes SET NOT NULL;
 
 CREATE SEQUENCE seq_localizacion INCREMENT BY 1 START WITH 1;
 
-CREATE TABLE LOCALIZACION AS 
-SELECT DISTINCT ON (
-localizacion.departamento, 
-localizacion.ciudad) 
-localizacion.departamento, 
-localizacion.ciudad 
-FROM colmovil.localizacion 
-ORDER BY localizacion.departamento;
+CREATE TABLE LOCALIZACION
+(
+SK_localizacion BIGINT NOT NULL DEFAULT nextval('seq_localizacion'::regclass),
+departamento VARCHAR(45) NOT NULL,
+ciudad VARCHAR(45) NOT NULL,
+PRIMARY KEY (SK_localizacion)
+); 
 
-ALTER TABLE LOCALIZACION ADD SK_localizacion 
-BIGINT DEFAULT NEXTVAL('seq_localizacion'::regclass) PRIMARY KEY;
-ALTER TABLE LOCALIZACION ALTER COLUMN departamento SET NOT NULL;
-ALTER TABLE LOCALIZACION ALTER COLUMN ciudad SET NOT NULL;
 /*==============================================================*/
 /* Creación: Hechos						*/
 /*==============================================================*/
