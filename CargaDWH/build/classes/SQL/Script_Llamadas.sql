@@ -1,0 +1,36 @@
+INSERT INTO BODEGA.LLAMADA
+SELECT 
+DFECHA.sk_fecha,
+DTIEMPO.sk_tiempo,
+DCLIENTE.sk_cliente, 
+DDEMOGRAFIA.sk_demografia,
+DSIM.sk_sim_card,
+DPLAN.sk_plan_voz,
+COPERADOR.nombre,
+(CLLAMADA.fecha_finalizacion::TIME - CLLAMADA.fecha_inicio::TIME) AS duracion,
+CLLAMADA.utilizo_roaming
+
+FROM 
+COLMOVIL.CLIENTE AS CCLIENTE, 
+COLMOVIL.LLAMADA AS CLLAMADA, 
+COLMOVIL.CONTRATO AS CCONTRATO, 
+COLMOVIL.OPERADOR AS COPERADOR,
+BODEGA.CLIENTE AS DCLIENTE,
+BODEGA.DEMOGRAFIA AS DDEMOGRAFIA,
+BODEGA.SIM_CARD AS DSIM,
+BODEGA.PLAN_VOZ AS DPLAN,
+BODEGA.FECHA AS DFECHA,
+BODEGA.TIEMPO AS DTIEMPO
+
+WHERE CCLIENTE.idcliente = CCONTRATO.id_cliente 
+AND CLLAMADA.id_contrato = CCONTRATO.id_contrato 
+AND CLLAMADA.id_operador_destino = COPERADOR.id_operador
+AND CCLIENTE.numero_identificacion = DCLIENTE.numero_id
+AND CCLIENTE.estado_civil = DDEMOGRAFIA.estado_civil
+AND CCLIENTE.estrato = DDEMOGRAFIA.estrato
+AND CCLIENTE.genero = DDEMOGRAFIA.genero
+AND CCONTRATO.id_plan_voz = DPLAN.id_plan_voz
+AND CCONTRATO.id_sim_card = DSIM.id_sim_card
+AND CLLAMADA.fecha_inicio::DATE = DFECHA.fecha
+AND TO_CHAR (CLLAMADA.fecha_inicio, 'HH24:MI') = DTIEMPO.tiempo
+;
