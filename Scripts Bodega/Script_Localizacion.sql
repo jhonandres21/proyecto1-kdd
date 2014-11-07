@@ -1,0 +1,9 @@
+INSERT INTO BODEGA.LOCALIZACION (departamento, ciudad)
+SELECT DISTINCT ON(
+CLOCAL.departamento,
+CLOCAL.ciudad)
+CLOCAL.departamento,
+CLOCAL.ciudad
+FROM
+COLMOVIL.LOCALIZACION AS CLOCAL
+ORDER BY CLOCAL.departamento;
