@@ -32,6 +32,7 @@ public class DaoPerfilAbandonanColmovil {
     public void consulta(int numDocIdCandidato, String nombre_Proceso/*Parametros dinamicos de las preguntas*/) {
         String sql_select;
         sql_select = "";
+
         try {
             conn = BaseDeDatos.conectar();
             Statement sentencia = conn.createStatement();
