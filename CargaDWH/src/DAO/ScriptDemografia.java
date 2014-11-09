@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import ConectorBD.ConexionBD;
@@ -24,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class ScriptDemografia {
 
-    String scriptDirPath = "C:\\Users\\Juan Olaya O\\Documents\\NetBeansProjects\\CargaDWH\\src\\SQL";
+    String scriptDirPath = "src/SQL";
     ConexionBD conexion;
     Connection con;
     ArrayList<Cliente> clientes;

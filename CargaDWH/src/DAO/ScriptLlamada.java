@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  */
 public class ScriptLlamada {
 
-    String scriptDirPath = "C:\\Users\\Juan Olaya O\\Documents\\NetBeansProjects\\CargaDWH\\src\\SQL";
+    String scriptDirPath = "src/SQL";
     ConexionBD conexion;
     Connection con;
     ArrayList<Cliente> clientes;

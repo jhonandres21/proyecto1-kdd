@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import ConectorBD.ConexionBD;
-import Logico.Cliente;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,7 +9,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,17 +18,12 @@ import java.util.logging.Logger;
  */
 public class ScriptLocalizacion {
 
-    String scriptDirPath = "C:\\Users\\Juan Olaya O\\Documents\\NetBeansProjects\\CargaDWH\\src\\SQL";
+    String scriptDirPath = "src/SQL";
     ConexionBD conexion;
     Connection con;
-    ArrayList<Cliente> clientes;
-    Cliente cliente;
 
     public ScriptLocalizacion() {
         conexion = new ConexionBD();
-        clientes = null;
-        cliente = new Cliente();
-        clientes = new ArrayList();
     }
 
     private String extraerSentenciaDeSQL() {
@@ -96,9 +85,9 @@ public class ScriptLocalizacion {
             
             sentencia.executeUpdate(sql);
             conexion.desconectarBaseDeDatos(con);
-            
+
             System.out.println("Carga Exitosa!");
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ScriptLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
         }

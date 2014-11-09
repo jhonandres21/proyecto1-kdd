@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 public class ConexionBD {
 
     private final String driver = "org.postgresql.Driver";
-    private final String name_dir = "jdbc:postgresql://localhost:5432/postgres";
+    private final String name_dir = "jdbc:postgresql://localhost:5432/colmovil";
     private final String user = "postgres";
-    private final String password = "admin";
+    private final String password = "password";
     private Connection conexion;
     
     /*localhost -> es el servidor local, eN la universidad es pgsql, el puerto es el mismo

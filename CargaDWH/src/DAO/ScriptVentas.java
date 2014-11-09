@@ -42,7 +42,7 @@ public class ScriptVentas {
             String consulta = "SELECT fecha_contrato, id_oficina, id_cliente, id_plan_voz, id_plan_datos, id_equipo_celular,"
                     + " id_sim_card FROM colmovil.contrato;";
             ResultSet rs = stmt.executeQuery(consulta);
-            System.out.println("Si tira consulta");
+            
             rs = stmt.executeQuery(consulta);
 
             long startTime1 = System.nanoTime();
@@ -110,7 +110,7 @@ public class ScriptVentas {
 
                 if (contador % 100 == 0) {
                     long duration1 = (endTime1 - startTime1) / 1000000;
-                    System.out.println("Se demoró " + duration1 + " ms, para descargar " + contador + " datos");
+                    //System.out.println("Se demoró " + duration1 + " ms, para descargar " + contador + " datos");
                 }
             }
 
@@ -130,15 +130,6 @@ public class ScriptVentas {
         int numRegistros = ventas.size();
 
         for (int i = 0; i < numRegistros; i++) {
-//            System.out.println("SK Fecha: " + ventas.get(i).getId_dim_fecha()
-//                    + "// SK localizacion: " + ventas.get(i).getId_dim_localizacion()
-//                    + "// SK Cliente: " + ventas.get(i).getId_dim_cliente()
-//                    + "// SK Demografia: " + ventas.get(i).getId_dim_demografia()
-//                    + "// SK Plan Voz: " + ventas.get(i).getId_dim_plan_voz()
-//                    + "// SK Plan Datos: " + ventas.get(i).getId_dim_plan_datos()
-//                    + "// SK Equipo: " + ventas.get(i).getId_dim_equipo()
-//                    + "// SK Oficina: " + ventas.get(i).getId_dim_oficina()
-//                    + "// SK Sim Card: " + ventas.get(i).getId_dim_sim_card());
 
             sql += "INSERT INTO bodega.venta ( fecha, localizacion, cliente, demografia, plan_voz, plan_datos,"
                     + "  equipo, oficina, sim_card, precio_plan)"
