@@ -186,8 +186,6 @@ public class Visualizador extends javax.swing.JFrame {
 
     private void preguntasActionPerformed(java.awt.event.ActionEvent evt) {
 
-        System.out.println(comboBoxPreguntas.getSelectedItem());
-
         String preguntaSeleccionada = "" + comboBoxPreguntas.getSelectedItem();
         int codigoDePregunta = 0;
 
@@ -198,8 +196,8 @@ public class Visualizador extends javax.swing.JFrame {
                 break;
             }
         }
-
-        System.out.println("El código de la pregunta es: " + codigoDePregunta);
+        
+        System.out.println(comboBoxPreguntas.getSelectedItem() + " - Código de la pregunta: " + codigoDePregunta);
         asignarComponentes(codigoDePregunta);
     }
 

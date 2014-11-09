@@ -11,7 +11,7 @@ public class ControlAbandonoColmovil {
         daoPerfilAbandonanColmovil = new DaoPerfilAbandonoColmovil();
     }
     
-    public void consulta(int numDocIdCandidato, String nombre_Proceso/*Paramatros dinamicos*/) {
+    public void consulta(int numDocIdCandidato, String nombre_Proceso) {
 
     }
 

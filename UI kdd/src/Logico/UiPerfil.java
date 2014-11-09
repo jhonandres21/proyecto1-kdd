@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * @author john En esta clase se van a poner todos los componentes de la
@@ -23,7 +24,9 @@ public abstract class UiPerfil {
         inicializarJLabel(labelSexo, "Sexo:          ");
 
         checkBoxSexoFemenino = new JCheckBox("Femenino");
+        checkBoxSexoFemenino.setSelected(true);
         checkBoxSexoMasculino = new JCheckBox("Masculino");
+        checkBoxSexoMasculino.setSelected(true);
 
         estadoCivil = new JComboBox();
         inicioEstrato = new JComboBox();
@@ -109,6 +112,32 @@ public abstract class UiPerfil {
     }
 
     abstract void hacerConsulta(java.awt.event.ActionEvent evt);
+
+    protected boolean evaluarRangoEstrato() {
+
+        if (!inicioEstrato.getSelectedItem().equals("Escoger una Opción")) {
+
+            if (finEstrato.getSelectedItem().equals("Escoger una Opción")) {
+
+                JOptionPane.showMessageDialog(null, "Debe escoger un valor para el rango de Estrato");
+                return false;
+
+            } else {
+
+                int valorInicioEstrato = Integer.parseInt("" + inicioEstrato.getSelectedItem());
+                int valorFinEstrato = Integer.parseInt("" + finEstrato.getSelectedItem());
+
+                if (valorFinEstrato < valorInicioEstrato) {
+                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR para el rango de Estrato");
+                    return false;
+                } else {
+                    return true;
+                }
+            }//fin else
+        }
+
+        return true;
+    }
 
     public JLabel getLabelSexo() {
         return labelSexo;

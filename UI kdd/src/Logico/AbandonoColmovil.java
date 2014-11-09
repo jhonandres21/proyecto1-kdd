@@ -13,9 +13,13 @@ public class AbandonoColmovil extends UiPerfil {
 
     @Override
     void hacerConsulta(ActionEvent evt) {
-
-        System.out.println("Funciona!");
-        System.out.println("Femenino: Seleccionado?" + checkBoxSexoFemenino.isSelected());
-        System.out.println("Estado Civil: " + estadoCivil.getSelectedItem());
+        
+        //verificamos que el rango de estrato sea correcto
+        if(evaluarRangoEstrato()){
+            
+            System.out.println("Femenino: Seleccionado?" + checkBoxSexoFemenino.isSelected());
+            System.out.println("Estado Civil: " + estadoCivil.getSelectedItem());
+        }
+        
     }
 }

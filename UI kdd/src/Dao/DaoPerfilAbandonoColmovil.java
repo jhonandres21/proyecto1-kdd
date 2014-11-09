@@ -19,7 +19,7 @@ public class DaoPerfilAbandonoColmovil {
         BaseDeDatos = new ConexionBD();
     }
 
-    public void consulta(int numDocIdCandidato, String nombre_Proceso/*Parametros dinamicos de las preguntas*/) {
+    public void consulta(int numDocIdCandidato, String nombre_Proceso) {
         String sql_select;
         sql_select = "";
 
