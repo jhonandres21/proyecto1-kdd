@@ -26,7 +26,6 @@ public class UiPerfil {
 
         checkBox.setVisible(true);
         checkBox.setSize(100, 45);
-        //margin bottom
         checkBox.setMargin(new java.awt.Insets(0, 0, 10, 0));
     }
 
