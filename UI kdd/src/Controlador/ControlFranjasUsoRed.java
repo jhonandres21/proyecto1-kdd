@@ -19,8 +19,22 @@ public class ControlFranjasUsoRed {
         daoFranjasUsoRed = new DaoFranjasUsoRed();
     }
     
-    public void consulta(int numDocIdCandidato, String nombre_Proceso/*Paramatros dinamicos*/) {
+    public int[] consultaGeneral() {
+        int[] conteoLlamadas = new int[5];
+        
+        conteoLlamadas = daoFranjasUsoRed.consultaGeneral();
+        
+        return conteoLlamadas;
 
+    }
+    
+    public int[] consultaPorOperador(String operador) {
+        
+        int[] conteoLlamadas = new int[5];
+        
+        conteoLlamadas = daoFranjasUsoRed.consultaPorOperador(operador);
+        
+        return conteoLlamadas;
     }
 
     public void desconectar() {
