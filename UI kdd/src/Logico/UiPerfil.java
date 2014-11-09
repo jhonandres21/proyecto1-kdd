@@ -1,47 +1,80 @@
 package Logico;
 
+import java.awt.Dimension;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 /**
- *
- * @author john
+ * @author john En esta clase se van a poner todos los componentes de la
+ * interfaz gráfica que estén relacionados con las preguntas sobre "Perfiles"
  */
-/*
- * En esta clase se van a poner todos los componentes de la interfaz gráfica
- * que estén relacionados con las preguntas sobre "Perfiles"
- */
-public class UiPerfil {
+public abstract class UiPerfil {
 
-    JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino;
-    JComboBox estadoCivil, inicioEstrato, finEstrato;
+    protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino;
+    protected JComboBox estadoCivil, inicioEstrato, finEstrato;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato;
+    protected JButton consultar;
 
     public UiPerfil() {
 
+        labelSexo = new JLabel();
+        inicializarJLabel(labelSexo, "Sexo:          ");
+
         checkBoxSexoFemenino = new JCheckBox("Femenino");
         checkBoxSexoMasculino = new JCheckBox("Masculino");
+
         estadoCivil = new JComboBox();
         inicioEstrato = new JComboBox();
         finEstrato = new JComboBox();
+
+        labelEstadoCivil = new JLabel();
+        inicializarJLabel(labelEstadoCivil, "Estado Civil:");
+
+        labelInicioEstrato = new JLabel();
+        inicializarJLabel(labelInicioEstrato, "Estrato:");
+
+        labelFinEstrato = new JLabel();
+        inicializarJLabel(labelFinEstrato, " Hasta:");
+
+        consultar = new JButton("Consultar");
+
+        consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerConsulta(evt);
+            }
+        });
+
         inicializarCheckBox(checkBoxSexoFemenino);
         inicializarCheckBox(checkBoxSexoMasculino);
-        inicializarEstadoCivil();
+        inicializarEstadoCivil(estadoCivil);
         inicializarEstrato(inicioEstrato);
         inicializarEstrato(finEstrato);
     }
 
-    private void inicializarCheckBox(JCheckBox checkBox) {
+    protected void inicializarJLabel(JLabel label, String texto) {
 
-        checkBox.setVisible(true);
-        checkBox.setSize(100, 45);
-        checkBox.setMargin(new java.awt.Insets(0, 0, 10, 0));
+        label.setText(texto);
+        label.setSize(170, 30);
+        label.setMinimumSize(new Dimension(170, 30));
+        label.setMaximumSize(new Dimension(170, 30));
+        label.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
     }
 
-    private JComboBox inicializarEstadoCivil() {
+    protected void inicializarCheckBox(JCheckBox checkBox) {
 
-        estadoCivil = new JComboBox();
+        checkBox.setVisible(true);
+        checkBox.setSize(170, 40);
+        checkBox.setMinimumSize(new Dimension(170, 40));
+        checkBox.setMaximumSize(new Dimension(170, 40));
+        checkBox.setMargin(new java.awt.Insets(0, 0, 5, 0));
+    }
+
+    protected void inicializarEstadoCivil(JComboBox estadoCivil) {
+
         estadoCivil.setVisible(true);
-        estadoCivil.setSize(100, 45);
+        estadoCivil.setMaximumSize(new Dimension(170, 30));
 
         String estados[][] = new String[6][1];
         estados[0][0] = "Escoger una Opción";
@@ -54,14 +87,12 @@ public class UiPerfil {
         for (int i = 0; i < estados.length; i++) {
             estadoCivil.addItem(estados[i][0]);
         }
-
-        return estadoCivil;
     }
 
-    private void inicializarEstrato(JComboBox estrato) {
+    protected void inicializarEstrato(JComboBox estrato) {
 
         estrato.setVisible(true);
-        estrato.setSize(100, 45);
+        estrato.setMaximumSize(new Dimension(170, 30));
 
         String estratos[][] = new String[7][1];
         estratos[0][0] = "Escoger una Opción";
@@ -75,6 +106,12 @@ public class UiPerfil {
         for (int i = 0; i < estratos.length; i++) {
             estrato.addItem(estratos[i][0]);
         }
+    }
+
+    abstract void hacerConsulta(java.awt.event.ActionEvent evt);
+
+    public JLabel getLabelSexo() {
+        return labelSexo;
     }
 
     public JCheckBox getCheckBoxSexoFemenino() {
@@ -107,5 +144,21 @@ public class UiPerfil {
 
     public void setFinEstrato(JComboBox finEstrato) {
         this.finEstrato = finEstrato;
+    }
+
+    public JLabel getLabelEstadoCivil() {
+        return labelEstadoCivil;
+    }
+
+    public JLabel getLabelInicioEstrato() {
+        return labelInicioEstrato;
+    }
+
+    public JLabel getLabelFinEstrato() {
+        return labelFinEstrato;
+    }
+
+    public JButton getConsultar() {
+        return consultar;
     }
 }

@@ -1,7 +1,7 @@
 package GUI;
 
-import Logico.UiPerfil;
-import javax.swing.BoxLayout;
+import Logico.AbandonoColmovil;
+import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -15,7 +15,8 @@ public class Visualizador extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
-        panelOpciones.setLayout(new BoxLayout(panelOpciones, BoxLayout.Y_AXIS));
+        FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
+        panelOpciones.setLayout(layout);
 
         //Inicializamos y asignamos las Preguntas
         comboBoxPreguntas = this.setPreguntas();
@@ -24,7 +25,7 @@ public class Visualizador extends javax.swing.JFrame {
                 preguntasActionPerformed(evt);
             }
         });
-        
+
         panel1 = new JPanel();
         panel2 = new JPanel();
         panelPreguntas.add(comboBoxPreguntas);
@@ -63,14 +64,23 @@ public class Visualizador extends javax.swing.JFrame {
         //según la pregunta que se elija asignamos unos componentes a la interfaz
         if (codigoDePregunta == 1 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
 
-            UiPerfil perfil = new UiPerfil();
+            AbandonoColmovil abandono = new AbandonoColmovil();
             panelOpciones.removeAll();
-            panelOpciones.add(perfil.getCheckBoxSexoFemenino());
-            panelOpciones.add(perfil.getCheckBoxSexoMasculino());
+            panelOpciones.add(abandono.getLabelSexo());
+            panelOpciones.add(abandono.getCheckBoxSexoFemenino());
+            panelOpciones.add(abandono.getCheckBoxSexoMasculino());
+            panelOpciones.add(abandono.getLabelEstadoCivil());
+            panelOpciones.add(abandono.getEstadoCivil());
+            panelOpciones.add(abandono.getLabelInicioEstrato());
+            panelOpciones.add(abandono.getInicioEstrato());
+            panelOpciones.add(abandono.getLabelFinEstrato());
+            panelOpciones.add(abandono.getFinEstrato());
+            panelOpciones.add(abandono.getConsultar());
             panelOpciones.updateUI();
-        }else{
+        } else {
             //por ahora eliminamos los componentes de la interfaz
             panelOpciones.removeAll();
+            panelOpciones.updateUI();
         }
     }
 
@@ -114,7 +124,7 @@ public class Visualizador extends javax.swing.JFrame {
 
         panelOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         panelOpciones.setMinimumSize(new java.awt.Dimension(150, 0));
-        panelOpciones.setLayout(new javax.swing.BoxLayout(panelOpciones, javax.swing.BoxLayout.LINE_AXIS));
+        panelOpciones.setLayout(new java.awt.GridLayout());
 
         panelPreguntas.setBorder(javax.swing.BorderFactory.createTitledBorder("Preguntas"));
         panelPreguntas.setMinimumSize(new java.awt.Dimension(150, 0));
@@ -160,7 +170,7 @@ public class Visualizador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
+                        .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(panelPestanas)))
