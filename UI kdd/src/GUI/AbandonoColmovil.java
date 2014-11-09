@@ -1,5 +1,6 @@
-package Logico;
+package GUI;
 
+import Controlador.ControlAbandonoColmovil;
 import java.awt.event.ActionEvent;
 
 /**
@@ -8,7 +9,11 @@ import java.awt.event.ActionEvent;
  */
 public class AbandonoColmovil extends UiPerfil {
 
+    ControlAbandonoColmovil controladorAbandono;
+
     public AbandonoColmovil() {
+
+        controladorAbandono = new ControlAbandonoColmovil();
     }
 
     @Override
@@ -19,6 +24,7 @@ public class AbandonoColmovil extends UiPerfil {
             
             System.out.println("Femenino: Seleccionado?" + checkBoxSexoFemenino.isSelected());
             System.out.println("Estado Civil: " + estadoCivil.getSelectedItem());
+            controladorAbandono.getPerfiles();
         }
         
     }

@@ -5,17 +5,14 @@ import Dao.DaoPerfilAbandonoColmovil;
 
 public class ControlAbandonoColmovil {
     
-    DaoPerfilAbandonoColmovil daoPerfilAbandonanColmovil;
+     DaoPerfilAbandonoColmovil daoPerfilAbandonanColmovil;
 
     public ControlAbandonoColmovil() {
         daoPerfilAbandonanColmovil = new DaoPerfilAbandonoColmovil();
     }
-    
-    public void consulta(int numDocIdCandidato, String nombre_Proceso) {
 
-    }
+    public void getPerfiles() {
 
-    public void desconectar() {
-        daoPerfilAbandonanColmovil.desconectar();
+        daoPerfilAbandonanColmovil.listaPerfiles();
     }
 }

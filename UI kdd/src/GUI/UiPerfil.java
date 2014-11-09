@@ -1,4 +1,4 @@
-package Logico;
+package GUI;
 
 import java.awt.Dimension;
 import javax.swing.JButton;

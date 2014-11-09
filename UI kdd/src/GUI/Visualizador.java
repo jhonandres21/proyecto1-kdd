@@ -1,6 +1,5 @@
 package GUI;
 
-import Logico.AbandonoColmovil;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
