@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino;
-    protected JComboBox estadoCivil, inicioEstrato, finEstrato;
+    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato;
     protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato;
-    protected JButton consultar;
+    protected JButton botonConsultar;
 
     public UiPerfil() {
 
@@ -28,9 +28,9 @@ public abstract class UiPerfil {
         checkBoxSexoMasculino = new JCheckBox("Masculino");
         checkBoxSexoMasculino.setSelected(true);
 
-        estadoCivil = new JComboBox();
-        inicioEstrato = new JComboBox();
-        finEstrato = new JComboBox();
+        comboBoxEstadoCivil = new JComboBox();
+        comboBoxInicioEstrato = new JComboBox();
+        comboBoxFinEstrato = new JComboBox();
 
         labelEstadoCivil = new JLabel();
         inicializarJLabel(labelEstadoCivil, "Estado Civil:");
@@ -41,9 +41,9 @@ public abstract class UiPerfil {
         labelFinEstrato = new JLabel();
         inicializarJLabel(labelFinEstrato, " Hasta:");
 
-        consultar = new JButton("Consultar");
+        botonConsultar = new JButton("Consultar");
 
-        consultar.addActionListener(new java.awt.event.ActionListener() {
+        botonConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hacerConsulta(evt);
             }
@@ -51,9 +51,9 @@ public abstract class UiPerfil {
 
         inicializarCheckBox(checkBoxSexoFemenino);
         inicializarCheckBox(checkBoxSexoMasculino);
-        inicializarEstadoCivil(estadoCivil);
-        inicializarEstrato(inicioEstrato);
-        inicializarEstrato(finEstrato);
+        inicializarEstadoCivil(comboBoxEstadoCivil);
+        inicializarEstrato(comboBoxInicioEstrato);
+        inicializarEstrato(comboBoxFinEstrato);
     }
 
     protected void inicializarJLabel(JLabel label, String texto) {
@@ -115,20 +115,20 @@ public abstract class UiPerfil {
 
     protected boolean evaluarRangoEstrato() {
 
-        if (!inicioEstrato.getSelectedItem().equals("Escoger una Opción")) {
+        if (!comboBoxInicioEstrato.getSelectedItem().equals("Escoger una Opción")) {
 
-            if (finEstrato.getSelectedItem().equals("Escoger una Opción")) {
+            if (comboBoxFinEstrato.getSelectedItem().equals("Escoger una Opción")) {
 
                 JOptionPane.showMessageDialog(null, "Debe escoger un valor para el rango de Estrato");
                 return false;
 
             } else {
 
-                int valorInicioEstrato = Integer.parseInt("" + inicioEstrato.getSelectedItem());
-                int valorFinEstrato = Integer.parseInt("" + finEstrato.getSelectedItem());
+                int valorInicioEstrato = Integer.parseInt("" + comboBoxInicioEstrato.getSelectedItem());
+                int valorFinEstrato = Integer.parseInt("" + comboBoxFinEstrato.getSelectedItem());
 
                 if (valorFinEstrato < valorInicioEstrato) {
-                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR para el rango de Estrato");
+                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR o IGUAL para el rango de Estrato");
                     return false;
                 } else {
                     return true;
@@ -152,27 +152,27 @@ public abstract class UiPerfil {
     }
 
     public JComboBox getEstadoCivil() {
-        return estadoCivil;
+        return comboBoxEstadoCivil;
     }
 
     public void setEstadoCivil(JComboBox estadoCivil) {
-        this.estadoCivil = estadoCivil;
+        this.comboBoxEstadoCivil = estadoCivil;
     }
 
     public JComboBox getInicioEstrato() {
-        return inicioEstrato;
+        return comboBoxInicioEstrato;
     }
 
     public void setInicioEstrato(JComboBox inicioEstrato) {
-        this.inicioEstrato = inicioEstrato;
+        this.comboBoxInicioEstrato = inicioEstrato;
     }
 
     public JComboBox getFinEstrato() {
-        return finEstrato;
+        return comboBoxFinEstrato;
     }
 
     public void setFinEstrato(JComboBox finEstrato) {
-        this.finEstrato = finEstrato;
+        this.comboBoxFinEstrato = finEstrato;
     }
 
     public JLabel getLabelEstadoCivil() {
@@ -188,6 +188,6 @@ public abstract class UiPerfil {
     }
 
     public JButton getConsultar() {
-        return consultar;
+        return botonConsultar;
     }
 }

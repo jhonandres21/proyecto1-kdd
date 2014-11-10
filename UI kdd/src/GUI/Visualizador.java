@@ -63,7 +63,7 @@ public class Visualizador extends javax.swing.JFrame {
         //según la pregunta que se elija asignamos unos componentes a la interfaz
         if (codigoDePregunta == 1 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
 
-            AbandonoColmovil abandono = new AbandonoColmovil();
+            UiAbandonoColmovil abandono = new UiAbandonoColmovil();
             panelOpciones.removeAll();
             panelOpciones.add(abandono.getLabelSexo());
             panelOpciones.add(abandono.getCheckBoxSexoFemenino());

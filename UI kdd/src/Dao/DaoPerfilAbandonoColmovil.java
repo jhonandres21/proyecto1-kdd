@@ -1,6 +1,7 @@
 package Dao;
 
 import ConectorBD.ConexionBD;
+import Logico.AbandonoColmovil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,19 +17,51 @@ public class DaoPerfilAbandonoColmovil {
         conexionBd = new ConexionBD();
     }
 
-    public ArrayList<String[]> listaPerfiles() {
+    public String prepararRestriccionesClausulaWherePerfiles(AbandonoColmovil abandono) {
+
+        String where = "";
+
+        if (abandono.getSexoFemenino().equals("true") && abandono.getSexoMasculino().equals("true")) {
+
+            where += " AND (demografia.genero = 'Femenino' OR demografia.genero = 'Masculino') ";
+
+        } else if (abandono.getSexoMasculino().equals("true")) {
+
+            where += " AND demografia.genero = 'Masculino' ";
+
+        } else if (abandono.getSexoFemenino().equals("true")) {
+
+            where += " AND demografia.genero = 'Femenino' ";
+        }
+
+
+        if (!abandono.getEstadoCivil().equals("Escoger una Opción")) {
+            where += " AND estado_civil = '" + abandono.getEstadoCivil() + "'";
+        }
+
+        if (!abandono.getInicioEstrato().equals("Escoger una Opción")) {
+
+            where += " AND (demografia.estrato = " + abandono.getInicioEstrato() + " OR demografia.estrato = " + abandono.getFinEstrato() + ")";
+        }
+
+        return where;
+    }
+
+    public ArrayList<String[]> listaPerfiles(String where) {
 
         ArrayList<String[]> resultado = new ArrayList<String[]>();
 
         Statement sentencia;
         Connection connection = conexionBd.conectar();
         ResultSet resultSet;
-        System.out.println("Inicia Consulta");
+        System.out.println("----------Inicia Consulta");
         try {
 
             sentencia = connection.createStatement();
             String consulta = "SELECT * FROM bodega.retiro, bodega.demografia\n"
-                    + "WHERE retiro.demografia = demografia.sk_demografia;";
+                    + "WHERE retiro.demografia = demografia.sk_demografia" + where + ";";
+
+            System.out.println("Consulta: " + consulta);
 
             resultSet = sentencia.executeQuery(consulta);
 
@@ -47,7 +80,7 @@ public class DaoPerfilAbandonoColmovil {
 
                 resultado.add(temp);
             }
-            System.out.println("Termina Consulta");
+            System.out.println("----------Termina Consulta\n");
             resultSet.close();
             connection.close();
 
