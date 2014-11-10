@@ -28,7 +28,25 @@ public class DaoPlanesMasEscogidos {
         BaseDeDatos = new ConexionBD();
     }
   
-    public void consultar(int numDocIdCandidato, String nombre_Proceso/*Parametros dinamicos de las preguntas*/) {
+    public void consultarPrepago(String tipoPlan, boolean operativo) {
+        String sql_select;
+        sql_select = "";
+        try {
+            conn = BaseDeDatos.conectar();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+
+            while (tabla.next()) {
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public void consultarPostPago(String tipoPlan, boolean operativo) {
         String sql_select;
         sql_select = "";
         try {

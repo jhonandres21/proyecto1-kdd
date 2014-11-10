@@ -64,11 +64,6 @@ public class DaoFranjasUsoRed {
             conteoLlamadas[3] = pm;
             conteoLlamadas[4] = evening;
             
-            System.out.println("Night: " + night);
-            System.out.println("Morning: " + morning);
-            System.out.println("Am: " + am);
-            System.out.println("Pm: " + pm);
-            System.out.println("Evening: " + evening);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (Exception ex) {
@@ -77,11 +72,7 @@ public class DaoFranjasUsoRed {
         
         return conteoLlamadas;
     }
-    public static void main(String args[]) {
-        DaoFranjasUsoRed p = new DaoFranjasUsoRed();
-        p.consultaGeneral();
-    }
-
+    
     public int[] consultaPorOperador(String operador) {
         
         int night = 0;
@@ -94,12 +85,12 @@ public class DaoFranjasUsoRed {
         String sql_select;
         sql_select = "SELECT periodo_del_dia, cliente  FROM bodega.tiempo, "
                 + "bodega.llamada WHERE bodega.tiempo.sk_tiempo = bodega.llamada.tiempo "
-                + "AND WHERE bodega.llamada.nombre_operador = '" + operador + "';";
+                + "AND bodega.llamada.nombre_operador = '" + operador + "';";
         try {
             conn = BaseDeDatos.conectar();
             Statement sentencia = conn.createStatement();
             ResultSet tabla = sentencia.executeQuery(sql_select);
-
+            
             while (tabla.next()) {
                 if (tabla.getObject(1).toString().equalsIgnoreCase("night")) {
                     night++;
