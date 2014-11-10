@@ -1,50 +1,93 @@
 package Dao;
 
 import ConectorBD.ConexionBD;
+import Logico.AbandonoColmovil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class DaoPerfilAbandonoColmovil {
 
-    ConexionBD BaseDeDatos;
-    Connection conn;
-    Statement stmt;
+    ConexionBD conexionBd;
 
     public DaoPerfilAbandonoColmovil() {
-        BaseDeDatos = new ConexionBD();
+        conexionBd = new ConexionBD();
     }
 
-    public void consulta(int numDocIdCandidato, String nombre_Proceso) {
-        String sql_select;
-        sql_select = "";
+    public String prepararRestriccionesClausulaWherePerfiles(AbandonoColmovil abandono) {
 
+        String where = "";
+
+        if (abandono.getSexoFemenino().equals("true") && abandono.getSexoMasculino().equals("true")) {
+
+            where += " AND (demografia.genero = 'Femenino' OR demografia.genero = 'Masculino') ";
+
+        } else if (abandono.getSexoMasculino().equals("true")) {
+
+            where += " AND demografia.genero = 'Masculino' ";
+
+        } else if (abandono.getSexoFemenino().equals("true")) {
+
+            where += " AND demografia.genero = 'Femenino' ";
+        }
+
+
+        if (!abandono.getEstadoCivil().equals("Escoger una Opción")) {
+            where += " AND estado_civil = '" + abandono.getEstadoCivil() + "'";
+        }
+
+        if (!abandono.getInicioEstrato().equals("Escoger una Opción")) {
+
+            where += " AND (demografia.estrato = " + abandono.getInicioEstrato() + " OR demografia.estrato = " + abandono.getFinEstrato() + ")";
+        }
+
+        return where;
+    }
+
+    public ArrayList<String[]> listaPerfiles(String where) {
+
+        ArrayList<String[]> resultado = new ArrayList<String[]>();
+
+        Statement sentencia;
+        Connection connection = conexionBd.conectar();
+        ResultSet resultSet;
+        System.out.println("----------Inicia Consulta");
         try {
-            conn = BaseDeDatos.conectar();
-            Statement sentencia = conn.createStatement();
-            ResultSet tabla = sentencia.executeQuery(sql_select);
 
-            while (tabla.next()) {
+            sentencia = connection.createStatement();
+            String consulta = "SELECT * FROM bodega.retiro, bodega.demografia\n"
+                    + "WHERE retiro.demografia = demografia.sk_demografia" + where + ";";
+
+            System.out.println("Consulta: " + consulta);
+
+            resultSet = sentencia.executeQuery(consulta);
+
+            while (resultSet.next()) {
+
+                String temp[] = new String[9];
+                temp[0] = "" + resultSet.getObject(1);
+                temp[1] = "" + resultSet.getObject(2);
+                temp[2] = "" + resultSet.getObject(3);
+                temp[3] = "" + resultSet.getObject(4);
+                temp[4] = "" + resultSet.getObject(5);
+                temp[5] = "" + resultSet.getObject(6);
+                temp[6] = "" + resultSet.getObject(7);
+                temp[7] = "" + resultSet.getObject(8);
+                temp[8] = "" + resultSet.getObject(9);
+
+                resultado.add(temp);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.out.println("----------Termina Consulta\n");
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException exp) {
+            JOptionPane.showMessageDialog(null, exp.getMessage());
         }
-    }
 
-    public void desconectar() {
-
-        try {
-
-            stmt.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        return resultado;
     }
 }

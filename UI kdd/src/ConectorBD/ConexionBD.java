@@ -10,7 +10,11 @@ public class ConexionBD {
     private final String driver = "org.postgresql.Driver";
     private final String name_dir = "jdbc:postgresql://localhost:5432/colmovil";
     private final String user = "postgres";
+<<<<<<< HEAD
     private final String password = "pipe14";
+=======
+    private final String password = "password";
+>>>>>>> 7c80f1a6f1a93926eee6db4be6c4b1a1d4b4c15a
     private Connection conexion;
     
     /*localhost -> es el servidor local, eN la universidad es pgsql, el puerto es el mismo

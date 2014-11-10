@@ -1,21 +1,27 @@
-
 package Controlador;
 
 import Dao.DaoPerfilAbandonoColmovil;
+import Logico.AbandonoColmovil;
 
 public class ControlAbandonoColmovil {
-    
+
     DaoPerfilAbandonoColmovil daoPerfilAbandonanColmovil;
 
     public ControlAbandonoColmovil() {
+
         daoPerfilAbandonanColmovil = new DaoPerfilAbandonoColmovil();
     }
-    
-    public void consulta(int numDocIdCandidato, String nombre_Proceso) {
 
-    }
+    public void getPerfiles(String sexoFemenino, String sexoMasculino, String estadoCivil, String inicioEstrato, String finEstrato) {
 
-    public void desconectar() {
-        daoPerfilAbandonanColmovil.desconectar();
+        AbandonoColmovil abandono = new AbandonoColmovil();
+        abandono.setSexoFemenino(sexoFemenino);
+        abandono.setSexoMasculino(sexoMasculino);
+        abandono.setEstadoCivil(estadoCivil);
+        abandono.setInicioEstrato(inicioEstrato);
+        abandono.setFinEstrato(finEstrato);
+        
+        String restriccionesClausulaWhere = daoPerfilAbandonanColmovil.prepararRestriccionesClausulaWherePerfiles(abandono);
+        daoPerfilAbandonanColmovil.listaPerfiles(restriccionesClausulaWhere);
     }
 }
