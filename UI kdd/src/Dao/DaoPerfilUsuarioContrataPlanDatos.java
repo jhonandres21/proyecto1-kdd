@@ -1,4 +1,3 @@
-
 package Dao;
 
 import ConectorBD.ConexionBD;
@@ -15,8 +14,7 @@ import javax.swing.JOptionPane;
  * @author john
  */
 public class DaoPerfilUsuarioContrataPlanDatos {
-    
-    
+
     ConexionBD conexionBd;
 
     public DaoPerfilUsuarioContrataPlanDatos() {
@@ -60,13 +58,13 @@ public class DaoPerfilUsuarioContrataPlanDatos {
         Connection connection = conexionBd.conectar();
         ResultSet resultSet;
         System.out.println("----------Inicia Consulta");
-        
+
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n" 
-                            + "WHERE venta.demografia = demografia.sk_demografia\n" 
-                            + "AND (venta.plan_voz <> 1 AND venta.plan_datos <> 1) " + where + ";";
+            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n"
+                            + "WHERE venta.demografia = demografia.sk_demografia\n"
+                            + "AND venta.plan_datos <> 1 " + where + ";";
 
             System.out.println("Consulta: " + consulta);
 
