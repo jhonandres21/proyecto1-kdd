@@ -61,8 +61,9 @@ public class DaoPerfilPlanesPrepago {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.retiro, bodega.demografia\n"
-                    + "WHERE retiro.demografia = demografia.sk_demografia" + where + ";";
+            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n"
+                            + "WHERE venta.demografia = demografia.sk_demografia\n"
+                            + "AND (venta.plan_voz = 1 AND venta.plan_datos = 1) " + where + ";";
 
             System.out.println("Consulta: " + consulta);
 
