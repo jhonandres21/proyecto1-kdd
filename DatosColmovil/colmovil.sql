@@ -256,6 +256,8 @@ CREATE TABLE colmovil.recarga (
     ON UPDATE NO ACTION);
     
 
+
+
 copy cliente FROM 'C:\Users\Juan Olaya O\Documents\GitHub\proyecto1-kdd\DatosColmovil\clientes.csv' DELIMITER ',' CSV;
 
 COPY localizacion FROM 'C:\Users\Juan Olaya O\Documents\GitHub\proyecto1-kdd\DatosColmovil\localizacion.csv' DELIMITER ',' CSV;
@@ -281,3 +283,4 @@ COPY llamada FROM 'C:\Users\Juan Olaya O\Documents\GitHub\proyecto1-kdd\DatosCol
 COPY retiro FROM 'C:\Users\Juan Olaya O\Documents\GitHub\proyecto1-kdd\DatosColmovil\retiros_sim_card.csv' DELIMITER ',' CSV;
 
 COPY recarga FROM 'C:\Users\Juan Olaya O\Documents\GitHub\proyecto1-kdd\DatosColmovil\recargas_sim_card.csv' DELIMITER ',' CSV;
+
