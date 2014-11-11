@@ -70,10 +70,13 @@ public class Visualizador extends javax.swing.JFrame {
             } else if (codigoDePregunta == 4) {
                 UiPerfilPlanesPrepago planesPrepago = new UiPerfilPlanesPrepago();
                 asignaComponentes(planesPrepago);
-                
+
             } else if (codigoDePregunta == 5) {
                 UiPerfilPlanesPospago planesPospago = new UiPerfilPlanesPospago();
                 asignaComponentes(planesPospago);
+            } else {
+                panelOpciones.removeAll();
+                panelOpciones.updateUI();
             }
 
         } else {

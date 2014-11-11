@@ -62,9 +62,9 @@ public class DaoPerfilPlanesPospago {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n"
-                            + "WHERE venta.demografia = demografia.sk_demografia\n"
-                            + "AND (venta.plan_voz = 1 AND venta.plan_datos = 1) " + where + ";";
+            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n" 
+                            + "WHERE venta.demografia = demografia.sk_demografia\n" 
+                            + "AND (venta.plan_voz <> 1 AND venta.plan_datos <> 1) " + where + ";";
 
             System.out.println("Consulta: " + consulta);
 
