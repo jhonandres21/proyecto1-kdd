@@ -74,10 +74,15 @@ public class Visualizador extends javax.swing.JFrame {
             } else if (codigoDePregunta == 5) {
                 UiPerfilUsuarioPlanPospago planesPospago = new UiPerfilUsuarioPlanPospago();
                 asignaComponentes(planesPospago);
-                
-            }else if (codigoDePregunta == 6) {
+
+            } else if (codigoDePregunta == 6) {
                 UiPerfilUsuarioContrataPlanDatos UsuarioPlanDatos = new UiPerfilUsuarioContrataPlanDatos();
                 asignaComponentes(UsuarioPlanDatos);
+
+            } else if (codigoDePregunta == 7) {
+                UiPerfilUsuarioServicioRoamming UsuarioServicioRoamming = new UiPerfilUsuarioServicioRoamming();
+                asignaComponentes(UsuarioServicioRoamming);
+
             } else {
                 panelOpciones.removeAll();
                 panelOpciones.updateUI();
