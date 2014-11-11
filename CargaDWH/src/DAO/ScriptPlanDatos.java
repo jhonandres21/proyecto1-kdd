@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import ConectorBD.ConexionBD;
@@ -82,8 +78,8 @@ public class ScriptPlanDatos {
             int numRegistros = planes.size();
 
             for (int i = 0; i < numRegistros; i++) {
-//            System.out.println("ID: " + planes.get(i).getId_plan_datos() + "// Nombre del Plan: " + planes.get(i).getNombre_plan_datos() + "// Corporativo: " + planes.get(i).getEs_corporativo());
-                sql += "INSERT INTO bodega.plan_datos (id_plan_datos, nombre_plan_datos, es_corporativo) VALUES (" + planes.get(i).getId_plan_datos() + ", '" + planes.get(i).getNombre_plan_datos() + "', '" + planes.get(i).getEs_corporativo() + "');";
+
+                sql = "INSERT INTO bodega.plan_datos (id_plan_datos, nombre_plan_datos, es_corporativo) VALUES (" + planes.get(i).getId_plan_datos() + ", '" + planes.get(i).getNombre_plan_datos() + "', '" + planes.get(i).getEs_corporativo() + "');";
                 sentencia.executeUpdate(sql);
             }
             conexion.desconectarBaseDeDatos(con);
