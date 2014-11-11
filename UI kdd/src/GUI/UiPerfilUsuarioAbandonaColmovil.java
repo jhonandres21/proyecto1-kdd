@@ -1,19 +1,19 @@
 package GUI;
 
-import Controlador.ControladorPerfilAbandonoColmovil;
+import Controlador.ControladorPerfilUsuarioAbandonaColmovil;
 import java.awt.event.ActionEvent;
 
 /**
  *
  * @author john
  */
-public class UiPerfilAbandonoColmovil extends UiPerfil {
+public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
 
-    ControladorPerfilAbandonoColmovil controladorAbandono;
+    ControladorPerfilUsuarioAbandonaColmovil controladorAbandono;
 
-    public UiPerfilAbandonoColmovil() {
+    public UiPerfilUsuarioAbandonaColmovil() {
 
-        controladorAbandono = new ControladorPerfilAbandonoColmovil();
+        controladorAbandono = new ControladorPerfilUsuarioAbandonaColmovil();
     }
 
     @Override

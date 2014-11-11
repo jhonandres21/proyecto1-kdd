@@ -1,20 +1,20 @@
 package Controlador;
 
-import Dao.DaoPerfilAbandonoColmovil;
-import Logico.AbandonoColmovil;
+import Dao.DaoPerfilUsuarioAbandonaColmovil;
+import Logico.UsuarioAbandonaColmovil;
 
-public class ControladorPerfilAbandonoColmovil {
+public class ControladorPerfilUsuarioAbandonaColmovil {
 
-    DaoPerfilAbandonoColmovil daoPerfilAbandonanColmovil;
+    DaoPerfilUsuarioAbandonaColmovil daoPerfilAbandonanColmovil;
 
-    public ControladorPerfilAbandonoColmovil() {
+    public ControladorPerfilUsuarioAbandonaColmovil() {
 
-        daoPerfilAbandonanColmovil = new DaoPerfilAbandonoColmovil();
+        daoPerfilAbandonanColmovil = new DaoPerfilUsuarioAbandonaColmovil();
     }
 
     public void getPerfiles(String sexoFemenino, String sexoMasculino, String estadoCivil, String inicioEstrato, String finEstrato) {
 
-        AbandonoColmovil abandono = new AbandonoColmovil();
+        UsuarioAbandonaColmovil abandono = new UsuarioAbandonaColmovil();
         abandono.setSexoFemenino(sexoFemenino);
         abandono.setSexoMasculino(sexoMasculino);
         abandono.setEstadoCivil(estadoCivil);

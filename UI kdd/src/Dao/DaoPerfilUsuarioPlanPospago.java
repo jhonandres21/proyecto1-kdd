@@ -1,7 +1,8 @@
+
 package Dao;
 
 import ConectorBD.ConexionBD;
-import Logico.PlanesPrepago;
+import Logico.UsuarioPlanPospago;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,38 +14,38 @@ import javax.swing.JOptionPane;
  *
  * @author john
  */
-public class DaoPerfilPlanesPrepago {
-
+public class DaoPerfilUsuarioPlanPospago {
+    
     ConexionBD conexionBd;
 
-    public DaoPerfilPlanesPrepago() {
+    public DaoPerfilUsuarioPlanPospago() {
         conexionBd = new ConexionBD();
     }
 
-    public String prepararRestriccionesClausulaWherePerfiles(PlanesPrepago planesPrepago) {
+    public String prepararRestriccionesClausulaWherePerfiles(UsuarioPlanPospago planesPospago) {
 
         String where = "";
 
-        if (planesPrepago.getSexoFemenino().equals("true") && planesPrepago.getSexoMasculino().equals("true")) {
+        if (planesPospago.getSexoFemenino().equals("true") && planesPospago.getSexoMasculino().equals("true")) {
 
             where += " AND (demografia.genero = 'Femenino' OR demografia.genero = 'Masculino') ";
 
-        } else if (planesPrepago.getSexoMasculino().equals("true")) {
+        } else if (planesPospago.getSexoMasculino().equals("true")) {
 
             where += " AND demografia.genero = 'Masculino' ";
 
-        } else if (planesPrepago.getSexoFemenino().equals("true")) {
+        } else if (planesPospago.getSexoFemenino().equals("true")) {
 
             where += " AND demografia.genero = 'Femenino' ";
         }
 
-        if (!planesPrepago.getEstadoCivil().equals("Escoger una Opción")) {
-            where += " AND estado_civil = '" + planesPrepago.getEstadoCivil() + "'";
+        if (!planesPospago.getEstadoCivil().equals("Escoger una Opción")) {
+            where += " AND estado_civil = '" + planesPospago.getEstadoCivil() + "'";
         }
 
-        if (!planesPrepago.getInicioEstrato().equals("Escoger una Opción")) {
+        if (!planesPospago.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + planesPrepago.getInicioEstrato() + " OR demografia.estrato = " + planesPrepago.getFinEstrato() + ")";
+            where += " AND (demografia.estrato = " + planesPospago.getInicioEstrato() + " OR demografia.estrato = " + planesPospago.getFinEstrato() + ")";
         }
 
         return where;
@@ -61,9 +62,9 @@ public class DaoPerfilPlanesPrepago {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n"
-                            + "WHERE venta.demografia = demografia.sk_demografia\n"
-                            + "AND (venta.plan_voz = 1 AND venta.plan_datos = 1) " + where + ";";
+            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n" 
+                            + "WHERE venta.demografia = demografia.sk_demografia\n" 
+                            + "AND (venta.plan_voz <> 1 AND venta.plan_datos <> 1) " + where + ";";
 
             System.out.println("Consulta: " + consulta);
 

@@ -64,16 +64,20 @@ public class Visualizador extends javax.swing.JFrame {
         if (codigoDePregunta == 1 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
 
             if (codigoDePregunta == 1) {
-                UiPerfilAbandonoColmovil abandono = new UiPerfilAbandonoColmovil();
+                UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
                 asignaComponentes(abandono);
 
             } else if (codigoDePregunta == 4) {
-                UiPerfilPlanesPrepago planesPrepago = new UiPerfilPlanesPrepago();
+                UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
                 asignaComponentes(planesPrepago);
 
             } else if (codigoDePregunta == 5) {
-                UiPerfilPlanesPospago planesPospago = new UiPerfilPlanesPospago();
+                UiPerfilUsuarioPlanPospago planesPospago = new UiPerfilUsuarioPlanPospago();
                 asignaComponentes(planesPospago);
+                
+            }else if (codigoDePregunta == 6) {
+                UiPerfilUsuarioContrataPlanDatos UsuarioPlanDatos = new UiPerfilUsuarioContrataPlanDatos();
+                asignaComponentes(UsuarioPlanDatos);
             } else {
                 panelOpciones.removeAll();
                 panelOpciones.updateUI();

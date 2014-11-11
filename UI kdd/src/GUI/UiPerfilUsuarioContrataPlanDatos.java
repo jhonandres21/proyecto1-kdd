@@ -1,20 +1,19 @@
-
 package GUI;
 
-import Controlador.ControladorPerfilPlanesPospago;
+import Controlador.ControladorPerfilUsuarioContrataPlanDatos;
 import java.awt.event.ActionEvent;
 
 /**
  *
  * @author john
  */
-public class UiPerfilPlanesPospago extends UiPerfil {
-    
-       ControladorPerfilPlanesPospago controladorPlanesPospago;
+public class UiPerfilUsuarioContrataPlanDatos extends UiPerfil {
 
-    public UiPerfilPlanesPospago() {
+    ControladorPerfilUsuarioContrataPlanDatos controladorUsuarioContrataPlanDatos;
 
-        controladorPlanesPospago = new ControladorPerfilPlanesPospago();
+    public UiPerfilUsuarioContrataPlanDatos() {
+
+        controladorUsuarioContrataPlanDatos = new ControladorPerfilUsuarioContrataPlanDatos();
     }
 
     @Override
@@ -29,7 +28,7 @@ public class UiPerfilPlanesPospago extends UiPerfil {
             String inicioEstrato = "" + comboBoxInicioEstrato.getSelectedItem();
             String finEstrato = "" + comboBoxFinEstrato.getSelectedItem();
 
-            controladorPlanesPospago.getPerfiles(sexoFemenino, sexoMasculino, estadoCivil, inicioEstrato, finEstrato);
+            controladorUsuarioContrataPlanDatos.getPerfiles(sexoFemenino, sexoMasculino, estadoCivil, inicioEstrato, finEstrato);
         }
 
     }

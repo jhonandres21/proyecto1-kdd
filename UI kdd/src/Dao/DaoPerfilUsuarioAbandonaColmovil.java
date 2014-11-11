@@ -1,7 +1,7 @@
 package Dao;
 
 import ConectorBD.ConexionBD;
-import Logico.AbandonoColmovil;
+import Logico.UsuarioAbandonaColmovil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,15 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class DaoPerfilAbandonoColmovil {
+public class DaoPerfilUsuarioAbandonaColmovil {
 
     ConexionBD conexionBd;
 
-    public DaoPerfilAbandonoColmovil() {
+    public DaoPerfilUsuarioAbandonaColmovil() {
         conexionBd = new ConexionBD();
     }
 
-    public String prepararRestriccionesClausulaWherePerfiles(AbandonoColmovil abandono) {
+    public String prepararRestriccionesClausulaWherePerfiles(UsuarioAbandonaColmovil abandono) {
 
         String where = "";
 

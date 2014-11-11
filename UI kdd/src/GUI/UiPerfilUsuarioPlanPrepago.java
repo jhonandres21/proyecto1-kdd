@@ -1,19 +1,19 @@
 package GUI;
 
-import Controlador.ControladorPerfilPlanesPrepago;
+import Controlador.ControladorPerfilUsuarioPlanPrepago;
 import java.awt.event.ActionEvent;
 
 /**
  *
  * @author john
  */
-public class UiPerfilPlanesPrepago extends UiPerfil {
+public class UiPerfilUsuarioPlanPrepago extends UiPerfil {
 
-    ControladorPerfilPlanesPrepago controladorPlanesPrepago;
+    ControladorPerfilUsuarioPlanPrepago controladorPlanesPrepago;
 
-    public UiPerfilPlanesPrepago() {
+    public UiPerfilUsuarioPlanPrepago() {
 
-        controladorPlanesPrepago = new ControladorPerfilPlanesPrepago();
+        controladorPlanesPrepago = new ControladorPerfilUsuarioPlanPrepago();
     }
 
     @Override

@@ -2,7 +2,7 @@
 package Dao;
 
 import ConectorBD.ConexionBD;
-import Logico.PlanesPospago;
+import Logico.UsuarioContrataPlanDatos;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,38 +14,39 @@ import javax.swing.JOptionPane;
  *
  * @author john
  */
-public class DaoPerfilPlanesPospago {
+public class DaoPerfilUsuarioContrataPlanDatos {
+    
     
     ConexionBD conexionBd;
 
-    public DaoPerfilPlanesPospago() {
+    public DaoPerfilUsuarioContrataPlanDatos() {
         conexionBd = new ConexionBD();
     }
 
-    public String prepararRestriccionesClausulaWherePerfiles(PlanesPospago planesPospago) {
+    public String prepararRestriccionesClausulaWherePerfiles(UsuarioContrataPlanDatos usuarioPlanDatos) {
 
         String where = "";
 
-        if (planesPospago.getSexoFemenino().equals("true") && planesPospago.getSexoMasculino().equals("true")) {
+        if (usuarioPlanDatos.getSexoFemenino().equals("true") && usuarioPlanDatos.getSexoMasculino().equals("true")) {
 
             where += " AND (demografia.genero = 'Femenino' OR demografia.genero = 'Masculino') ";
 
-        } else if (planesPospago.getSexoMasculino().equals("true")) {
+        } else if (usuarioPlanDatos.getSexoMasculino().equals("true")) {
 
             where += " AND demografia.genero = 'Masculino' ";
 
-        } else if (planesPospago.getSexoFemenino().equals("true")) {
+        } else if (usuarioPlanDatos.getSexoFemenino().equals("true")) {
 
             where += " AND demografia.genero = 'Femenino' ";
         }
 
-        if (!planesPospago.getEstadoCivil().equals("Escoger una Opción")) {
-            where += " AND estado_civil = '" + planesPospago.getEstadoCivil() + "'";
+        if (!usuarioPlanDatos.getEstadoCivil().equals("Escoger una Opción")) {
+            where += " AND estado_civil = '" + usuarioPlanDatos.getEstadoCivil() + "'";
         }
 
-        if (!planesPospago.getInicioEstrato().equals("Escoger una Opción")) {
+        if (!usuarioPlanDatos.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + planesPospago.getInicioEstrato() + " OR demografia.estrato = " + planesPospago.getFinEstrato() + ")";
+            where += " AND (demografia.estrato = " + usuarioPlanDatos.getInicioEstrato() + " OR demografia.estrato = " + usuarioPlanDatos.getFinEstrato() + ")";
         }
 
         return where;
@@ -59,6 +60,7 @@ public class DaoPerfilPlanesPospago {
         Connection connection = conexionBd.conectar();
         ResultSet resultSet;
         System.out.println("----------Inicia Consulta");
+        
         try {
 
             sentencia = connection.createStatement();

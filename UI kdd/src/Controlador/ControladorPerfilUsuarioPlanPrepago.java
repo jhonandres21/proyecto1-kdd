@@ -1,25 +1,25 @@
 
 package Controlador;
 
-import Dao.DaoPerfilPlanesPrepago;
-import Logico.PlanesPrepago;
+import Dao.DaoPerfilUsuarioPlanPrepago;
+import Logico.UsuarioPlanPrepago;
 
 /**
  *
  * @author john
  */
-public class ControladorPerfilPlanesPrepago {
+public class ControladorPerfilUsuarioPlanPrepago {
 
-    DaoPerfilPlanesPrepago daoPerfilPlanesPrepago;
+    DaoPerfilUsuarioPlanPrepago daoPerfilPlanesPrepago;
 
-    public ControladorPerfilPlanesPrepago() {
+    public ControladorPerfilUsuarioPlanPrepago() {
 
-        daoPerfilPlanesPrepago = new DaoPerfilPlanesPrepago();
+        daoPerfilPlanesPrepago = new DaoPerfilUsuarioPlanPrepago();
     }
 
     public void getPerfiles(String sexoFemenino, String sexoMasculino, String estadoCivil, String inicioEstrato, String finEstrato) {
 
-        PlanesPrepago planesPrepago = new PlanesPrepago();
+        UsuarioPlanPrepago planesPrepago = new UsuarioPlanPrepago();
         planesPrepago.setSexoFemenino(sexoFemenino);
         planesPrepago.setSexoMasculino(sexoMasculino);
         planesPrepago.setEstadoCivil(estadoCivil);
