@@ -3,7 +3,5 @@
 *.jar
 *.class
 
-# NetBeans specific #
-UI kdd/src/ConectorBD/
 
 
