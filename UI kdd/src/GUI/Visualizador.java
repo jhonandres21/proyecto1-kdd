@@ -63,24 +63,36 @@ public class Visualizador extends javax.swing.JFrame {
         //según la pregunta que se elija asignamos unos componentes a la interfaz
         if (codigoDePregunta == 1 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
 
-            UiAbandonoColmovil abandono = new UiAbandonoColmovil();
-            panelOpciones.removeAll();
-            panelOpciones.add(abandono.getLabelSexo());
-            panelOpciones.add(abandono.getCheckBoxSexoFemenino());
-            panelOpciones.add(abandono.getCheckBoxSexoMasculino());
-            panelOpciones.add(abandono.getLabelEstadoCivil());
-            panelOpciones.add(abandono.getEstadoCivil());
-            panelOpciones.add(abandono.getLabelInicioEstrato());
-            panelOpciones.add(abandono.getInicioEstrato());
-            panelOpciones.add(abandono.getLabelFinEstrato());
-            panelOpciones.add(abandono.getFinEstrato());
-            panelOpciones.add(abandono.getConsultar());
-            panelOpciones.updateUI();
+            if (codigoDePregunta == 1) {
+                UiPerfilAbandonoColmovil abandono = new UiPerfilAbandonoColmovil();
+                asignaComponentes(abandono);
+
+            } else if (codigoDePregunta == 4) {
+                UiPerfilPlanesPrepago planesPrepago = new UiPerfilPlanesPrepago();
+                asignaComponentes(planesPrepago);
+            }
+
         } else {
             //por ahora eliminamos los componentes de la interfaz
             panelOpciones.removeAll();
             panelOpciones.updateUI();
         }
+    }
+
+    private void asignaComponentes(UiPerfil perfil) {
+
+        panelOpciones.removeAll();
+        panelOpciones.add(perfil.getLabelSexo());
+        panelOpciones.add(perfil.getCheckBoxSexoFemenino());
+        panelOpciones.add(perfil.getCheckBoxSexoMasculino());
+        panelOpciones.add(perfil.getLabelEstadoCivil());
+        panelOpciones.add(perfil.getEstadoCivil());
+        panelOpciones.add(perfil.getLabelInicioEstrato());
+        panelOpciones.add(perfil.getInicioEstrato());
+        panelOpciones.add(perfil.getLabelFinEstrato());
+        panelOpciones.add(perfil.getFinEstrato());
+        panelOpciones.add(perfil.getConsultar());
+        panelOpciones.updateUI();
     }
 
     /**
@@ -195,7 +207,7 @@ public class Visualizador extends javax.swing.JFrame {
                 break;
             }
         }
-        
+
         System.out.println(comboBoxPreguntas.getSelectedItem() + " - Código de la pregunta: " + codigoDePregunta);
         asignarComponentes(codigoDePregunta);
     }

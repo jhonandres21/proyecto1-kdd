@@ -3,11 +3,11 @@ package Controlador;
 import Dao.DaoPerfilAbandonoColmovil;
 import Logico.AbandonoColmovil;
 
-public class ControlAbandonoColmovil {
+public class ControladorPerfilAbandonoColmovil {
 
     DaoPerfilAbandonoColmovil daoPerfilAbandonanColmovil;
 
-    public ControlAbandonoColmovil() {
+    public ControladorPerfilAbandonoColmovil() {
 
         daoPerfilAbandonanColmovil = new DaoPerfilAbandonoColmovil();
     }

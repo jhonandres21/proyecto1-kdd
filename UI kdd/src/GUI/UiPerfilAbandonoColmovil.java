@@ -1,19 +1,19 @@
 package GUI;
 
-import Controlador.ControlAbandonoColmovil;
+import Controlador.ControladorPerfilAbandonoColmovil;
 import java.awt.event.ActionEvent;
 
 /**
  *
  * @author john
  */
-public class UiAbandonoColmovil extends UiPerfil {
+public class UiPerfilAbandonoColmovil extends UiPerfil {
 
-    ControlAbandonoColmovil controladorAbandono;
+    ControladorPerfilAbandonoColmovil controladorAbandono;
 
-    public UiAbandonoColmovil() {
+    public UiPerfilAbandonoColmovil() {
 
-        controladorAbandono = new ControlAbandonoColmovil();
+        controladorAbandono = new ControladorPerfilAbandonoColmovil();
     }
 
     @Override
@@ -22,8 +22,6 @@ public class UiAbandonoColmovil extends UiPerfil {
         //verificamos que el rango de estrato sea correcto
         if (evaluarRangoEstrato()) {
 
-            //System.out.println("Femenino: Seleccionado?" + checkBoxSexoFemenino.isSelected());
-            //System.out.println("Estado Civil: " + comboBoxEstadoCivil.getSelectedItem());
             String sexoFemenino = "" + checkBoxSexoFemenino.isSelected();
             String sexoMasculino = "" + checkBoxSexoMasculino.isSelected();
             String estadoCivil = "" + comboBoxEstadoCivil.getSelectedItem();
@@ -32,6 +30,5 @@ public class UiAbandonoColmovil extends UiPerfil {
 
             controladorAbandono.getPerfiles(sexoFemenino, sexoMasculino, estadoCivil, inicioEstrato, finEstrato);
         }
-
     }
 }
