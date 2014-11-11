@@ -1,4 +1,3 @@
-
 package Dao;
 
 import ConectorBD.ConexionBD;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author john
  */
 public class DaoPerfilUsuarioServicioRoamming {
-    
+
     ConexionBD conexionBd;
 
     public DaoPerfilUsuarioServicioRoamming() {
@@ -59,14 +58,13 @@ public class DaoPerfilUsuarioServicioRoamming {
         Connection connection = conexionBd.conectar();
         ResultSet resultSet;
         System.out.println("----------Inicia Consulta");
-        System.out.println("----------Roamming");
 
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n"
-                            + "WHERE venta.demografia = demografia.sk_demografia\n"
-                            + "AND venta.plan_datos <> 1 " + where + ";";
+            String consulta = "SELECT * FROM bodega.llamada, bodega.demografia\n"
+                            + "WHERE llamada.demografia = demografia.sk_demografia\n"
+                            + "AND flag_roaming = 'SI' " + where + ";";
 
             System.out.println("Consulta: " + consulta);
 
@@ -74,7 +72,7 @@ public class DaoPerfilUsuarioServicioRoamming {
 
             while (resultSet.next()) {
 
-                String temp[] = new String[14];
+                String temp[] = new String[13];
                 temp[0] = "" + resultSet.getObject(1);
                 temp[1] = "" + resultSet.getObject(2);
                 temp[2] = "" + resultSet.getObject(3);
@@ -88,7 +86,6 @@ public class DaoPerfilUsuarioServicioRoamming {
                 temp[10] = "" + resultSet.getObject(11);
                 temp[11] = "" + resultSet.getObject(12);
                 temp[12] = "" + resultSet.getObject(13);
-                temp[13] = "" + resultSet.getObject(14);
 
                 resultado.add(temp);
             }
