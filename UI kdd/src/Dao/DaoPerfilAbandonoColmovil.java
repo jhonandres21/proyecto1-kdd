@@ -86,6 +86,8 @@ public class DaoPerfilAbandonoColmovil {
 
         } catch (SQLException exp) {
             JOptionPane.showMessageDialog(null, exp.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
         }
 
         return resultado;
