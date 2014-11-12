@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class DaoPlanesMasEscogidos {
 
     ConexionBD BaseDeDatos;
@@ -24,11 +23,31 @@ public class DaoPlanesMasEscogidos {
     Statement stmt;
     public static ResultSet rsCandidato;
 
-    public DaoPlanesMasEscogidos(){
+    public DaoPlanesMasEscogidos() {
         BaseDeDatos = new ConexionBD();
     }
-  
-    public void consultarPrepago(String tipoPlan, boolean operativo) {
+
+    public void consultaGeneral() {
+        
+        String sql_select;
+        sql_select = "";
+        try {
+            conn = BaseDeDatos.conectar();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+
+            while (tabla.next()) {
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+    }
+
+    public void consultarPrepago(String tipoPlan, boolean corporativo) {
         String sql_select;
         sql_select = "";
         try {
@@ -45,8 +64,8 @@ public class DaoPlanesMasEscogidos {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
-    
-    public void consultarPostPago(String tipoPlan, boolean operativo) {
+
+    public void consultarPostPago(String tipoPlan, boolean corporativo) {
         String sql_select;
         sql_select = "";
         try {
