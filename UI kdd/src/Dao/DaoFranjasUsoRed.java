@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,14 +31,14 @@ public class DaoFranjasUsoRed {
 
         String where = "";
 
-        if (operador.length() > 0) {
+        if (!operador.equalsIgnoreCase("Escoger una Opción")) {
             where += " AND bodega.llamada.nombre_operador = '" + operador + "'";
         }
 
         return where;
     }
 
-    public int[] listaFranjas(String where) {
+    public ArrayList <Integer> listaFranjas(String where) {
 
         int night = 0;
         int morning = 0;
@@ -45,7 +46,7 @@ public class DaoFranjasUsoRed {
         int pm = 0;
         int evening = 0;
 
-        int[] conteoLlamadas = new int[5];
+        ArrayList <Integer> conteoLlamadas = new ArrayList<Integer>();
         String sql_select;
         sql_select = "SELECT periodo_del_dia, cliente  FROM bodega.tiempo, "
                 + "bodega.llamada WHERE bodega.tiempo.sk_tiempo = bodega.llamada.tiempo" + where + ";";
@@ -68,12 +69,18 @@ public class DaoFranjasUsoRed {
                     evening++;
                 }
             }
+            
+            System.out.println("am: " + am);
+            System.out.println("evening: " + evening);
+            System.out.println("morning: " + morning);
+            System.out.println("night: " + night);
+            System.out.println("pm: " + pm);
 
-            conteoLlamadas[0] = night;
-            conteoLlamadas[1] = morning;
-            conteoLlamadas[2] = am;
-            conteoLlamadas[3] = pm;
-            conteoLlamadas[4] = evening;
+            conteoLlamadas.add(am);
+            conteoLlamadas.add(evening);
+            conteoLlamadas.add(morning);
+            conteoLlamadas.add(night);
+            conteoLlamadas.add(pm);            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino;
-    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato;
+    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador;
     protected JButton botonConsultar;
 
     public UiPerfil() {
@@ -31,6 +31,7 @@ public abstract class UiPerfil {
         comboBoxEstadoCivil = new JComboBox();
         comboBoxInicioEstrato = new JComboBox();
         comboBoxFinEstrato = new JComboBox();
+        comboBoxOperador = new JComboBox();
 
         labelEstadoCivil = new JLabel();
         inicializarJLabel(labelEstadoCivil, "Estado Civil:");
@@ -41,6 +42,12 @@ public abstract class UiPerfil {
         labelFinEstrato = new JLabel();
         inicializarJLabel(labelFinEstrato, " Hasta:");
 
+        labelVacia = new JLabel();
+        inicializarJLabel(labelVacia, "        ");
+        
+        labelOperador = new JLabel();
+        inicializarJLabel(labelOperador, " Operador:");
+        
         botonConsultar = new JButton("Consultar");
 
         botonConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +61,7 @@ public abstract class UiPerfil {
         inicializarEstadoCivil(comboBoxEstadoCivil);
         inicializarEstrato(comboBoxInicioEstrato);
         inicializarEstrato(comboBoxFinEstrato);
+        inicializarOperador(comboBoxOperador);
     }
 
     protected void inicializarJLabel(JLabel label, String texto) {
@@ -110,6 +118,36 @@ public abstract class UiPerfil {
             estrato.addItem(estratos[i][0]);
         }
     }
+    
+    protected void inicializarOperador(JComboBox operador) {
+
+        operador.setVisible(true);
+        operador.setMaximumSize(new Dimension(170, 30));
+
+        String estratos[][] = new String[18][1];
+        estratos[0][0] = "Escoger una Opción";
+        estratos[1][0] = "AT&T";
+        estratos[2][0] = "Avantel";
+        estratos[3][0] = "Colmovil";
+        estratos[4][0] = "Comcel";
+        estratos[5][0] = "EMCALI";
+        estratos[6][0] = "EPM";
+        estratos[7][0] = "ETB";
+        estratos[8][0] = "ETP";
+        estratos[9][0] = "Metrotel";
+        estratos[10][0] = "Movistar";
+        estratos[11][0] = "Orange";
+        estratos[12][0] = "Telebucaramanga";
+        estratos[13][0] = "telefonica";
+        estratos[14][0] = "telmex";
+        estratos[15][0] = "Tigo";
+        estratos[16][0] = "UNE";
+        estratos[17][0] = "Vodafone";
+
+        for (int i = 0; i < estratos.length; i++) {
+            operador.addItem(estratos[i][0]);
+        }
+    }
 
     abstract void hacerConsulta(java.awt.event.ActionEvent evt);
 
@@ -128,7 +166,7 @@ public abstract class UiPerfil {
                 int valorFinEstrato = Integer.parseInt("" + comboBoxFinEstrato.getSelectedItem());
 
                 if (valorFinEstrato < valorInicioEstrato) {
-                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR o IGUAL para el rango de Estrato");
+                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR o IGUAL para el rango del Estrato");
                     return false;
                 } else {
                     return true;
@@ -185,6 +223,22 @@ public abstract class UiPerfil {
 
     public JLabel getLabelFinEstrato() {
         return labelFinEstrato;
+    }
+    
+    public JLabel getLabelVacia() {
+        return labelVacia;
+    }
+
+    public JComboBox getComboBoxOperador() {
+        return comboBoxOperador;
+    }
+
+    public void setComboBoxOperador(JComboBox comboBoxOperador) {
+        this.comboBoxOperador = comboBoxOperador;
+    }
+
+    public JLabel getLabelOperador() {
+        return labelOperador;
     }
 
     public JButton getConsultar() {

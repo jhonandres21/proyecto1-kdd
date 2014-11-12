@@ -12,11 +12,11 @@ import java.sql.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
-public class ControlPlanesMasEscogidos {
+public class ControladorPlanesMasEscogidos {
     
     DaoPlanesMasEscogidos daoPlanesMasEscogidos;
 
-    public ControlPlanesMasEscogidos() {
+    public ControladorPlanesMasEscogidos() {
         daoPlanesMasEscogidos = new DaoPlanesMasEscogidos();
     }
     
