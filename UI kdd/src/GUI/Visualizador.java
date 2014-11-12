@@ -1,17 +1,17 @@
 package GUI;
 
 import java.awt.FlowLayout;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 
 public class Visualizador extends javax.swing.JFrame {
 
     String arregloPreguntas[][];
     JComboBox comboBoxPreguntas;
-    JPanel panel1, panel2;
+    public static JFXPanel panel1, panel2;
 
     public Visualizador() {
-
+        super("Colmovil");
         initComponents();
         this.setLocationRelativeTo(null);
         FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
@@ -25,11 +25,12 @@ public class Visualizador extends javax.swing.JFrame {
             }
         });
 
-        panel1 = new JPanel();
-        panel2 = new JPanel();
+        /*panel1 = new JPanel();
+         panel2 = new JPanel();*/
         panelPreguntas.add(comboBoxPreguntas);
-        panelPestanas.addTab("Visualización 1", panel1);
-        panelPestanas.addTab("Visualización 2", panel2);
+        /*
+         panelPestanas.addTab("Visualización 1", panel1);
+         panelPestanas.addTab("Visualización 2", panel2);*/
     }
 
     private JComboBox setPreguntas() {
@@ -151,7 +152,7 @@ public class Visualizador extends javax.swing.JFrame {
 
         panelOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         panelOpciones.setMinimumSize(new java.awt.Dimension(150, 0));
-        panelOpciones.setLayout(new java.awt.GridLayout());
+        panelOpciones.setLayout(new java.awt.GridLayout(1, 0));
 
         panelPreguntas.setBorder(javax.swing.BorderFactory.createTitledBorder("Preguntas"));
         panelPreguntas.setMinimumSize(new java.awt.Dimension(150, 0));
@@ -197,7 +198,7 @@ public class Visualizador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+                        .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(panelPestanas)))
@@ -272,7 +273,7 @@ public class Visualizador extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPanel panelOpciones;
-    private javax.swing.JTabbedPane panelPestanas;
+    public static javax.swing.JTabbedPane panelPestanas;
     private javax.swing.JPanel panelPreguntas;
     private javax.swing.JMenu salir;
     // End of variables declaration//GEN-END:variables

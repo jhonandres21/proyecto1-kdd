@@ -59,7 +59,7 @@ public class DaoPerfilUsuarioAbandonaColmovil {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.retiro, bodega.demografia, bodega.fecha\n"
+            String consulta = "SELECT bodega.retiro.fecha, bodega.fecha.mes FROM bodega.retiro, bodega.demografia, bodega.fecha\n"
                     + "WHERE retiro.demografia = demografia.sk_demografia"
                     + " AND retiro.fecha = fecha.sk_fecha " + where + ";";
 
@@ -72,13 +72,13 @@ public class DaoPerfilUsuarioAbandonaColmovil {
                 String temp[] = new String[9];
                 temp[0] = "" + resultSet.getObject(1);
                 temp[1] = "" + resultSet.getObject(2);
-                temp[2] = "" + resultSet.getObject(3);
+                /*temp[2] = "" + resultSet.getObject(3);
                 temp[3] = "" + resultSet.getObject(4);
                 temp[4] = "" + resultSet.getObject(5);
                 temp[5] = "" + resultSet.getObject(6);
                 temp[6] = "" + resultSet.getObject(7);
                 temp[7] = "" + resultSet.getObject(8);
-                temp[8] = "" + resultSet.getObject(9);
+                temp[8] = "" + resultSet.getObject(9);*/
 
                 resultado.add(temp);
             }
