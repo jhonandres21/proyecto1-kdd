@@ -80,7 +80,7 @@ public class FXPieChart {
                         public void handle(MouseEvent e) {
                             caption.setTranslateX(e.getSceneX());
                             caption.setTranslateY(e.getSceneY());
-                            caption.setText(String.valueOf(data.getPieValue()) + "%");
+                            caption.setText(String.valueOf(data.getPieValue()));
                         }
                     });
         }
