@@ -55,11 +55,13 @@ public class DaoPerfilUsuarioAbandonaColmovil {
         Connection connection = conexionBd.conectar();
         ResultSet resultSet;
         System.out.println("----------Inicia Consulta");
+        
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.retiro, bodega.demografia\n"
-                    + "WHERE retiro.demografia = demografia.sk_demografia" + where + ";";
+            String consulta = "SELECT * FROM bodega.retiro, bodega.demografia, bodega.fecha\n"
+                    + "WHERE retiro.demografia = demografia.sk_demografia"
+                    + " AND retiro.fecha = fecha.sk_fecha " + where + ";";
 
             System.out.println("Consulta: " + consulta);
 
