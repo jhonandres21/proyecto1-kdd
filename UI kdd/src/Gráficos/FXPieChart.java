@@ -11,19 +11,24 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author Juan Olaya O
  */
 public class FXPieChart {
+
     final String chartName;
     final ArrayList<String> tags;
     final ArrayList<Integer> values;
-    
+    static boolean firstTime = true;
 
     public FXPieChart(final String chartName, final ArrayList<String> tags, final ArrayList<Integer> values) {
 
@@ -35,7 +40,9 @@ public class FXPieChart {
         JFXPanel PanelVisualizador = Visualizador.panel1;
         PanelVisualizador = fxPanel;
         PanelVisualizador.setVisible(true);
-        Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
+        if (firstTime) {
+            Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
+        }
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -62,7 +69,24 @@ public class FXPieChart {
         final PieChart chart = new PieChart(pieChartData);
         chart.setTitle(chartName);
 
+        final Label caption = new Label("");
+        caption.setTextFill(Color.WHITE);
+        caption.setStyle("-fx-font: 24 arial;");
+
+        for (final PieChart.Data data : chart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent e) {
+                            caption.setTranslateX(e.getSceneX());
+                            caption.setTranslateY(e.getSceneY());
+                            caption.setText(String.valueOf(data.getPieValue()) + "%");
+                        }
+                    });
+        }
+
         ((Group) scene.getRoot()).getChildren().add(chart);
+        ((Group) scene.getRoot()).getChildren().add(caption);
 
         return (scene);
     }
