@@ -1,21 +1,23 @@
 package Controlador;
 
 import Dao.DaoFranjasUsoRed;
+import java.util.ArrayList;
 
-public class ControlFranjasUsoRed {
+public class ControladorFranjasUsoRed {
 
     DaoFranjasUsoRed daoFranjasUsoRed;
 
-    public ControlFranjasUsoRed() {
+    public ControladorFranjasUsoRed() {
         daoFranjasUsoRed = new DaoFranjasUsoRed();
     }
 
-    public int[] obtenerFranjas(String operador) {
-        int[] conteoLlamadas = new int[5];
+    public ArrayList <Integer> obtenerFranjas(String operador) {
+        ArrayList <Integer> conteoLlamadas = new ArrayList<>();
         
         String where = "";
         
         where = daoFranjasUsoRed.prepararRestriccionesClausulaWhereFranjas(operador);
+        System.out.println("where: " + where);
 
         conteoLlamadas = daoFranjasUsoRed.listaFranjas(where);
 

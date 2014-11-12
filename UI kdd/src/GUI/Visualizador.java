@@ -62,11 +62,15 @@ public class Visualizador extends javax.swing.JFrame {
     private void asignarComponentes(int codigoDePregunta) {
 
         //según la pregunta que se elija asignamos unos componentes a la interfaz
-        if (codigoDePregunta == 1 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
+        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
                 asignaComponentes(abandono);
+
+            } else if (codigoDePregunta == 2) {
+                UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
+                asignaComponentesFranjas(franjasUsoRed);
 
             } else if (codigoDePregunta == 4) {
                 UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
@@ -100,6 +104,7 @@ public class Visualizador extends javax.swing.JFrame {
 
         panelOpciones.removeAll();
         panelOpciones.add(perfil.getLabelSexo());
+        panelOpciones.add(perfil.getLabelVacia());
         panelOpciones.add(perfil.getCheckBoxSexoFemenino());
         panelOpciones.add(perfil.getCheckBoxSexoMasculino());
         panelOpciones.add(perfil.getLabelEstadoCivil());
@@ -108,6 +113,16 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getInicioEstrato());
         panelOpciones.add(perfil.getLabelFinEstrato());
         panelOpciones.add(perfil.getFinEstrato());
+        panelOpciones.add(perfil.getConsultar());
+        panelOpciones.updateUI();
+    }
+    
+    private void asignaComponentesFranjas(UiPerfil perfil) {
+
+        panelOpciones.removeAll();
+        panelOpciones.add(perfil.getLabelOperador());
+        panelOpciones.add(perfil.getLabelVacia());
+        panelOpciones.add(perfil.getComboBoxOperador());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
