@@ -1,6 +1,6 @@
 package GUI;
 
-import Controlador.ControladorFranjasUsoRed;
+import Controlador.ControladorPlanesMasEscogidos;
 import Gráficos.FXBarChart;
 import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author luisfemm
  */
-public class UiFranjasUsoRed extends UiPerfil {
+public class UiPlanesMasEscogidos extends UiPerfil {
 
-    ControladorFranjasUsoRed controladorFranjasUsoRed;
-    ArrayList <Integer> datosFranjas;
+    ControladorPlanesMasEscogidos controladorPlanesMasEscogidos;
+    ArrayList <Integer> datosPlanes;
 
-    public UiFranjasUsoRed() {
+    public UiPlanesMasEscogidos() {
 
-        controladorFranjasUsoRed = new ControladorFranjasUsoRed();
+        controladorPlanesMasEscogidos= new ControladorPlanesMasEscogidos();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class UiFranjasUsoRed extends UiPerfil {
 
         String operador = "" + comboBoxOperador.getSelectedItem();
         
-        datosFranjas = controladorFranjasUsoRed.obtenerFranjas(operador);
+//        datosPlanes = controladorPlanesMasEscogidos.obtenerFranjas(operador);
 
         ArrayList<String> franjas = new ArrayList();
         franjas.add("AM");
@@ -38,9 +38,9 @@ public class UiFranjasUsoRed extends UiPerfil {
         FXPieChart PieChart;
         FXBarChart BarChart;
 
-        if (!datosFranjas.isEmpty()) {
-            PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
-            BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas);
+        if (!datosPlanes.isEmpty()) {
+            PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosPlanes);
+            BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosPlanes);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }

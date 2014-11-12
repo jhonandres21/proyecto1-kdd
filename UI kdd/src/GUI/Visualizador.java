@@ -62,42 +62,39 @@ public class Visualizador extends javax.swing.JFrame {
     private void asignarComponentes(int codigoDePregunta) {
 
         //según la pregunta que se elija asignamos unos componentes a la interfaz
-        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
+        if (codigoDePregunta == 1) {
+            UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
+            asignaComponentes(abandono);
 
-            if (codigoDePregunta == 1) {
-                UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
-                asignaComponentes(abandono);
+        } else if (codigoDePregunta == 2) {
+            UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
+            asignaComponentesFranjas(franjasUsoRed);
 
-            } else if (codigoDePregunta == 2) {
-                UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
-                asignaComponentesFranjas(franjasUsoRed);
+        } else if (codigoDePregunta == 3) {
+            UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
+            asignaComponentesFranjas(franjasUsoRed);
 
-            } else if (codigoDePregunta == 4) {
-                UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
-                asignaComponentes(planesPrepago);
+        } else if (codigoDePregunta == 4) {
+            UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
+            asignaComponentes(planesPrepago);
 
-            } else if (codigoDePregunta == 5) {
-                UiPerfilUsuarioPlanPospago planesPospago = new UiPerfilUsuarioPlanPospago();
-                asignaComponentes(planesPospago);
+        } else if (codigoDePregunta == 5) {
+            UiPerfilUsuarioPlanPospago planesPospago = new UiPerfilUsuarioPlanPospago();
+            asignaComponentes(planesPospago);
 
-            } else if (codigoDePregunta == 6) {
-                UiPerfilUsuarioContrataPlanDatos UsuarioPlanDatos = new UiPerfilUsuarioContrataPlanDatos();
-                asignaComponentes(UsuarioPlanDatos);
+        } else if (codigoDePregunta == 6) {
+            UiPerfilUsuarioContrataPlanDatos UsuarioPlanDatos = new UiPerfilUsuarioContrataPlanDatos();
+            asignaComponentes(UsuarioPlanDatos);
 
-            } else if (codigoDePregunta == 7) {
-                UiPerfilUsuarioServicioRoamming UsuarioServicioRoamming = new UiPerfilUsuarioServicioRoamming();
-                asignaComponentes(UsuarioServicioRoamming);
-
-            } else {
-                panelOpciones.removeAll();
-                panelOpciones.updateUI();
-            }
+        } else if (codigoDePregunta == 7) {
+            UiPerfilUsuarioServicioRoamming UsuarioServicioRoamming = new UiPerfilUsuarioServicioRoamming();
+            asignaComponentes(UsuarioServicioRoamming);
 
         } else {
-            //por ahora eliminamos los componentes de la interfaz
             panelOpciones.removeAll();
             panelOpciones.updateUI();
         }
+
     }
 
     private void asignaComponentes(UiPerfil perfil) {
@@ -116,13 +113,27 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-    
+
     private void asignaComponentesFranjas(UiPerfil perfil) {
 
         panelOpciones.removeAll();
         panelOpciones.add(perfil.getLabelOperador());
         panelOpciones.add(perfil.getLabelVacia());
         panelOpciones.add(perfil.getComboBoxOperador());
+        panelOpciones.add(perfil.getConsultar());
+        panelOpciones.updateUI();
+    }
+    
+    private void asignaComponentesPlanes(UiPerfil perfil) {
+
+        panelOpciones.removeAll();
+        panelOpciones.add(perfil.getLabelPlanDeDatos());
+        panelOpciones.add(perfil.getLabelVacia());
+        panelOpciones.add(perfil.getCheckBoxDatos());
+        panelOpciones.add(perfil.getLabelPlanDeVoz());
+        panelOpciones.add(perfil.getCheckBoxPrepagoVoz());
+        panelOpciones.add(perfil.getCheckBoxPostpagoVoz());
+        panelOpciones.add(perfil.getCheckBoxCorporativo());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }

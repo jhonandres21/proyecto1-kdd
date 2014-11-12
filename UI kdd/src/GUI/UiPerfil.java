@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
  */
 public abstract class UiPerfil {
 
-    protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino;
+    protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino, checkBoxDatos, checkBoxPrepagoVoz, checkBoxPostpagoVoz, checkBoxCorporativo;
     protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz;
     protected JButton botonConsultar;
 
     public UiPerfil() {
@@ -48,6 +48,22 @@ public abstract class UiPerfil {
         labelOperador = new JLabel();
         inicializarJLabel(labelOperador, " Operador:");
         
+        labelPlanDeDatos = new JLabel();
+        inicializarJLabel(labelPlanDeDatos, " Plan de Datos:");
+        
+        checkBoxDatos = new JCheckBox("Sí");
+        checkBoxDatos.setSelected(true);
+        
+        labelPlanDeVoz = new JLabel();
+        inicializarJLabel(labelPlanDeVoz, " Plan de Voz:");
+        
+        checkBoxPrepagoVoz = new JCheckBox("Planes Prepago");
+        checkBoxPrepagoVoz.setSelected(true);
+        checkBoxPostpagoVoz = new JCheckBox("Planes Postpago");
+        checkBoxPostpagoVoz.setSelected(true);
+        checkBoxCorporativo= new JCheckBox("Planes Corporativos");
+        checkBoxCorporativo.setSelected(true);
+        
         botonConsultar = new JButton("Consultar");
 
         botonConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +74,10 @@ public abstract class UiPerfil {
 
         inicializarCheckBox(checkBoxSexoFemenino);
         inicializarCheckBox(checkBoxSexoMasculino);
+        inicializarCheckBox(checkBoxDatos);
+        inicializarCheckBox(checkBoxPrepagoVoz);
+        inicializarCheckBox(checkBoxPostpagoVoz);
+        inicializarCheckBox(checkBoxCorporativo);
         inicializarEstadoCivil(comboBoxEstadoCivil);
         inicializarEstrato(comboBoxInicioEstrato);
         inicializarEstrato(comboBoxFinEstrato);
@@ -241,6 +261,30 @@ public abstract class UiPerfil {
         return labelOperador;
     }
 
+    public JCheckBox getCheckBoxDatos() {
+        return checkBoxDatos;
+    }
+
+    public JCheckBox getCheckBoxPrepagoVoz() {
+        return checkBoxPrepagoVoz;
+    }
+
+    public JCheckBox getCheckBoxPostpagoVoz() {
+        return checkBoxPostpagoVoz;
+    }
+
+    public JCheckBox getCheckBoxCorporativo() {
+        return checkBoxCorporativo;
+    }
+
+    public JLabel getLabelPlanDeDatos() {
+        return labelPlanDeDatos;
+    }
+
+    public JLabel getLabelPlanDeVoz() {
+        return labelPlanDeVoz;
+    }
+    
     public JButton getConsultar() {
         return botonConsultar;
     }

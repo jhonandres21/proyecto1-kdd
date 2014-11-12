@@ -5,8 +5,6 @@
  */
 package Dao;
 
-import Logico.PlanVoz;
-import Logico.PlanDatos;
 import ConectorBD.ConexionBD;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -26,6 +24,36 @@ public class DaoPlanesMasEscogidos {
     public DaoPlanesMasEscogidos() {
         BaseDeDatos = new ConexionBD();
     }
+    
+//    public String prepararRestriccionesClausulaWherePerfiles(UsuarioAbandonaColmovil abandono) {
+//
+//        String where = "";
+//
+//        if (abandono.getSexoFemenino().equals("true") && abandono.getSexoMasculino().equals("true")) {
+//
+//            where += " AND (demografia.genero = 'Femenino' OR demografia.genero = 'Masculino') ";
+//
+//        } else if (abandono.getSexoMasculino().equals("true")) {
+//
+//            where += " AND demografia.genero = 'Masculino' ";
+//
+//        } else if (abandono.getSexoFemenino().equals("true")) {
+//
+//            where += " AND demografia.genero = 'Femenino' ";
+//        }
+//
+//
+//        if (!abandono.getEstadoCivil().equals("Escoger una Opción")) {
+//            where += " AND estado_civil = '" + abandono.getEstadoCivil() + "'";
+//        }
+//
+//        if (!abandono.getInicioEstrato().equals("Escoger una Opción")) {
+//
+//            where += " AND (demografia.estrato BETWEEN " + abandono.getInicioEstrato() + " AND " + abandono.getFinEstrato() + ")";
+//        }
+//
+//        return where;
+//    }
 
     public void consultaGeneral() {
         
