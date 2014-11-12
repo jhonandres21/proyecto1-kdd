@@ -44,7 +44,7 @@ public class DaoPerfilUsuarioServicioRoamming {
 
         if (!usuarioServicioRoamming.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + usuarioServicioRoamming.getInicioEstrato() + " OR demografia.estrato = " + usuarioServicioRoamming.getFinEstrato() + ")";
+            where += " AND (demografia.estrato BETWEEN " + usuarioServicioRoamming.getInicioEstrato() + " AND " + usuarioServicioRoamming.getFinEstrato() + ")";
         }
 
         return where;

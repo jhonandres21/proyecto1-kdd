@@ -44,7 +44,7 @@ public class DaoPerfilUsuarioPlanPrepago {
 
         if (!planesPrepago.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + planesPrepago.getInicioEstrato() + " OR demografia.estrato = " + planesPrepago.getFinEstrato() + ")";
+            where += " AND (demografia.estrato BETWEEN " + planesPrepago.getInicioEstrato() + " AND " + planesPrepago.getFinEstrato() + ")";
         }
 
         return where;

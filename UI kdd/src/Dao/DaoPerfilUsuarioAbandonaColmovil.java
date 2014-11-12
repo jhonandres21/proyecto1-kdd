@@ -41,7 +41,7 @@ public class DaoPerfilUsuarioAbandonaColmovil {
 
         if (!abandono.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + abandono.getInicioEstrato() + " OR demografia.estrato = " + abandono.getFinEstrato() + ")";
+            where += " AND (demografia.estrato BETWEEN " + abandono.getInicioEstrato() + " AND " + abandono.getFinEstrato() + ")";
         }
 
         return where;

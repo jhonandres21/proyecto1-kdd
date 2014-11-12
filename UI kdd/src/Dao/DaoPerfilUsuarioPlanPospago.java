@@ -45,7 +45,7 @@ public class DaoPerfilUsuarioPlanPospago {
 
         if (!planesPospago.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + planesPospago.getInicioEstrato() + " OR demografia.estrato = " + planesPospago.getFinEstrato() + ")";
+            where += " AND (demografia.estrato BETWEEN " + planesPospago.getInicioEstrato() + " AND " + planesPospago.getFinEstrato() + ")";
         }
 
         return where;

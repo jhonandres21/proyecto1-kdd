@@ -44,7 +44,7 @@ public class DaoPerfilUsuarioContrataPlanDatos {
 
         if (!usuarioPlanDatos.getInicioEstrato().equals("Escoger una Opción")) {
 
-            where += " AND (demografia.estrato = " + usuarioPlanDatos.getInicioEstrato() + " OR demografia.estrato = " + usuarioPlanDatos.getFinEstrato() + ")";
+            where += " AND (demografia.estrato BETWEEN " + usuarioPlanDatos.getInicioEstrato() + " AND " + usuarioPlanDatos.getFinEstrato() + ")";
         }
 
         return where;
