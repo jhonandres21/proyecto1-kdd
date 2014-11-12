@@ -1,35 +1,26 @@
 package Controlador;
 
 import Dao.DaoFranjasUsoRed;
-import Logico.Tiempo;
-import java.sql.Date;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
 
 public class ControlFranjasUsoRed {
-    
+
     DaoFranjasUsoRed daoFranjasUsoRed;
 
     public ControlFranjasUsoRed() {
         daoFranjasUsoRed = new DaoFranjasUsoRed();
     }
-    
-    public int[] consultaGeneral() {
+
+    public int[] obtenerFranjas(String operador) {
         int[] conteoLlamadas = new int[5];
         
-        conteoLlamadas = daoFranjasUsoRed.consultaGeneral();
+        String where = "";
         
+        where = daoFranjasUsoRed.prepararRestriccionesClausulaWhereFranjas(operador);
+
+        conteoLlamadas = daoFranjasUsoRed.listaFranjas(where);
+
         return conteoLlamadas;
 
-    }
-    
-    public int[] consultaPorOperador(String operador) {
-        
-        int[] conteoLlamadas = new int[5];
-        
-        conteoLlamadas = daoFranjasUsoRed.consultaPorOperador(operador);
-        
-        return conteoLlamadas;
     }
 
     public void desconectar() {
