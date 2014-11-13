@@ -36,17 +36,10 @@ public class FXPieChart {
         this.chartName = chartName;
 
         final JFXPanel fxPanel = new JFXPanel();
-<<<<<<< HEAD
-        JFXPanel PanelVisualizador = Visualizador.panel1;
-        PanelVisualizador = fxPanel;
-        PanelVisualizador.setVisible(true);
-        Visualizador.panelPestanas.removeAll();
-        Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
-=======
+
         Visualizador.panelPestanas.removeAll();
         Visualizador.panelPestanas.addTab("Pie Chart", fxPanel);
         System.out.println("Se prepara PieChart");
->>>>>>> db1891b70a90380854342429264a309e9c1e0272
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

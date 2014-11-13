@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino, checkBoxDatos, checkBoxPrepagoVoz, checkBoxPostpagoVoz, checkBoxCorporativo;
-    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz;
+    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxInicioAnios, comboBoxFinAnios;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelAnioInicio, labelAnioFin;
     protected JButton botonConsultar;
 
     public UiPerfil() {
@@ -32,6 +32,8 @@ public abstract class UiPerfil {
         comboBoxInicioEstrato = new JComboBox();
         comboBoxFinEstrato = new JComboBox();
         comboBoxOperador = new JComboBox();
+        comboBoxInicioAnios = new JComboBox();
+        comboBoxFinAnios = new JComboBox();
 
         labelEstadoCivil = new JLabel();
         inicializarJLabel(labelEstadoCivil, "Estado Civil:");
@@ -50,6 +52,12 @@ public abstract class UiPerfil {
 
         labelPlanDeDatos = new JLabel();
         inicializarJLabel(labelPlanDeDatos, " Plan de Datos:");
+
+        labelAnioInicio = new JLabel();
+        inicializarJLabel(labelAnioInicio, " Año Inicio:");
+
+        labelAnioFin = new JLabel();
+        inicializarJLabel(labelAnioFin, " Año Fin:");
 
         checkBoxDatos = new JCheckBox("Sí");
         checkBoxDatos.setSelected(true);
@@ -82,6 +90,8 @@ public abstract class UiPerfil {
         inicializarEstrato(comboBoxInicioEstrato);
         inicializarEstrato(comboBoxFinEstrato);
         inicializarOperador(comboBoxOperador);
+        inicializarAnios(comboBoxInicioAnios);
+        inicializarAnios(comboBoxFinAnios);
     }
 
     protected void inicializarJLabel(JLabel label, String texto) {
@@ -169,6 +179,34 @@ public abstract class UiPerfil {
         }
     }
 
+    protected void inicializarAnios(JComboBox anios) {
+
+        anios.setVisible(true);
+        anios.setMaximumSize(new Dimension(170, 30));
+
+        String anos[][] = new String[16][1];
+        anos[0][0] = "Escoger una Opción";
+        anos[1][0] = "2000";
+        anos[2][0] = "2001";
+        anos[3][0] = "2002";
+        anos[4][0] = "2003";
+        anos[5][0] = "2004";
+        anos[6][0] = "2005";
+        anos[7][0] = "2006";
+        anos[8][0] = "2007";
+        anos[9][0] = "2008";
+        anos[10][0] = "2009";
+        anos[11][0] = "2010";
+        anos[12][0] = "2011";
+        anos[13][0] = "2012";
+        anos[14][0] = "2013";
+        anos[15][0] = "2014";
+
+        for (int i = 0; i < anos.length; i++) {
+            anios.addItem(anos[i][0]);
+        }
+    }
+
     abstract void hacerConsulta(java.awt.event.ActionEvent evt);
 
     protected boolean evaluarRangoEstrato() {
@@ -197,11 +235,37 @@ public abstract class UiPerfil {
         return true;
     }
 
+    protected boolean evaluarRangoAnios() {
+
+        if (!comboBoxInicioAnios.getSelectedItem().equals("Escoger una Opción")) {
+
+            if (comboBoxFinAnios.getSelectedItem().equals("Escoger una Opción")) {
+
+                JOptionPane.showMessageDialog(null, "Debe escoger un valor para el rango el Año");
+                return false;
+
+            } else {
+
+                int valorInicioAnio = Integer.parseInt("" + comboBoxInicioAnios.getSelectedItem());
+                int valorFinAnio = Integer.parseInt("" + comboBoxFinAnios.getSelectedItem());
+
+                if (valorFinAnio < valorInicioAnio) {
+                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR o IGUAL para el rango del Año");
+                    return false;
+                } else {
+                    return true;
+                }
+            }//fin else
+        }
+
+        return true;
+    }
+
     protected boolean evaluarPlanesEscogidos() {
 
         if (checkBoxDatos.isSelected() && checkBoxCorporativo.isSelected()
                 && checkBoxPrepagoVoz.isSelected() && checkBoxPostpagoVoz.isSelected()) {
-            
+
             return true;
 
         } else if (checkBoxDatos.isSelected() && (checkBoxCorporativo.isSelected()
@@ -215,13 +279,13 @@ public abstract class UiPerfil {
 
             JOptionPane.showMessageDialog(null, "No existen planes prepago que sean corporativos.");
             return false;
-        
+
         } else if (!checkBoxDatos.isSelected() && !checkBoxCorporativo.isSelected()
                 && checkBoxPrepagoVoz.isSelected() && !checkBoxPostpagoVoz.isSelected()) {
 
             JOptionPane.showMessageDialog(null, "No es posible realizar esta consulta. "
-                                             + "Para ver el número de planer prepago vendidos, "
-                                             + "porfavor marque la opcion prepago y postpago..");
+                    + "Para ver el número de planer prepago vendidos, "
+                    + "porfavor marque la opcion prepago y postpago..");
             return false;
 
         }
@@ -288,6 +352,38 @@ public abstract class UiPerfil {
 
     public void setComboBoxOperador(JComboBox comboBoxOperador) {
         this.comboBoxOperador = comboBoxOperador;
+    }
+
+    public JComboBox getComboBoxInicioAnios() {
+        return comboBoxInicioAnios;
+    }
+
+    public void setComboBoxInicioAnios(JComboBox comboBoxInicioAnios) {
+        this.comboBoxInicioAnios = comboBoxInicioAnios;
+    }
+
+    public JComboBox getComboBoxFinAnios() {
+        return comboBoxFinAnios;
+    }
+
+    public void setComboBoxFinAnios(JComboBox comboBoxFinAnios) {
+        this.comboBoxFinAnios = comboBoxFinAnios;
+    }
+
+    public JLabel getLabelAnioInicio() {
+        return labelAnioInicio;
+    }
+
+    public void setLabelAnioInicio(JLabel labelAnioInicio) {
+        this.labelAnioInicio = labelAnioInicio;
+    }
+
+    public JLabel getLabelAnioFin() {
+        return labelAnioFin;
+    }
+
+    public void setLabelAnioFin(JLabel labelAnioFin) {
+        this.labelAnioFin = labelAnioFin;
     }
 
     public JLabel getLabelOperador() {

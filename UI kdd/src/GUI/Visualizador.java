@@ -55,7 +55,7 @@ public class Visualizador extends javax.swing.JFrame {
     private void asignarComponentes(int codigoDePregunta) {
 
         //según la pregunta que se elija asignamos unos componentes a la interfaz
-        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
+        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 12) {
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
@@ -65,15 +65,13 @@ public class Visualizador extends javax.swing.JFrame {
                 UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
                 asignaComponentesFranjas(franjasUsoRed);
 
-<<<<<<< HEAD
-        } else if (codigoDePregunta == 3) {
-            UiPlanesMasEscogidos planesMasEscogidos = new UiPlanesMasEscogidos();
-            asignaComponentesPlanes(planesMasEscogidos);
-=======
+            } else if (codigoDePregunta == 3) {
+                UiPlanesMasEscogidos planesMasEscogidos = new UiPlanesMasEscogidos();
+                asignaComponentesPlanes(planesMasEscogidos);
+
             } else if (codigoDePregunta == 4) {
                 UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
                 asignaComponentes(planesPrepago);
->>>>>>> db1891b70a90380854342429264a309e9c1e0272
 
             } else if (codigoDePregunta == 5) {
                 UiPerfilUsuarioPlanPospago planesPospago = new UiPerfilUsuarioPlanPospago();
@@ -86,6 +84,10 @@ public class Visualizador extends javax.swing.JFrame {
             } else if (codigoDePregunta == 7) {
                 UiPerfilUsuarioServicioRoamming UsuarioServicioRoamming = new UiPerfilUsuarioServicioRoamming();
                 asignaComponentes(UsuarioServicioRoamming);
+
+            } else if (codigoDePregunta == 12) {
+                UiPerfilUsuarioTendenciaPlanVoz tendenciaPLanVoz = new UiPerfilUsuarioTendenciaPlanVoz();
+                asignaComponentesTendencia(tendenciaPLanVoz);
 
             } else {
                 panelOpciones.removeAll();
@@ -115,7 +117,7 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-    
+
     private void asignaComponentesFranjas(UiPerfil perfil) {
 
         panelOpciones.removeAll();
@@ -125,8 +127,7 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-<<<<<<< HEAD
-    
+
     private void asignaComponentesPlanes(UiPerfil perfil) {
 
         panelOpciones.removeAll();
@@ -139,8 +140,19 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-=======
->>>>>>> db1891b70a90380854342429264a309e9c1e0272
+
+    private void asignaComponentesTendencia(UiPerfil perfil) {
+
+        panelOpciones.removeAll();
+        panelOpciones.add(perfil.getLabelAnioInicio());
+        panelOpciones.add(perfil.getLabelVacia());
+        panelOpciones.add(perfil.getComboBoxInicioAnios());
+        panelOpciones.add(perfil.getLabelAnioFin());
+        panelOpciones.add(perfil.getLabelVacia());
+        panelOpciones.add(perfil.getComboBoxFinAnios());
+        panelOpciones.add(perfil.getConsultar());
+        panelOpciones.updateUI();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
