@@ -11,8 +11,8 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
@@ -20,12 +20,13 @@ import javafx.scene.chart.XYChart;
  *
  * @author Juan Olaya O
  */
-public class FXBarChart {
+public class FXLineChart {
+    
     final String chartName, valuesName, tagName, legend;
     final ArrayList<String> tags;
     final ArrayList<Integer> values;
 
-    public FXBarChart(final String chartName, final String tagName, final ArrayList<String> tags, final String valuesName, final ArrayList<Integer> values, final String legend) {
+    public FXLineChart(final String chartName, final String tagName, final ArrayList<String> tags, final String valuesName, final ArrayList<Integer> values, final String legend) {
 
         this.tags = tags;
         this.values = values;
@@ -35,7 +36,7 @@ public class FXBarChart {
         this.legend = legend;
 
         final JFXPanel fxPanel = new JFXPanel();
-        Visualizador.panelPestanas.addTab("Bar Chart", fxPanel);
+        Visualizador.panelPestanas.addTab("Line Chart", fxPanel);
         
         Platform.runLater(new Runnable() {
             @Override
@@ -56,8 +57,8 @@ public class FXBarChart {
 
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String, Number> bc
-                = new BarChart(xAxis, yAxis);
+        final LineChart<String, Number> bc
+                = new LineChart(xAxis, yAxis);
         bc.setTitle(chartName);
         xAxis.setLabel(tagName);
         yAxis.setLabel(valuesName);
@@ -72,4 +73,5 @@ public class FXBarChart {
 
         return (scene);
     }
+    
 }

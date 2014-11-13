@@ -1,13 +1,11 @@
 package GUI;
 
 import Controlador.ControladorPerfilUsuarioAbandonaColmovil;
-import static GUI.Visualizador.panel1;
-import static GUI.Visualizador.panelPestanas;
 import Gráficos.FXBarChart;
+import Gráficos.FXLineChart;
 import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +15,6 @@ import javax.swing.JOptionPane;
 public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
 
     ControladorPerfilUsuarioAbandonaColmovil controladorAbandono;
-    ArrayList dataAbandonos;
 
     public UiPerfilUsuarioAbandonaColmovil() {
 
@@ -36,7 +33,7 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
             String inicioEstrato = "" + comboBoxInicioEstrato.getSelectedItem();
             String finEstrato = "" + comboBoxFinEstrato.getSelectedItem();
 
-            dataAbandonos = controladorAbandono.getPerfiles(sexoFemenino, sexoMasculino, estadoCivil, inicioEstrato, finEstrato);
+            ArrayList dataAbandonos = controladorAbandono.getPerfiles(sexoFemenino, sexoMasculino, estadoCivil, inicioEstrato, finEstrato);
 
             ArrayList<String> meses = new ArrayList();
             meses.add("Enero");
@@ -52,12 +49,12 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
             meses.add("Noviembre");
             meses.add("Diciembre");
 
-            FXPieChart PieChart;
-            FXBarChart BarChart;
 
             if (!dataAbandonos.isEmpty()) {
-                PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
-                BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos);
+                
+                FXPieChart PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
+                FXBarChart BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
+                FXLineChart LineChart = new FXLineChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }
