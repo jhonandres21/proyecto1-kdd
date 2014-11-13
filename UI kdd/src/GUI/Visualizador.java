@@ -53,7 +53,11 @@ public class Visualizador extends javax.swing.JFrame {
     private void asignarComponentes(int codigoDePregunta) {
 
         //según la pregunta que se elija asignamos unos componentes a la interfaz
+<<<<<<< HEAD
         if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 8) {
+=======
+        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 12) {
+>>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
@@ -83,9 +87,15 @@ public class Visualizador extends javax.swing.JFrame {
                 UiPerfilUsuarioServicioRoamming UsuarioServicioRoamming = new UiPerfilUsuarioServicioRoamming();
                 asignaComponentes(UsuarioServicioRoamming);
 
+<<<<<<< HEAD
             } else if (codigoDePregunta == 8) {
                 UiOperadoresMasFrecuentes operadoresMasFrecuentes = new UiOperadoresMasFrecuentes();
                 asignaComponentesOperadores(operadoresMasFrecuentes);
+=======
+            } else if (codigoDePregunta == 12) {
+                UiPerfilUsuarioTendenciaPlanVoz tendenciaPLanVoz = new UiPerfilUsuarioTendenciaPlanVoz();
+                asignaComponentesTendencia(tendenciaPLanVoz);
+>>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
 
             } else {
                 panelOpciones.removeAll();
@@ -126,6 +136,7 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.updateUI();
     }
 
+<<<<<<< HEAD
     private void asignaComponentesOperadores(UiPerfil perfil) {
 
         panelOpciones.removeAll();
@@ -135,6 +146,8 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.updateUI();
     }
 
+=======
+>>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
     private void asignaComponentesPlanes(UiPerfil perfil) {
 
         panelOpciones.removeAll();
@@ -147,6 +160,22 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
+<<<<<<< HEAD
+=======
+
+    private void asignaComponentesTendencia(UiPerfil perfil) {
+
+        panelOpciones.removeAll();
+        panelOpciones.add(perfil.getLabelAnioInicio());
+        panelOpciones.add(perfil.getLabelVacia());
+        panelOpciones.add(perfil.getComboBoxInicioAnios());
+        panelOpciones.add(perfil.getLabelAnioFin());
+        panelOpciones.add(perfil.getLabelVacia());
+        panelOpciones.add(perfil.getComboBoxFinAnios());
+        panelOpciones.add(perfil.getConsultar());
+        panelOpciones.updateUI();
+    }
+>>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
 
     /**
      * This method is called from within the constructor to initialize the form.
