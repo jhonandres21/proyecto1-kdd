@@ -30,7 +30,7 @@ public class Visualizador extends javax.swing.JFrame {
 
         comboBoxPreguntas = new JComboBox();
         //columna #0 = Pregunta
-        arregloPreguntas = new String[13][1];
+        arregloPreguntas = new String[11][1];
         arregloPreguntas[0][0] = "Escoger una Opción";
         arregloPreguntas[1][0] = "Perfil de usuarios que abandonan a COLMOVIL";
         arregloPreguntas[2][0] = "Franjas de mayor uso de la red";
@@ -40,10 +40,8 @@ public class Visualizador extends javax.swing.JFrame {
         arregloPreguntas[6][0] = "Perfil de usuarios que contratan plan de datos";
         arregloPreguntas[7][0] = "Perfil de usuarios de servicio de roamming";
         arregloPreguntas[8][0] = "Operadores nacionales más frecuentemente utilizados";
-        arregloPreguntas[9][0] = "Relaciones entre características socioeconómicas y demográfica y tipos de planes";
-        arregloPreguntas[10][0] = "Planes preferidos por usuarios de convenios corporativos";
-        arregloPreguntas[11][0] = "Consumo de planes de datos por región, país";
-        arregloPreguntas[12][0] = "Tendencia de consumo de servicios de voz y de datos";
+        arregloPreguntas[9][0] = "Planes preferidos por usuarios de convenios corporativos";
+        arregloPreguntas[10][0] = "Tendencia de consumo de servicios de voz";
 
         for (int i = 0; i < arregloPreguntas.length; i++) {
             comboBoxPreguntas.addItem(arregloPreguntas[i][0]);
@@ -55,7 +53,7 @@ public class Visualizador extends javax.swing.JFrame {
     private void asignarComponentes(int codigoDePregunta) {
 
         //según la pregunta que se elija asignamos unos componentes a la interfaz
-        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7) {
+        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 8) {
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
@@ -65,15 +63,13 @@ public class Visualizador extends javax.swing.JFrame {
                 UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
                 asignaComponentesFranjas(franjasUsoRed);
 
-<<<<<<< HEAD
-        } else if (codigoDePregunta == 3) {
-            UiPlanesMasEscogidos planesMasEscogidos = new UiPlanesMasEscogidos();
-            asignaComponentesPlanes(planesMasEscogidos);
-=======
+            } else if (codigoDePregunta == 3) {
+                UiPlanesMasEscogidos planesMasEscogidos = new UiPlanesMasEscogidos();
+                asignaComponentesPlanes(planesMasEscogidos);
+
             } else if (codigoDePregunta == 4) {
                 UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
                 asignaComponentes(planesPrepago);
->>>>>>> db1891b70a90380854342429264a309e9c1e0272
 
             } else if (codigoDePregunta == 5) {
                 UiPerfilUsuarioPlanPospago planesPospago = new UiPerfilUsuarioPlanPospago();
@@ -86,6 +82,10 @@ public class Visualizador extends javax.swing.JFrame {
             } else if (codigoDePregunta == 7) {
                 UiPerfilUsuarioServicioRoamming UsuarioServicioRoamming = new UiPerfilUsuarioServicioRoamming();
                 asignaComponentes(UsuarioServicioRoamming);
+
+            } else if (codigoDePregunta == 8) {
+                UiOperadoresMasFrecuentes operadoresMasFrecuentes = new UiOperadoresMasFrecuentes();
+                asignaComponentesOperadores(operadoresMasFrecuentes);
 
             } else {
                 panelOpciones.removeAll();
@@ -115,7 +115,7 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-    
+
     private void asignaComponentesFranjas(UiPerfil perfil) {
 
         panelOpciones.removeAll();
@@ -125,8 +125,16 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-<<<<<<< HEAD
-    
+
+    private void asignaComponentesOperadores(UiPerfil perfil) {
+
+        panelOpciones.removeAll();
+        panelOpciones.add(perfil.getLabelMeses());
+        panelOpciones.add(perfil.getComboBoxMeses());
+        panelOpciones.add(perfil.getConsultar());
+        panelOpciones.updateUI();
+    }
+
     private void asignaComponentesPlanes(UiPerfil perfil) {
 
         panelOpciones.removeAll();
@@ -139,8 +147,6 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
-=======
->>>>>>> db1891b70a90380854342429264a309e9c1e0272
 
     /**
      * This method is called from within the constructor to initialize the form.

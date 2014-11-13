@@ -2,6 +2,7 @@ package GUI;
 
 import Controlador.ControladorPlanesMasEscogidos;
 import Gráficos.FXBarChart;
+import Gráficos.FXLineChart;
 import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -96,6 +97,7 @@ public class UiPlanesMasEscogidos extends UiPerfil {
             if (!datosPlanes.isEmpty()) {
                 PieChart = new FXPieChart("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
                 BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                FXLineChart LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

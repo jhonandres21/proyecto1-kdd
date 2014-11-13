@@ -5,7 +5,6 @@
  */
 package Dao;
 
-import Logico.Tiempo;
 import ConectorBD.ConexionBD;
 import java.sql.Connection;
 import java.sql.ResultSet;

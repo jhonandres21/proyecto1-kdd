@@ -2,6 +2,7 @@ package GUI;
 
 import Controlador.ControladorFranjasUsoRed;
 import Gráficos.FXBarChart;
+import Gráficos.FXLineChart;
 import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 public class UiFranjasUsoRed extends UiPerfil {
 
     ControladorFranjasUsoRed controladorFranjasUsoRed;
-    ArrayList <Integer> datosFranjas;
+    ArrayList<Integer> datosFranjas;
 
     public UiFranjasUsoRed() {
 
@@ -25,7 +26,7 @@ public class UiFranjasUsoRed extends UiPerfil {
     void hacerConsulta(ActionEvent evt) {
 
         String operador = "" + comboBoxOperador.getSelectedItem();
-        
+
         datosFranjas = controladorFranjasUsoRed.obtenerFranjas(operador);
 
         ArrayList<String> franjas = new ArrayList();
@@ -41,6 +42,8 @@ public class UiFranjasUsoRed extends UiPerfil {
         if (!datosFranjas.isEmpty()) {
             PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
             BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
+            FXLineChart LineChart = new FXLineChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
+
         } else {
             JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }

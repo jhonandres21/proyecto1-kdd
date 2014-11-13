@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino, checkBoxDatos, checkBoxPrepagoVoz, checkBoxPostpagoVoz, checkBoxCorporativo;
-    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz;
+    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses;
     protected JButton botonConsultar;
 
     public UiPerfil() {
@@ -32,6 +32,10 @@ public abstract class UiPerfil {
         comboBoxInicioEstrato = new JComboBox();
         comboBoxFinEstrato = new JComboBox();
         comboBoxOperador = new JComboBox();
+        comboBoxMeses = new JComboBox();
+        
+        labelMeses = new JLabel();
+        inicializarJLabel(labelMeses, "Meses:");
 
         labelEstadoCivil = new JLabel();
         inicializarJLabel(labelEstadoCivil, "Estado Civil:");
@@ -82,6 +86,7 @@ public abstract class UiPerfil {
         inicializarEstrato(comboBoxInicioEstrato);
         inicializarEstrato(comboBoxFinEstrato);
         inicializarOperador(comboBoxOperador);
+        inicializarMeses(comboBoxMeses);
     }
 
     protected void inicializarJLabel(JLabel label, String texto) {
@@ -142,7 +147,7 @@ public abstract class UiPerfil {
     protected void inicializarOperador(JComboBox operador) {
 
         operador.setVisible(true);
-        operador.setMaximumSize(new Dimension(170, 30));
+        operador.setMaximumSize(new Dimension(200, 30));
 
         String estratos[][] = new String[18][1];
         estratos[0][0] = "Escoger una Opción";
@@ -169,6 +174,32 @@ public abstract class UiPerfil {
         }
     }
 
+        protected void inicializarMeses(JComboBox entradaMeses) {
+
+        entradaMeses.setVisible(true);
+        entradaMeses.setMaximumSize(new Dimension(200, 30));
+
+        String meses[][] = new String[13][1];
+        meses[0][0] = "General";
+        meses[1][0] = "Enero";
+        meses[2][0] = "Febrero";
+        meses[3][0] = "Marzo";
+        meses[4][0] = "Abril";
+        meses[5][0] = "Mayo";
+        meses[6][0] = "Junio";
+        meses[7][0] = "Julio";
+        meses[8][0] = "Agosto";
+        meses[9][0] = "Septiembre";
+        meses[10][0] = "Octubre";
+        meses[11][0] = "Noviembre";
+        meses[12][0] = "Diciembre";
+
+        for (int i = 0; i < meses.length; i++) {
+            entradaMeses.addItem(meses[i][0]);
+        }
+    }
+
+    
     abstract void hacerConsulta(java.awt.event.ActionEvent evt);
 
     protected boolean evaluarRangoEstrato() {
@@ -320,5 +351,17 @@ public abstract class UiPerfil {
 
     public JButton getConsultar() {
         return botonConsultar;
+    }
+
+    public JLabel getLabelMeses() {
+        return labelMeses;
+    }
+
+    public JComboBox getComboBoxMeses() {
+        return comboBoxMeses;
+    }
+
+    public void setComboBoxMeses(JComboBox comboBoxMeses) {
+        this.comboBoxMeses = comboBoxMeses;
     }
 }
