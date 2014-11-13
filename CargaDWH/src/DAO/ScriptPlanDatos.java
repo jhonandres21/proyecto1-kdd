@@ -34,7 +34,7 @@ public class ScriptPlanDatos {
 
             con = conexion.conectar();
             Statement stmt = con.createStatement();
-            String consulta = "SELECT id_plan_datos, nombre FROM colmovil.plan_datos;";
+            String consulta = "SELECT DISTINCT id_plan_datos, nombre FROM colmovil.plan_datos;";
             ResultSet rs = stmt.executeQuery(consulta);
             
             while (rs.next()) {

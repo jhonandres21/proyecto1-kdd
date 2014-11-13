@@ -71,8 +71,8 @@ public class Visualizador extends javax.swing.JFrame {
             asignaComponentesFranjas(franjasUsoRed);
 
         } else if (codigoDePregunta == 3) {
-            UiFranjasUsoRed franjasUsoRed = new UiFranjasUsoRed();
-            asignaComponentesFranjas(franjasUsoRed);
+            UiPlanesMasEscogidos planesMasEscogidos = new UiPlanesMasEscogidos();
+            asignaComponentesPlanes(planesMasEscogidos);
 
         } else if (codigoDePregunta == 4) {
             UiPerfilUsuarioPlanPrepago planesPrepago = new UiPerfilUsuarioPlanPrepago();
@@ -128,7 +128,6 @@ public class Visualizador extends javax.swing.JFrame {
 
         panelOpciones.removeAll();
         panelOpciones.add(perfil.getLabelPlanDeDatos());
-        panelOpciones.add(perfil.getLabelVacia());
         panelOpciones.add(perfil.getCheckBoxDatos());
         panelOpciones.add(perfil.getLabelPlanDeVoz());
         panelOpciones.add(perfil.getCheckBoxPrepagoVoz());

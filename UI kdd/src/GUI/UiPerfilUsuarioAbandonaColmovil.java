@@ -57,7 +57,7 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
 
             if (!dataAbandonos.isEmpty()) {
                 PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
-                BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos);
+                BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

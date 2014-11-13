@@ -44,26 +44,26 @@ public abstract class UiPerfil {
 
         labelVacia = new JLabel();
         inicializarJLabel(labelVacia, "        ");
-        
+
         labelOperador = new JLabel();
         inicializarJLabel(labelOperador, " Operador:");
-        
+
         labelPlanDeDatos = new JLabel();
         inicializarJLabel(labelPlanDeDatos, " Plan de Datos:");
-        
+
         checkBoxDatos = new JCheckBox("Sí");
         checkBoxDatos.setSelected(true);
-        
+
         labelPlanDeVoz = new JLabel();
         inicializarJLabel(labelPlanDeVoz, " Plan de Voz:");
-        
+
         checkBoxPrepagoVoz = new JCheckBox("Planes Prepago");
         checkBoxPrepagoVoz.setSelected(true);
         checkBoxPostpagoVoz = new JCheckBox("Planes Postpago");
         checkBoxPostpagoVoz.setSelected(true);
-        checkBoxCorporativo= new JCheckBox("Planes Corporativos");
+        checkBoxCorporativo = new JCheckBox("Planes Corporativos");
         checkBoxCorporativo.setSelected(true);
-        
+
         botonConsultar = new JButton("Consultar");
 
         botonConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +138,7 @@ public abstract class UiPerfil {
             estrato.addItem(estratos[i][0]);
         }
     }
-    
+
     protected void inicializarOperador(JComboBox operador) {
 
         operador.setVisible(true);
@@ -197,6 +197,39 @@ public abstract class UiPerfil {
         return true;
     }
 
+    protected boolean evaluarPlanesEscogidos() {
+
+        if (checkBoxDatos.isSelected() && checkBoxCorporativo.isSelected()
+                && checkBoxPrepagoVoz.isSelected() && checkBoxPostpagoVoz.isSelected()) {
+            
+            return true;
+
+        } else if (checkBoxDatos.isSelected() && (checkBoxCorporativo.isSelected()
+                || checkBoxPrepagoVoz.isSelected() || checkBoxPostpagoVoz.isSelected())) {
+
+            JOptionPane.showMessageDialog(null, "Sólo puede elegir un plan de datos solo,\n o con todas las demás opciones.");
+            return false;
+
+        } else if (!checkBoxDatos.isSelected() && checkBoxCorporativo.isSelected()
+                && checkBoxPrepagoVoz.isSelected() && !checkBoxPostpagoVoz.isSelected()) {
+
+            JOptionPane.showMessageDialog(null, "No existen planes prepago que sean corporativos.");
+            return false;
+        
+        } else if (!checkBoxDatos.isSelected() && !checkBoxCorporativo.isSelected()
+                && checkBoxPrepagoVoz.isSelected() && !checkBoxPostpagoVoz.isSelected()) {
+
+            JOptionPane.showMessageDialog(null, "No es posible realizar esta consulta. "
+                                             + "Para ver el número de planer prepago vendidos, "
+                                             + "porfavor marque la opcion prepago y postpago..");
+            return false;
+
+        }
+
+        return true;
+
+    }
+
     public JLabel getLabelSexo() {
         return labelSexo;
     }
@@ -244,7 +277,7 @@ public abstract class UiPerfil {
     public JLabel getLabelFinEstrato() {
         return labelFinEstrato;
     }
-    
+
     public JLabel getLabelVacia() {
         return labelVacia;
     }
@@ -284,7 +317,7 @@ public abstract class UiPerfil {
     public JLabel getLabelPlanDeVoz() {
         return labelPlanDeVoz;
     }
-    
+
     public JButton getConsultar() {
         return botonConsultar;
     }

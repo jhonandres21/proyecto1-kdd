@@ -138,7 +138,7 @@ public class ScriptVentas {
 //                    + "// SK Oficina: " + ventas.get(i).getId_dim_oficina()
 //                    + "// SK Sim Card: " + ventas.get(i).getId_dim_sim_card());
 
-            sql += "INSERT INTO colmovil_dwh.venta ( fecha, localizacion, cliente, demografia, plan_voz, plan_datos,"
+            sql += "INSERT INTO bodega.venta ( fecha, localizacion, cliente, demografia, plan_voz, plan_datos,"
                     + "  equipo, oficina, sim_card, precio_plan)"
                     + " VALUES (" + ventas.get(i).getId_dim_fecha()
                     + ", " + ventas.get(i).getId_dim_localizacion()
@@ -175,7 +175,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_fecha FROM colmovil_dwh.fecha WHERE fecha = '" + Fecha + "';";
+            String consulta = "SELECT sk_fecha FROM bodega.fecha WHERE fecha = '" + Fecha + "';";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -197,7 +197,7 @@ public class ScriptVentas {
 
         try {
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_oficina FROM colmovil_dwh.oficina WHERE id_oficina = " + oficina + ";";
+            String consulta = "SELECT sk_oficina FROM bodega.oficina WHERE id_oficina = " + oficina + ";";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -222,7 +222,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_localizacion FROM colmovil_dwh.localizacion WHERE departamento = (SELECT departamento FROM colmovil.localizacion WHERE idlocalizacion = (SELECT id_localizacion FROM colmovil.oficina WHERE id_oficina =" + oficina + ")) AND ciudad = (SELECT ciudad FROM colmovil.localizacion WHERE idlocalizacion = (SELECT id_localizacion FROM colmovil.oficina WHERE id_oficina = " + oficina + "));";
+            String consulta = "SELECT sk_localizacion FROM bodega.localizacion WHERE departamento = (SELECT departamento FROM colmovil.localizacion WHERE idlocalizacion = (SELECT id_localizacion FROM colmovil.oficina WHERE id_oficina =" + oficina + ")) AND ciudad = (SELECT ciudad FROM colmovil.localizacion WHERE idlocalizacion = (SELECT id_localizacion FROM colmovil.oficina WHERE id_oficina = " + oficina + "));";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -247,7 +247,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_cliente FROM colmovil_dwh.cliente WHERE sk_cliente = " + cliente + ";";
+            String consulta = "SELECT sk_cliente FROM bodega.cliente WHERE sk_cliente = " + cliente + ";";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -272,7 +272,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_demografia FROM colmovil_dwh.demografia WHERE estado_civil = (SELECT estado_civil FROM colmovil.cliente WHERE idcliente = " + cliente + ") AND estrato = (SELECT estrato FROM colmovil.cliente WHERE idcliente = " + cliente + ") AND genero = (SELECT genero FROM colmovil.cliente WHERE idcliente = " + cliente + ");";
+            String consulta = "SELECT sk_demografia FROM bodega.demografia WHERE estado_civil = (SELECT estado_civil FROM colmovil.cliente WHERE idcliente = " + cliente + ") AND estrato = (SELECT estrato FROM colmovil.cliente WHERE idcliente = " + cliente + ") AND genero = (SELECT genero FROM colmovil.cliente WHERE idcliente = " + cliente + ");";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -297,7 +297,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_plan_voz FROM colmovil_dwh.plan_voz WHERE id_plan_voz = " + plan_voz + ";";
+            String consulta = "SELECT sk_plan_voz FROM bodega.plan_voz WHERE id_plan_voz = " + plan_voz + ";";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -322,7 +322,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_plan_datos FROM colmovil_dwh.plan_datos WHERE id_plan_datos = " + plan_datos + ";";
+            String consulta = "SELECT sk_plan_datos FROM bodega.plan_datos WHERE id_plan_datos = " + plan_datos + ";";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -347,7 +347,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_equipo FROM colmovil_dwh.equipo WHERE id_equipo = " + equipo + ";";
+            String consulta = "SELECT sk_equipo FROM bodega.equipo WHERE id_equipo = " + equipo + ";";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 
@@ -372,7 +372,7 @@ public class ScriptVentas {
         try {
 
             Statement stmt = con.createStatement();
-            String consulta = "SELECT sk_sim_card FROM colmovil_dwh.sim_card WHERE id_sim_card = " + sim_card + ";";
+            String consulta = "SELECT sk_sim_card FROM bodega.sim_card WHERE id_sim_card = " + sim_card + ";";
             ResultSet resultSet = stmt.executeQuery(consulta);
             resultSet = stmt.executeQuery(consulta);
 

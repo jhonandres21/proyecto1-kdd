@@ -40,7 +40,7 @@ public class UiFranjasUsoRed extends UiPerfil {
 
         if (!datosFranjas.isEmpty()) {
             PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
-            BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas);
+            BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
         } else {
             JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }

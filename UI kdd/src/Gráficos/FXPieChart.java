@@ -40,9 +40,8 @@ public class FXPieChart {
         JFXPanel PanelVisualizador = Visualizador.panel1;
         PanelVisualizador = fxPanel;
         PanelVisualizador.setVisible(true);
-        if (firstTime) {
-            Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
-        }
+        Visualizador.panelPestanas.removeAll();
+        Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

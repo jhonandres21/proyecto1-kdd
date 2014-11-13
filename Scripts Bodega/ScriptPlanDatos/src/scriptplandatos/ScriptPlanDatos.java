@@ -36,7 +36,7 @@ public class ScriptPlanDatos {
 
             con = conexion.conectar();
             Statement stmt = con.createStatement();
-            String consulta = "SELECT id_plan_datos, nombre FROM colmovil.plan_datos;";
+            String consulta = "SELECT DISTINCT id_plan_datos, nombre FROM colmovil.plan_datos GROUP BY id_plan_datos, nombre;";
             ResultSet rs = stmt.executeQuery(consulta);
             
             while (rs.next()) {
@@ -78,10 +78,11 @@ public class ScriptPlanDatos {
             con = conexion.conectar();
             Statement sentencia = con.createStatement();
             int numRegistros = planes.size();
+            System.out.println("numR " + numRegistros);
 
             for (int i = 0; i < numRegistros; i++) {
-//            System.out.println("ID: " + planes.get(i).getId_plan_datos() + "// Nombre del Plan: " + planes.get(i).getNombre_plan_datos() + "// Corporativo: " + planes.get(i).getEs_corporativo());
-                sql += "INSERT INTO bodega.plan_datos (id_plan_datos, nombre_plan_datos, es_corporativo) VALUES (" + planes.get(i).getId_plan_datos() + ", '" + planes.get(i).getNombre_plan_datos() + "', '" + planes.get(i).getEs_corporativo() + "');";
+                System.out.println("i: " + i);
+                sql = "INSERT INTO bodega.plan_datos (id_plan_datos, nombre_plan_datos, es_corporativo) VALUES (" + planes.get(i).getId_plan_datos() + ", '" + planes.get(i).getNombre_plan_datos() + "', '" + planes.get(i).getEs_corporativo() + "');";
                 sentencia.executeUpdate(sql);
             }
             conexion.desconectarBaseDeDatos(con);

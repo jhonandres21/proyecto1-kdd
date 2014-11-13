@@ -6,11 +6,11 @@
 package Controlador;
 
 import Dao.DaoPlanesMasEscogidos;
-import Logico.PlanDatos;
-import Logico.PlanVoz;
-import java.sql.Date;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
+import Gráficos.FXBarChart;
+import Gráficos.FXPieChart;
+import Logico.PlanesMasEscogidos;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ControladorPlanesMasEscogidos {
     
@@ -20,8 +20,21 @@ public class ControladorPlanesMasEscogidos {
         daoPlanesMasEscogidos = new DaoPlanesMasEscogidos();
     }
     
-    public void consulta(int numDocIdCandidato, String nombre_Proceso/*Paramatros dinamicos*/) {
+    public ArrayList <Integer> obtenerPlanes(String datos, String prepago, String postpago, String corporativo/*Paramatros dinamicos*/) {
 
+        ArrayList <Integer> planesMasEscogidos = new ArrayList<>();
+
+        PlanesMasEscogidos planes = new PlanesMasEscogidos();
+        planes.setPlanDeDatos(datos);
+        planes.setPlanPrepagoVoz(prepago);
+        planes.setPlanPostpagoVoz(postpago);
+        planes.setPlanCorporativo(corporativo);
+        
+        String restriccionesClausulaWhere = daoPlanesMasEscogidos.prepararRestriccionesClausulaWherePlanes(planes);
+        ArrayList<Integer> conteoPlanes = daoPlanesMasEscogidos.listaPlanes(restriccionesClausulaWhere);
+        
+        return conteoPlanes;
+        
     }
 
     public void desconectar() {
