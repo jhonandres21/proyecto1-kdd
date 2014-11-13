@@ -14,13 +14,8 @@ import javax.swing.JOptionPane;
 public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino, checkBoxDatos, checkBoxPrepagoVoz, checkBoxPostpagoVoz, checkBoxCorporativo;
-<<<<<<< HEAD
-    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses;
-=======
-    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxInicioAnios, comboBoxFinAnios;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelAnioInicio, labelAnioFin;
->>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
+    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses, comboBoxInicioAnios, comboBoxFinAnios;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses, labelAnioInicio, labelAnioFin;
     protected JButton botonConsultar;
 
     public UiPerfil() {
@@ -37,15 +32,12 @@ public abstract class UiPerfil {
         comboBoxInicioEstrato = new JComboBox();
         comboBoxFinEstrato = new JComboBox();
         comboBoxOperador = new JComboBox();
-<<<<<<< HEAD
         comboBoxMeses = new JComboBox();
         
         labelMeses = new JLabel();
         inicializarJLabel(labelMeses, "Meses:");
-=======
         comboBoxInicioAnios = new JComboBox();
         comboBoxFinAnios = new JComboBox();
->>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
 
         labelEstadoCivil = new JLabel();
         inicializarJLabel(labelEstadoCivil, "Estado Civil:");
@@ -102,12 +94,9 @@ public abstract class UiPerfil {
         inicializarEstrato(comboBoxInicioEstrato);
         inicializarEstrato(comboBoxFinEstrato);
         inicializarOperador(comboBoxOperador);
-<<<<<<< HEAD
         inicializarMeses(comboBoxMeses);
-=======
         inicializarAnios(comboBoxInicioAnios);
         inicializarAnios(comboBoxFinAnios);
->>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
     }
 
     protected void inicializarJLabel(JLabel label, String texto) {
@@ -195,7 +184,6 @@ public abstract class UiPerfil {
         }
     }
 
-<<<<<<< HEAD
         protected void inicializarMeses(JComboBox entradaMeses) {
 
         entradaMeses.setVisible(true);
@@ -222,7 +210,6 @@ public abstract class UiPerfil {
     }
 
     
-=======
     protected void inicializarAnios(JComboBox anios) {
 
         anios.setVisible(true);
@@ -251,7 +238,6 @@ public abstract class UiPerfil {
         }
     }
 
->>>>>>> 922a7dc01e3785d2537eed6e50c4daac4cb5e83f
     abstract void hacerConsulta(java.awt.event.ActionEvent evt);
 
     protected boolean evaluarRangoEstrato() {
