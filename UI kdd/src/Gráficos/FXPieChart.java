@@ -28,7 +28,6 @@ public class FXPieChart {
     final String chartName;
     final ArrayList<String> tags;
     final ArrayList<Integer> values;
-    static boolean firstTime = true;
 
     public FXPieChart(final String chartName, final ArrayList<String> tags, final ArrayList<Integer> values) {
 
@@ -37,11 +36,17 @@ public class FXPieChart {
         this.chartName = chartName;
 
         final JFXPanel fxPanel = new JFXPanel();
+<<<<<<< HEAD
         JFXPanel PanelVisualizador = Visualizador.panel1;
         PanelVisualizador = fxPanel;
         PanelVisualizador.setVisible(true);
         Visualizador.panelPestanas.removeAll();
         Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
+=======
+        Visualizador.panelPestanas.removeAll();
+        Visualizador.panelPestanas.addTab("Pie Chart", fxPanel);
+        System.out.println("Se prepara PieChart");
+>>>>>>> db1891b70a90380854342429264a309e9c1e0272
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -52,11 +57,13 @@ public class FXPieChart {
 
     private static void initFX(JFXPanel fxPanel, String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
         // This method is invoked on the JavaFX thread
+        System.out.println("Se inicia PieChart");
         Scene scene = createScene(chartName, tags, values);
         fxPanel.setScene(scene);
     }
 
     private static Scene createScene(String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
+        System.out.println("Se dibuja PieChart");
         Group root = new Group();
         Scene scene = new Scene(root);
 

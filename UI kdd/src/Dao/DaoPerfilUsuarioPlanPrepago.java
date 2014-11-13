@@ -61,8 +61,9 @@ public class DaoPerfilUsuarioPlanPrepago {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.venta, bodega.demografia\n"
-                            + "WHERE venta.demografia = demografia.sk_demografia\n"
+            String consulta = "SELECT bodega.venta.fecha, bodega.fecha.mes FROM bodega.venta, bodega.demografia, bodega.fecha\n"
+                            + "WHERE venta.demografia = demografia.sk_demografia"
+                            + " AND venta.fecha = fecha.sk_fecha "
                             + "AND (venta.plan_voz = 1 AND venta.plan_datos = 1) " + where + ";";
 
             System.out.println("Consulta: " + consulta);
@@ -74,7 +75,7 @@ public class DaoPerfilUsuarioPlanPrepago {
                 String temp[] = new String[14];
                 temp[0] = "" + resultSet.getObject(1);
                 temp[1] = "" + resultSet.getObject(2);
-                temp[2] = "" + resultSet.getObject(3);
+                /*temp[2] = "" + resultSet.getObject(3);
                 temp[3] = "" + resultSet.getObject(4);
                 temp[4] = "" + resultSet.getObject(5);
                 temp[5] = "" + resultSet.getObject(6);
@@ -85,7 +86,7 @@ public class DaoPerfilUsuarioPlanPrepago {
                 temp[10] = "" + resultSet.getObject(11);
                 temp[11] = "" + resultSet.getObject(12);
                 temp[12] = "" + resultSet.getObject(13);
-                temp[13] = "" + resultSet.getObject(14);
+                temp[13] = "" + resultSet.getObject(14);*/
 
                 resultado.add(temp);
             }

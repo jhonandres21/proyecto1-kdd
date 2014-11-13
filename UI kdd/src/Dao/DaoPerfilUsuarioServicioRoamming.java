@@ -62,8 +62,9 @@ public class DaoPerfilUsuarioServicioRoamming {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT * FROM bodega.llamada, bodega.demografia\n"
-                            + "WHERE llamada.demografia = demografia.sk_demografia\n"
+            String consulta = "SELECT bodega.llamada.fecha, bodega.fecha.mes FROM bodega.llamada, bodega.demografia, bodega.fecha\n"
+                            + "WHERE llamada.demografia = demografia.sk_demografia"
+                            + " AND llamada.fecha = fecha.sk_fecha "
                             + "AND flag_roaming = 'SI' " + where + ";";
 
             System.out.println("Consulta: " + consulta);
@@ -75,7 +76,7 @@ public class DaoPerfilUsuarioServicioRoamming {
                 String temp[] = new String[13];
                 temp[0] = "" + resultSet.getObject(1);
                 temp[1] = "" + resultSet.getObject(2);
-                temp[2] = "" + resultSet.getObject(3);
+                /*temp[2] = "" + resultSet.getObject(3);
                 temp[3] = "" + resultSet.getObject(4);
                 temp[4] = "" + resultSet.getObject(5);
                 temp[5] = "" + resultSet.getObject(6);
@@ -85,7 +86,7 @@ public class DaoPerfilUsuarioServicioRoamming {
                 temp[9] = "" + resultSet.getObject(10);
                 temp[10] = "" + resultSet.getObject(11);
                 temp[11] = "" + resultSet.getObject(12);
-                temp[12] = "" + resultSet.getObject(13);
+                temp[12] = "" + resultSet.getObject(13);*/
 
                 resultado.add(temp);
             }
