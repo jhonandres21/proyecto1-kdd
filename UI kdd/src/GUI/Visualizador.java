@@ -30,7 +30,7 @@ public class Visualizador extends javax.swing.JFrame {
 
         comboBoxPreguntas = new JComboBox();
         //columna #0 = Pregunta
-        arregloPreguntas = new String[11][1];
+        arregloPreguntas = new String[10][1];
         arregloPreguntas[0][0] = "Escoger una Opción";
         arregloPreguntas[1][0] = "Perfil de usuarios que abandonan a COLMOVIL";
         arregloPreguntas[2][0] = "Franjas de mayor uso de la red";
@@ -40,8 +40,7 @@ public class Visualizador extends javax.swing.JFrame {
         arregloPreguntas[6][0] = "Perfil de usuarios que contratan plan de datos";
         arregloPreguntas[7][0] = "Perfil de usuarios de servicio de roamming";
         arregloPreguntas[8][0] = "Operadores nacionales más frecuentemente utilizados";
-        arregloPreguntas[9][0] = "Planes preferidos por usuarios de convenios corporativos";
-        arregloPreguntas[10][0] = "Tendencia de consumo de servicios de voz";
+        arregloPreguntas[9][0] = "Tendencia de consumo de servicios de voz";
 
         for (int i = 0; i < arregloPreguntas.length; i++) {
             comboBoxPreguntas.addItem(arregloPreguntas[i][0]);
@@ -53,7 +52,7 @@ public class Visualizador extends javax.swing.JFrame {
     private void asignarComponentes(int codigoDePregunta) {
 
         //según la pregunta que se elija asignamos unos componentes a la interfaz
-        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 12|| codigoDePregunta == 8) {
+        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 9|| codigoDePregunta == 8) {
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
@@ -85,7 +84,7 @@ public class Visualizador extends javax.swing.JFrame {
             } else if (codigoDePregunta == 8) {
                 UiOperadoresMasFrecuentes operadoresMasFrecuentes = new UiOperadoresMasFrecuentes();
                 asignaComponentesOperadores(operadoresMasFrecuentes);
-            } else if (codigoDePregunta == 12) {
+            } else if (codigoDePregunta == 9) {
                 UiPerfilUsuarioTendenciaPlanVoz tendenciaPLanVoz = new UiPerfilUsuarioTendenciaPlanVoz();
                 asignaComponentesTendencia(tendenciaPLanVoz);
 
