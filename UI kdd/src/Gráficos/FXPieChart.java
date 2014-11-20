@@ -35,30 +35,31 @@ public class FXPieChart {
         this.values = values;
         this.chartName = chartName;
 
-        final JFXPanel fxPanel = new JFXPanel();
-        JFXPanel PanelVisualizador = fxPanel;
+        //final JFXPanel fxPanel = new JFXPanel();
+        //JFXPanel PanelVisualizador = fxPanel;
+        JFXPanel PanelVisualizador = initFX(/*fxPanel, */chartName, tags, values);
         PanelVisualizador.setVisible(true);
         Visualizador.panelPestanas.removeAll();
         Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
-        Visualizador.panelPestanas.removeAll();
-        Visualizador.panelPestanas.addTab("Pie Chart", fxPanel);
         System.out.println("Se prepara PieChart");
-        Platform.runLater(new Runnable() {
+        /*Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                initFX(fxPanel, chartName, tags, values);
+                
             }
-        });
+        });*/
     }
 
-    private static void initFX(JFXPanel fxPanel, String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
+    private JFXPanel initFX(/*JFXPanel fxPanel, */String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
         // This method is invoked on the JavaFX thread
+        JFXPanel fxPanel = new JFXPanel();
         System.out.println("Se inicia PieChart");
         Scene scene = createScene(chartName, tags, values);
         fxPanel.setScene(scene);
+        return fxPanel;
     }
 
-    private static Scene createScene(String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
+    private Scene createScene(String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
         System.out.println("Se dibuja PieChart");
         Group root = new Group();
         Scene scene = new Scene(root);
