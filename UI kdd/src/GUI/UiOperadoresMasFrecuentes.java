@@ -48,15 +48,19 @@ public class UiOperadoresMasFrecuentes extends UiPerfil {
         operadores.add("Tigo");
         operadores.add("UNE");
         operadores.add("Vodafone");
-        
-        FXPieChart PieChart;
-        FXBarChart BarChart;
 
         if (!datosOperadores.isEmpty()) {
-            PieChart = new FXPieChart("Operadores Mas Frecuentes", operadores, datosOperadores);
-            BarChart = new FXBarChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica de Barras");
-            FXLineChart LineChart = new FXLineChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica Lineal");
-
+            if (!Visualizador.estadoInicial) {
+                System.out.println("Update");
+                PieChart.addData("Operadores Mas Frecuentes", operadores, datosOperadores);
+                BarChart.addData(operadores, datosOperadores);
+                LineChart.addData(operadores, datosOperadores);
+            } else {
+                Visualizador.estadoInicial = false;
+                PieChart = new FXPieChart("Operadores Mas Frecuentes", operadores, datosOperadores);
+                BarChart = new FXBarChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica de Barras");
+                FXLineChart LineChart = new FXLineChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica Lineal");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }

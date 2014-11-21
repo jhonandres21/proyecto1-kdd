@@ -49,11 +49,18 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
             meses.add("Noviembre");
             meses.add("Diciembre");
 
-
             if (!dataAbandonos.isEmpty()) {
-                FXPieChart PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
-                FXBarChart BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
-                FXLineChart LineChart = new FXLineChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
+                if (!Visualizador.estadoInicial) {
+                    System.out.println("Update");
+                    PieChart.addData("Abandonos Mes-a-Mes", meses, dataAbandonos);
+                    BarChart.addData(meses, dataAbandonos);
+                    LineChart.addData(meses, dataAbandonos);
+                } else {
+                    Visualizador.estadoInicial = false;
+                    PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
+                    BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
+                    LineChart = new FXLineChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

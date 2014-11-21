@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -25,9 +26,11 @@ import javafx.scene.paint.Color;
  */
 public class FXPieChart {
 
-    final String chartName;
-    final ArrayList<String> tags;
-    final ArrayList<Integer> values;
+    static String chartName;
+    static ArrayList<String> tags;
+    static ArrayList<Integer> values;
+    static ObservableList<PieChart.Data> pieChartData;
+    static PieChart chart;
 
     public FXPieChart(final String chartName, final ArrayList<String> tags, final ArrayList<Integer> values) {
 
@@ -46,32 +49,32 @@ public class FXPieChart {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                initFX(fxPanel, chartName, tags, values);
+                initFX(fxPanel);
             }
         });
     }
 
-    private static void initFX(JFXPanel fxPanel, String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
+    private static void initFX(JFXPanel fxPanel) {
         // This method is invoked on the JavaFX thread
         System.out.println("Se inicia PieChart");
-        Scene scene = createScene(chartName, tags, values);
+        Scene scene = createScene();
         fxPanel.setScene(scene);
     }
 
-    private static Scene createScene(String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
+    private static Scene createScene() {
         System.out.println("Se dibuja PieChart");
         Group root = new Group();
         Scene scene = new Scene(root);
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        pieChartData = FXCollections.observableArrayList();
         for (int i = 0; i < tags.size(); i++) {
             pieChartData.add(new PieChart.Data(tags.get(i), values.get(i)));
         }
+        String name = chartName;
+        chart = new PieChart(pieChartData);
+        chart.setTitle(name);
 
-        final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle(chartName);
-
-        final Label caption = new Label("");
+        Label caption = new Label("");
         caption.setTextFill(Color.WHITE);
         caption.setStyle("-fx-font: 24 arial;");
 
@@ -91,6 +94,25 @@ public class FXPieChart {
         ((Group) scene.getRoot()).getChildren().add(caption);
 
         return (scene);
+    }
+
+    //adds new Data to the list
+    public void naiveAddData(String name, int value) {
+        pieChartData.add(new PieChart.Data(name, value));
+    }
+
+    //updates existing Data-Object if name matches
+    public void addData(String chartName, ArrayList<String> addTags, final ArrayList<Integer> addValues) {
+        
+        for (int i = 0; i < addTags.size(); i++) {
+            for (Data d : pieChartData) {
+                if (d.getName().equals(addTags.get(i))) {
+                    d.setPieValue(addValues.get(i));
+                    return;
+                }
+            }
+            naiveAddData(addTags.get(i), addValues.get(i));
+        }
     }
 
 }

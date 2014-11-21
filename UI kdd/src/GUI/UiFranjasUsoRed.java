@@ -36,14 +36,19 @@ public class UiFranjasUsoRed extends UiPerfil {
         franjas.add("Night");
         franjas.add("PM");
 
-        FXPieChart PieChart;
-        FXBarChart BarChart;
-
         if (!datosFranjas.isEmpty()) {
-            PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
-            BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
-            FXLineChart LineChart = new FXLineChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
+            if (!Visualizador.estadoInicial) {
+                System.out.println("Update");
+                PieChart.addData("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
+                BarChart.addData(franjas, datosFranjas);
+                LineChart.addData(franjas, datosFranjas);
+            } else {
+                Visualizador.estadoInicial = false;
+                PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
+                BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
+                FXLineChart LineChart = new FXLineChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
 
+            }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }

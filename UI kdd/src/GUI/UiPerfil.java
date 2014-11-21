@@ -1,5 +1,8 @@
 package GUI;
 
+import Gráficos.FXBarChart;
+import Gráficos.FXLineChart;
+import Gráficos.FXPieChart;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,6 +20,9 @@ public abstract class UiPerfil {
     protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses, comboBoxInicioAnios, comboBoxFinAnios;
     protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses, labelAnioInicio, labelAnioFin;
     protected JButton botonConsultar;
+    static FXPieChart PieChart;
+    static FXBarChart BarChart;
+    static FXLineChart LineChart;
 
     public UiPerfil() {
 

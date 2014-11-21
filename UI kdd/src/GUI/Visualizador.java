@@ -1,13 +1,13 @@
 package GUI;
 
 import java.awt.FlowLayout;
-import javafx.embed.swing.JFXPanel;
 import javax.swing.JComboBox;
 
 public class Visualizador extends javax.swing.JFrame {
 
     String arregloPreguntas[][];
     JComboBox comboBoxPreguntas;
+    static boolean estadoInicial = true;
 
     public Visualizador() {
         super("Colmovil");
@@ -50,12 +50,12 @@ public class Visualizador extends javax.swing.JFrame {
     }
 
     private void asignarComponentes(int codigoDePregunta) {
-
         //según la pregunta que se elija asignamos unos componentes a la interfaz
-        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 9|| codigoDePregunta == 8) {
+        if (codigoDePregunta == 1 || codigoDePregunta == 2 || codigoDePregunta == 3 || codigoDePregunta == 4 || codigoDePregunta == 5 || codigoDePregunta == 6 || codigoDePregunta == 7 || codigoDePregunta == 9 || codigoDePregunta == 8) {
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
+
                 asignaComponentes(abandono);
 
             } else if (codigoDePregunta == 2) {

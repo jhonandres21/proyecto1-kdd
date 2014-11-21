@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Controlador.ControladorPerfilUsuarioServicioRoamming;
 import Controlador.ControladorTendenciaPlanVoz;
 import Gráficos.FXBarChart;
 import Gráficos.FXLineChart;
@@ -47,9 +46,17 @@ public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
             }
 
             if (!dataLlamadas.isEmpty()) {
-                FXPieChart PieChart = new FXPieChart("Tendencia Llamadas Mes-a-Mes", anios, dataLlamadas);
-                FXBarChart BarChart = new FXBarChart("Tendencia Llamadas Mes-a-Mes", "Años", anios, "Llamadas", dataLlamadas, "Llamadas");
-                FXLineChart LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "Años", anios, "Llamadas", dataLlamadas, "Llamadas");
+                if (!Visualizador.estadoInicial) {
+                    System.out.println("Update");
+                    PieChart.addData("Tendencia Llamadas Mes-a-Mes", anios, dataLlamadas);
+                    BarChart.addData(anios, dataLlamadas);
+                    LineChart.addData(anios, dataLlamadas);
+                } else {
+                    Visualizador.estadoInicial = false;
+                    FXPieChart PieChart = new FXPieChart("Tendencia Llamadas Mes-a-Mes", anios, dataLlamadas);
+                    FXBarChart BarChart = new FXBarChart("Tendencia Llamadas Mes-a-Mes", "Años", anios, "Llamadas", dataLlamadas, "Llamadas");
+                    FXLineChart LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "Años", anios, "Llamadas", dataLlamadas, "Llamadas");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

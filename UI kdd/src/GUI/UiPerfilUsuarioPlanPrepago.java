@@ -51,9 +51,17 @@ public class UiPerfilUsuarioPlanPrepago extends UiPerfil {
             meses.add("Diciembre");
 
             if (!dataContratos.isEmpty()) {
-                FXPieChart PieChart = new FXPieChart("Contratos Planes Prepago Mes-a-Mes", meses, dataContratos);
-                FXBarChart BarChart = new FXBarChart("Contratos Planes Prepago Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Prepag");
-                FXLineChart LineChart = new FXLineChart("Contratos Planes Prepago Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Prepag");
+                if (!Visualizador.estadoInicial) {
+                    System.out.println("Update");
+                    PieChart.addData("Contratos Planes Prepago Mes-a-Mes", meses, dataContratos);
+                    BarChart.addData(meses, dataContratos);
+                    LineChart.addData(meses, dataContratos);
+                } else {
+                    Visualizador.estadoInicial = false;
+                    PieChart = new FXPieChart("Contratos Planes Prepago Mes-a-Mes", meses, dataContratos);
+                    BarChart = new FXBarChart("Contratos Planes Prepago Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Prepag");
+                    LineChart = new FXLineChart("Contratos Planes Prepago Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Prepag");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

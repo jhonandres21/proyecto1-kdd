@@ -51,9 +51,17 @@ public class UiPerfilUsuarioServicioRoamming extends UiPerfil {
             meses.add("Diciembre");
 
             if (!dataContratos.isEmpty()) {
-                FXPieChart PieChart = new FXPieChart("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
-                FXBarChart BarChart = new FXBarChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
-                FXLineChart LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
+                if (!Visualizador.estadoInicial) {
+                    System.out.println("Update");
+                    PieChart.addData("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
+                    BarChart.addData(meses, dataContratos);
+                    LineChart.addData(meses, dataContratos);
+                } else {
+                    Visualizador.estadoInicial = false;
+                    PieChart = new FXPieChart("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
+                    BarChart = new FXBarChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
+                    LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

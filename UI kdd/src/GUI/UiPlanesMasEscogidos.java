@@ -35,11 +35,11 @@ public class UiPlanesMasEscogidos extends UiPerfil {
             datosPlanes = controladorPlanesMasEscogidos.obtenerPlanes(datos, prepago, postpago, corporativo);
 
             ArrayList<String> parametros = new ArrayList();
-            
-            if(datosPlanes.get(datosPlanes.size()-1) == 1){
+
+            if (datosPlanes.get(datosPlanes.size() - 1) == 1) {
                 parametros.add("Planes Datos");
                 parametros.add("Planes Voz");
-            }else if(datosPlanes.get(datosPlanes.size()-1) == 2){
+            } else if (datosPlanes.get(datosPlanes.size() - 1) == 2) {
                 parametros.add("Datos 5Megas");
                 parametros.add("Datos 50Megas");
                 parametros.add("Datos 100Megas");
@@ -48,40 +48,40 @@ public class UiPlanesMasEscogidos extends UiPerfil {
                 parametros.add("Datos Estandar X Kb");
                 parametros.add("Datos Premium X Kb");
                 parametros.add("Datos Gold X Kb");
-            }else if(datosPlanes.get(datosPlanes.size()-1) == 3){
+            } else if (datosPlanes.get(datosPlanes.size() - 1) == 3) {
                 parametros.add("Plan Casual");
                 parametros.add("Plan Estandar");
                 parametros.add("Plan Premium");
                 parametros.add("Plan Familia");
                 parametros.add("Plan Gold");
-                parametros.add("Plan Total_1600");               
+                parametros.add("Plan Total_1600");
                 parametros.add("Plan Total_600");
                 parametros.add("Plan Casual Abierto");
                 parametros.add("Plan Estandar Abierto");
-                parametros.add("Plan Premium Abierto");       
+                parametros.add("Plan Premium Abierto");
                 parametros.add("Plan Familia Abierto");
                 parametros.add("Plan Gold Abierto");
                 parametros.add("Plan Total_1600 Abierto");
-                parametros.add("Plan Total_600 Abierto");                
-            }else if(datosPlanes.get(datosPlanes.size()-1) == 4){
+                parametros.add("Plan Total_600 Abierto");
+            } else if (datosPlanes.get(datosPlanes.size() - 1) == 4) {
                 parametros.add("Plan Estandar Corporativo");
                 parametros.add("Plan Premium Corporativo");
                 parametros.add("Plan Gold Corporativo");
-            }else if(datosPlanes.get(datosPlanes.size()-1) == 5){
+            } else if (datosPlanes.get(datosPlanes.size() - 1) == 5) {
                 parametros.add("Prepago");
                 parametros.add("Postpago");
-            }else if(datosPlanes.get(datosPlanes.size()-1) == 6){
+            } else if (datosPlanes.get(datosPlanes.size() - 1) == 6) {
                 parametros.add("Prepago");
                 parametros.add("Plan Casual");
                 parametros.add("Plan Estandar");
                 parametros.add("Plan Premium");
                 parametros.add("Plan Familia");
                 parametros.add("Plan Gold");
-                parametros.add("Plan Total_1600");               
+                parametros.add("Plan Total_1600");
                 parametros.add("Plan Total_600");
                 parametros.add("Plan Casual Abierto");
                 parametros.add("Plan Estandar Abierto");
-                parametros.add("Plan Premium Abierto");       
+                parametros.add("Plan Premium Abierto");
                 parametros.add("Plan Familia Abierto");
                 parametros.add("Plan Gold Abierto");
                 parametros.add("Plan Total_1600 Abierto");
@@ -90,14 +90,19 @@ public class UiPlanesMasEscogidos extends UiPerfil {
                 parametros.add("Plan Premium Corporativo");
                 parametros.add("Plan Gold Corporativo");
             }
-            
-            FXPieChart PieChart;
-            FXBarChart BarChart;
 
             if (!datosPlanes.isEmpty()) {
-                PieChart = new FXPieChart("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
-                BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
-                FXLineChart LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                if (!Visualizador.estadoInicial) {
+                    System.out.println("Update");
+                    PieChart.addData("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
+                    BarChart.addData(parametros, datosPlanes);
+                    LineChart.addData(parametros, datosPlanes);
+                } else {
+                    Visualizador.estadoInicial = false;
+                    PieChart = new FXPieChart("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
+                    BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                    LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

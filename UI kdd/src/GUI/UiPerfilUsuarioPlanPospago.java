@@ -51,9 +51,17 @@ public class UiPerfilUsuarioPlanPospago extends UiPerfil {
             meses.add("Diciembre");
 
             if (!dataContratos.isEmpty()) {
-                FXPieChart PieChart = new FXPieChart("Contratos Planes Pospago Mes-a-Mes", meses, dataContratos);
-                FXBarChart BarChart = new FXBarChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
-                FXLineChart LineChart = new FXLineChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
+                if (!Visualizador.estadoInicial) {
+                    System.out.println("Update");
+                    PieChart.addData("Contratos Planes Pospago Mes-a-Mes", meses, dataContratos);
+                    BarChart.addData(meses, dataContratos);
+                    LineChart.addData(meses, dataContratos);
+                } else {
+                    Visualizador.estadoInicial = false;
+                    PieChart = new FXPieChart("Contratos Planes Pospago Mes-a-Mes", meses, dataContratos);
+                    BarChart = new FXBarChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
+                    LineChart = new FXLineChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }
