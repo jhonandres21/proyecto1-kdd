@@ -26,9 +26,9 @@ import javafx.scene.paint.Color;
  */
 public class FXPieChart {
 
-    static String chartName;
-    static ArrayList<String> tags;
-    static ArrayList<Integer> values;
+    final String chartName;
+    final ArrayList<String> tags;
+    final ArrayList<Integer> values;
     static ObservableList<PieChart.Data> pieChartData;
     static PieChart chart;
 
@@ -43,25 +43,24 @@ public class FXPieChart {
         PanelVisualizador.setVisible(true);
         Visualizador.panelPestanas.removeAll();
         Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
-        Visualizador.panelPestanas.removeAll();
-        Visualizador.panelPestanas.addTab("Pie Chart", fxPanel);
         System.out.println("Se prepara PieChart");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                initFX(fxPanel);
+                initFX(fxPanel, chartName, tags, values);
+
             }
         });
     }
 
-    private static void initFX(JFXPanel fxPanel) {
+    private static void initFX(JFXPanel fxPanel, String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
         // This method is invoked on the JavaFX thread
         System.out.println("Se inicia PieChart");
-        Scene scene = createScene();
+        Scene scene = createScene(chartName, tags, values);
         fxPanel.setScene(scene);
     }
 
-    private static Scene createScene() {
+    private static Scene createScene(String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
         System.out.println("Se dibuja PieChart");
         Group root = new Group();
         Scene scene = new Scene(root);
@@ -103,7 +102,7 @@ public class FXPieChart {
 
     //updates existing Data-Object if name matches
     public void addData(String chartName, ArrayList<String> addTags, final ArrayList<Integer> addValues) {
-        
+
         for (int i = 0; i < addTags.size(); i++) {
             for (Data d : pieChartData) {
                 if (d.getName().equals(addTags.get(i))) {
