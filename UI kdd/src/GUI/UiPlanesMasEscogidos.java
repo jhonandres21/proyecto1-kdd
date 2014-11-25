@@ -7,6 +7,7 @@ import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -92,17 +93,28 @@ public class UiPlanesMasEscogidos extends UiPerfil {
             }
 
             if (!datosPlanes.isEmpty()) {
-                if (!Visualizador.estadoInicial) {
+                /*if (!Visualizador.estadoInicial) {
                     System.out.println("Update");
-                    PieChart.addData("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
-                    BarChart.addData(parametros, datosPlanes);
-                    LineChart.addData(parametros, datosPlanes);
-                } else {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PieChart.addData("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
+                            BarChart.addData(parametros, datosPlanes);
+                            LineChart.addData(parametros, datosPlanes);
+                        }
+                    });
+
+                } else {*/
                     Visualizador.estadoInicial = false;
-                    PieChart = new FXPieChart("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
-                    BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
-                    LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
-                }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PieChart = new FXPieChart("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
+                            BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                            LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                        }
+                    });
+                //}
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

@@ -72,6 +72,7 @@ public class FXPieChart {
         String name = chartName;
         chart = new PieChart(pieChartData);
         chart.setTitle(name);
+        chart.setLegendVisible(false);
 
         Label caption = new Label("");
         caption.setTextFill(Color.WHITE);
@@ -108,10 +109,15 @@ public class FXPieChart {
                 if (d.getName().equals(addTags.get(i))) {
                     d.setPieValue(addValues.get(i));
                     return;
+                } else {
+                    pieChartData.get(i).setName(addTags.get(i));
+                    pieChartData.get(i).setPieValue(addValues.get(i));
+                    return;
                 }
             }
             naiveAddData(addTags.get(i), addValues.get(i));
         }
+
     }
 
 }

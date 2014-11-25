@@ -69,7 +69,7 @@ public class DaoPerfilUsuarioAbandonaColmovil {
 
             while (resultSet.next()) {
 
-                String temp[] = new String[9];
+                String temp[] = new String[2];
                 temp[0] = "" + resultSet.getObject(1);
                 temp[1] = "" + resultSet.getObject(2);
                 /*temp[2] = "" + resultSet.getObject(3);

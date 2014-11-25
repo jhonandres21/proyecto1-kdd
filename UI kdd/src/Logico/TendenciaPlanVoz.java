@@ -11,28 +11,19 @@ package Logico;
  */
 public class TendenciaPlanVoz {
     
-    int anioInicio, anioFin;
+    String anioInicio;
 
     public TendenciaPlanVoz() {
         
-        anioInicio = 0;
-        anioFin = 0;
+        anioInicio = "";
     }
 
-    public int getAnioInicio() {
+    public String getAnioInicio() {
         return anioInicio;
     }
 
-    public void setAnioInicio(int anioInicio) {
+    public void setAnioInicio(String anioInicio) {
         this.anioInicio = anioInicio;
-    }
-
-    public int getAnioFin() {
-        return anioFin;
-    }
-
-    public void setAnioFin(int anioFin) {
-        this.anioFin = anioFin;
     }
     
 }

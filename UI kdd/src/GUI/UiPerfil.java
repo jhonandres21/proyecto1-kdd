@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
 public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino, checkBoxDatos, checkBoxPrepagoVoz, checkBoxPostpagoVoz, checkBoxCorporativo;
-    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses, comboBoxInicioAnios, comboBoxFinAnios;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses, labelAnioInicio, labelAnioFin;
+    protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses, comboBoxInicioAnios;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses, labelAnioInicio;
     protected JButton botonConsultar;
     static FXPieChart PieChart;
     static FXBarChart BarChart;
@@ -43,7 +43,6 @@ public abstract class UiPerfil {
         labelMeses = new JLabel();
         inicializarJLabel(labelMeses, "Meses:");
         comboBoxInicioAnios = new JComboBox();
-        comboBoxFinAnios = new JComboBox();
 
         labelEstadoCivil = new JLabel();
         inicializarJLabel(labelEstadoCivil, "Estado Civil:");
@@ -64,10 +63,7 @@ public abstract class UiPerfil {
         inicializarJLabel(labelPlanDeDatos, " Plan de Datos:");
 
         labelAnioInicio = new JLabel();
-        inicializarJLabel(labelAnioInicio, " Año Inicio:");
-
-        labelAnioFin = new JLabel();
-        inicializarJLabel(labelAnioFin, " Año Fin:");
+        inicializarJLabel(labelAnioInicio, " Escoja año:");
 
         checkBoxDatos = new JCheckBox("Sí");
         checkBoxDatos.setSelected(true);
@@ -102,7 +98,6 @@ public abstract class UiPerfil {
         inicializarOperador(comboBoxOperador);
         inicializarMeses(comboBoxMeses);
         inicializarAnios(comboBoxInicioAnios);
-        inicializarAnios(comboBoxFinAnios);
     }
 
     protected void inicializarJLabel(JLabel label, String texto) {
@@ -272,32 +267,6 @@ public abstract class UiPerfil {
         return true;
     }
 
-    protected boolean evaluarRangoAnios() {
-
-        if (!comboBoxInicioAnios.getSelectedItem().equals("Escoger una Opción")) {
-
-            if (comboBoxFinAnios.getSelectedItem().equals("Escoger una Opción")) {
-
-                JOptionPane.showMessageDialog(null, "Debe escoger un valor para el rango el Año");
-                return false;
-
-            } else {
-
-                int valorInicioAnio = Integer.parseInt("" + comboBoxInicioAnios.getSelectedItem());
-                int valorFinAnio = Integer.parseInt("" + comboBoxFinAnios.getSelectedItem());
-
-                if (valorFinAnio < valorInicioAnio) {
-                    JOptionPane.showMessageDialog(null, "Debe escoger un valor MAYOR o IGUAL para el rango del Año");
-                    return false;
-                } else {
-                    return true;
-                }
-            }//fin else
-        }
-
-        return true;
-    }
-
     protected boolean evaluarPlanesEscogidos() {
 
         if (checkBoxDatos.isSelected() && checkBoxCorporativo.isSelected()
@@ -399,28 +368,12 @@ public abstract class UiPerfil {
         this.comboBoxInicioAnios = comboBoxInicioAnios;
     }
 
-    public JComboBox getComboBoxFinAnios() {
-        return comboBoxFinAnios;
-    }
-
-    public void setComboBoxFinAnios(JComboBox comboBoxFinAnios) {
-        this.comboBoxFinAnios = comboBoxFinAnios;
-    }
-
     public JLabel getLabelAnioInicio() {
         return labelAnioInicio;
     }
 
     public void setLabelAnioInicio(JLabel labelAnioInicio) {
         this.labelAnioInicio = labelAnioInicio;
-    }
-
-    public JLabel getLabelAnioFin() {
-        return labelAnioFin;
-    }
-
-    public void setLabelAnioFin(JLabel labelAnioFin) {
-        this.labelAnioFin = labelAnioFin;
     }
 
     public JLabel getLabelOperador() {

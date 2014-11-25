@@ -6,12 +6,14 @@
 package GUI;
 
 import Controlador.ControladorTendenciaPlanVoz;
+import static GUI.UiPerfil.PieChart;
 import Gráficos.FXBarChart;
 import Gráficos.FXLineChart;
 import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -20,7 +22,6 @@ import javax.swing.JOptionPane;
 public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
 
     ControladorTendenciaPlanVoz controladorTendenciaPLanVoz;
-    ArrayList<Integer> dataLlamadas;
 
     public UiPerfilUsuarioTendenciaPlanVoz() {
 
@@ -31,35 +32,55 @@ public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
     void hacerConsulta(ActionEvent evt) {
 
         //verificamos que el rango de estrato sea correcto
-        if (evaluarRangoAnios()) {
+        String inicioAnio = "" + comboBoxInicioAnios.getSelectedItem();
 
-            String inicioAnio = "" + comboBoxInicioAnios.getSelectedItem();
-            String finAnio = "" + comboBoxFinAnios.getSelectedItem();
-            int inicio = Integer.parseInt(inicioAnio);
-            int fin = Integer.parseInt(finAnio);
-
-            dataLlamadas = controladorTendenciaPLanVoz.getPerfiles(inicioAnio, finAnio);
-
-            ArrayList<String> anios = new ArrayList();
-            for (int i = inicio; i <= fin; i++) {
-                anios.add(i + "");
+        ArrayList<Integer> dataLlamadas = controladorTendenciaPLanVoz.getPerfiles(inicioAnio);
+        System.out.println(dataLlamadas.size());
+        ArrayList<String> dataString = new ArrayList();
+        if (dataLlamadas.size() == 12) {
+            System.out.println("meses");
+            dataString.add("Enero");
+            dataString.add("Febrero");
+            dataString.add("Marzo");
+            dataString.add("Abril");
+            dataString.add("Mayo");
+            dataString.add("Junio");
+            dataString.add("Julio");
+            dataString.add("Agosto");
+            dataString.add("Septiembre");
+            dataString.add("Octubre");
+            dataString.add("Noviembre");
+            dataString.add("Diciembre");
+        } else {
+            for (int i = 2000; i <= 2014; i++) {
+                dataString.add(i + "");
             }
-
-            if (!dataLlamadas.isEmpty()) {
-                if (!Visualizador.estadoInicial) {
-                    System.out.println("Update");
-                    PieChart.addData("Tendencia Llamadas Mes-a-Mes", anios, dataLlamadas);
-                    BarChart.addData(anios, dataLlamadas);
-                    LineChart.addData(anios, dataLlamadas);
-                } else {
-                    Visualizador.estadoInicial = false;
-                    FXPieChart PieChart = new FXPieChart("Tendencia Llamadas Mes-a-Mes", anios, dataLlamadas);
-                    FXBarChart BarChart = new FXBarChart("Tendencia Llamadas Mes-a-Mes", "Años", anios, "Llamadas", dataLlamadas, "Llamadas");
-                    FXLineChart LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "Años", anios, "Llamadas", dataLlamadas, "Llamadas");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha extraido la información");
-            }
+        }
+        System.out.println("Tags size: " + dataString + " Values size: " + dataLlamadas);
+        if (!dataLlamadas.isEmpty()) {
+            /*if (!Visualizador.estadoInicial) {
+                System.out.println("Update");
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        PieChart.addData("Tendencia Llamadas Mes-a-Mes", dataString, dataLlamadas);
+                        BarChart.addData(dataString, dataLlamadas);
+                        LineChart.addData(dataString, dataLlamadas);
+                    }
+                });
+            } else {*/
+                Visualizador.estadoInicial = false;
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        PieChart = new FXPieChart("Tendencia Llamadas Mes-a-Mes", dataString, dataLlamadas);
+                        BarChart = new FXBarChart("Tendencia Llamadas Mes-a-Mes", "Años", dataString, "Llamadas", dataLlamadas, "Llamadas");
+                        LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "Años", dataString, "Llamadas", dataLlamadas, "Llamadas");
+                    }
+                });
+            //}
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }
 
     }

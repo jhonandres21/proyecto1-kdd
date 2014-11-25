@@ -8,6 +8,7 @@ import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -50,17 +51,29 @@ public class UiOperadoresMasFrecuentes extends UiPerfil {
         operadores.add("Vodafone");
 
         if (!datosOperadores.isEmpty()) {
-            if (!Visualizador.estadoInicial) {
+            /*if (!Visualizador.estadoInicial) {
                 System.out.println("Update");
-                PieChart.addData("Operadores Mas Frecuentes", operadores, datosOperadores);
-                BarChart.addData(operadores, datosOperadores);
-                LineChart.addData(operadores, datosOperadores);
-            } else {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        PieChart.addData("Operadores Mas Frecuentes", operadores, datosOperadores);
+                        BarChart.addData(operadores, datosOperadores);
+                        LineChart.addData(operadores, datosOperadores);
+                    }
+                });
+
+            } else {*/
                 Visualizador.estadoInicial = false;
-                PieChart = new FXPieChart("Operadores Mas Frecuentes", operadores, datosOperadores);
-                BarChart = new FXBarChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica de Barras");
-                FXLineChart LineChart = new FXLineChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica Lineal");
-            }
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        PieChart = new FXPieChart("Operadores Mas Frecuentes", operadores, datosOperadores);
+                        BarChart = new FXBarChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica de Barras");
+                        FXLineChart LineChart = new FXLineChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica Lineal");
+                    }
+                });
+
+            //}
         } else {
             JOptionPane.showMessageDialog(null, "No se ha extraido la información");
         }

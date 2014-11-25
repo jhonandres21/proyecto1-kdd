@@ -1,12 +1,14 @@
 package GUI;
 
 import Controlador.ControladorPerfilUsuarioAbandonaColmovil;
+import static GUI.UiPerfil.PieChart;
 import Gráficos.FXBarChart;
 import Gráficos.FXLineChart;
 import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -50,17 +52,29 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
             meses.add("Diciembre");
 
             if (!dataAbandonos.isEmpty()) {
-                if (!Visualizador.estadoInicial) {
+                /*if (!Visualizador.estadoInicial) {
                     System.out.println("Update");
-                    PieChart.addData("Abandonos Mes-a-Mes", meses, dataAbandonos);
-                    BarChart.addData(meses, dataAbandonos);
-                    LineChart.addData(meses, dataAbandonos);
-                } else {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PieChart.addData("Abandonos Mes-a-Mes", meses, dataAbandonos);
+                            BarChart.addData(meses, dataAbandonos);
+                            LineChart.addData(meses, dataAbandonos);
+                        }
+                    });
+
+                } else {*/
                     Visualizador.estadoInicial = false;
-                    PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
-                    BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
-                    LineChart = new FXLineChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
-                }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
+                            BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
+                            LineChart = new FXLineChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
+                        }
+                    });
+
+                //}
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

@@ -29,17 +29,11 @@ public class DaoTendenciaPlanVoz {
     public String prepararRestriccionesClausulaWherePerfiles(TendenciaPlanVoz tendencia) {
 
         String where = "";
+        if (!tendencia.getAnioInicio().equals("Escoger una Opción")) {
 
-        int rango = tendencia.getAnioFin() - tendencia.getAnioInicio();
-        for (int i = tendencia.getAnioInicio(); i <= tendencia.getAnioFin(); i++) {
-            if (i == tendencia.getAnioFin()) {
-                where += "bodega.fecha.anio = " + i;
-            } else {
-                where += "bodega.fecha.anio = " + i + " OR ";
-            }
+            where += " AND bodega.fecha.anio = " + tendencia.getAnioInicio();
+
         }
-
-        System.out.println("Este es el where: WHERE " + where);
 
         return where;
     }
@@ -56,9 +50,9 @@ public class DaoTendenciaPlanVoz {
         try {
 
             sentencia = connection.createStatement();
-            String consulta = "SELECT bodega.llamada.fecha, bodega.fecha.anio FROM bodega.llamada,  bodega.demografia, bodega.fecha\n"
+            String consulta = "SELECT bodega.llamada.fecha, bodega.fecha.anio, bodega.fecha.mes FROM bodega.llamada,  bodega.demografia, bodega.fecha\n"
                     + "WHERE llamada.demografia = demografia.sk_demografia"
-                    + " AND llamada.fecha = fecha.sk_fecha and(" + where + ");";
+                    + " AND llamada.fecha = fecha.sk_fecha" + where + ";";
 
             System.out.println("Consulta: " + consulta);
 
@@ -66,11 +60,11 @@ public class DaoTendenciaPlanVoz {
 
             while (resultSet.next()) {
 
-                String temp[] = new String[9];
+                String temp[] = new String[3];
                 temp[0] = "" + resultSet.getObject(1);
                 temp[1] = "" + resultSet.getObject(2);
-                /*temp[2] = "" + resultSet.getObject(3);
-                 temp[3] = "" + resultSet.getObject(4);
+                temp[2] = "" + resultSet.getObject(3);
+                /*temp[3] = "" + resultSet.getObject(4);
                  temp[4] = "" + resultSet.getObject(5);
                  temp[5] = "" + resultSet.getObject(6);
                  temp[6] = "" + resultSet.getObject(7);

@@ -7,6 +7,7 @@ import Gráficos.FXPieChart;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -51,17 +52,29 @@ public class UiPerfilUsuarioServicioRoamming extends UiPerfil {
             meses.add("Diciembre");
 
             if (!dataContratos.isEmpty()) {
-                if (!Visualizador.estadoInicial) {
+                /*if (!Visualizador.estadoInicial) {
                     System.out.println("Update");
-                    PieChart.addData("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
-                    BarChart.addData(meses, dataContratos);
-                    LineChart.addData(meses, dataContratos);
-                } else {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PieChart.addData("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
+                            BarChart.addData(meses, dataContratos);
+                            LineChart.addData(meses, dataContratos);
+                        }
+                    });
+
+                } else {*/
                     Visualizador.estadoInicial = false;
-                    PieChart = new FXPieChart("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
-                    BarChart = new FXBarChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
-                    LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
-                }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PieChart = new FXPieChart("Uso Roamming Prepago Mes-a-Mes", meses, dataContratos);
+                            BarChart = new FXBarChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
+                            LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Roamming");
+                        }
+                    });
+
+                //}
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

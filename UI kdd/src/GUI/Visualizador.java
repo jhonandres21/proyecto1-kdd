@@ -55,7 +55,6 @@ public class Visualizador extends javax.swing.JFrame {
 
             if (codigoDePregunta == 1) {
                 UiPerfilUsuarioAbandonaColmovil abandono = new UiPerfilUsuarioAbandonaColmovil();
-
                 asignaComponentes(abandono);
 
             } else if (codigoDePregunta == 2) {
@@ -155,9 +154,6 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getLabelAnioInicio());
         panelOpciones.add(perfil.getLabelVacia());
         panelOpciones.add(perfil.getComboBoxInicioAnios());
-        panelOpciones.add(perfil.getLabelAnioFin());
-        panelOpciones.add(perfil.getLabelVacia());
-        panelOpciones.add(perfil.getComboBoxFinAnios());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
@@ -263,7 +259,6 @@ public class Visualizador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void preguntasActionPerformed(java.awt.event.ActionEvent evt) {
-
         String preguntaSeleccionada = "" + comboBoxPreguntas.getSelectedItem();
         int codigoDePregunta = 0;
 
