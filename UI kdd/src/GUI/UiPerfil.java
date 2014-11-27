@@ -4,11 +4,13 @@ import Gráficos.FXBarChart;
 import Gráficos.FXLineChart;
 import Gráficos.FXPieChart;
 import java.awt.Dimension;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  * @author john En esta clase se van a poner todos los componentes de la
@@ -18,8 +20,22 @@ public abstract class UiPerfil {
 
     protected JCheckBox checkBoxSexoFemenino, checkBoxSexoMasculino, checkBoxDatos, checkBoxPrepagoVoz, checkBoxPostpagoVoz, checkBoxCorporativo;
     protected JComboBox comboBoxEstadoCivil, comboBoxInicioEstrato, comboBoxFinEstrato, comboBoxOperador, comboBoxMeses, comboBoxInicioAnios;
-    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses, labelAnioInicio;
+    protected JLabel labelSexo, labelEstadoCivil, labelInicioEstrato, labelFinEstrato, labelVacia, labelOperador, labelPlanDeDatos, labelPlanDeVoz, labelMeses, labelAnioInicio, labelGrafico;
     protected JButton botonConsultar;
+    protected ButtonGroup bg;
+    protected JRadioButton pieRadio, barRadio, lineRadio;
+    static protected boolean perfilesActivo = false;
+    static protected boolean perfilesPie = false, perfilesBar = false, perfilesLine = false;
+    static protected boolean operadoresActivo = false;
+    static protected boolean operadoresPie = false, operadoresBar = false, operadoresLine = false;
+    static protected boolean franjasActivo = false;
+    static protected boolean franjasPie = false, franjasBar = false, franjasLine = false;
+    static protected boolean tendenciaAniosActivo = false, tendenciaMesesActivo = false;
+    static protected boolean tendenciaAniosPie = false, tendenciaAniosBar = false, tendenciaAniosLine = false, tendenciaMesesPie = false, tendenciaMesesBar = false, tendenciaMesesLine = false;
+    static protected boolean datosYVozActivo = false, vozActivo = false, datosActivo = false, preVsPosActivo = false, corpActivo = false, preActivo = false, posActivo = false;
+    static protected boolean datosYVozPie = false, datosYVozBar = false, datosYVozLine = false, vozPie = false, vozBar = false, vozLine = false, datosPie = false, datosBar = false, datosLine = false;
+    static protected boolean preVsPosPie = false, preVsPosBar = false, preVsPosLine = false, corpPie = false, corpBar = false, corpLine = false, prePie = false, preBar = false, preLine = false, posPie = false, posBar = false, posLine = false;
+    
     static FXPieChart PieChart;
     static FXBarChart BarChart;
     static FXLineChart LineChart;
@@ -33,13 +49,26 @@ public abstract class UiPerfil {
         checkBoxSexoFemenino.setSelected(true);
         checkBoxSexoMasculino = new JCheckBox("Masculino");
         checkBoxSexoMasculino.setSelected(true);
+        
+        pieRadio = new JRadioButton("Pie");
+        pieRadio.setSelected(false);
+        barRadio = new JRadioButton("Bar");
+        barRadio.setSelected(false);
+        lineRadio = new JRadioButton("Line");
+        lineRadio.setSelected(false);
+        
+        bg = new ButtonGroup();
+        bg.add(pieRadio);
+        bg.add(barRadio);
+        bg.add(lineRadio);
+        
 
         comboBoxEstadoCivil = new JComboBox();
         comboBoxInicioEstrato = new JComboBox();
         comboBoxFinEstrato = new JComboBox();
         comboBoxOperador = new JComboBox();
         comboBoxMeses = new JComboBox();
-        
+
         labelMeses = new JLabel();
         inicializarJLabel(labelMeses, "Meses:");
         comboBoxInicioAnios = new JComboBox();
@@ -64,6 +93,9 @@ public abstract class UiPerfil {
 
         labelAnioInicio = new JLabel();
         inicializarJLabel(labelAnioInicio, " Escoja año:");
+        
+        labelGrafico = new JLabel();
+        inicializarJLabel(labelGrafico, "Escoja tipo de grafico");
 
         checkBoxDatos = new JCheckBox("Sí");
         checkBoxDatos.setSelected(true);
@@ -116,6 +148,15 @@ public abstract class UiPerfil {
         checkBox.setMinimumSize(new Dimension(170, 40));
         checkBox.setMaximumSize(new Dimension(170, 40));
         checkBox.setMargin(new java.awt.Insets(0, 0, 5, 0));
+    }
+
+    protected void inicializarRadioButton(JRadioButton radioButton) {
+
+        radioButton.setVisible(true);
+        radioButton.setSize(170, 40);
+        radioButton.setMinimumSize(new Dimension(170, 40));
+        radioButton.setMaximumSize(new Dimension(170, 40));
+        radioButton.setMargin(new java.awt.Insets(0, 0, 5, 0));
     }
 
     protected void inicializarEstadoCivil(JComboBox estadoCivil) {
@@ -185,7 +226,7 @@ public abstract class UiPerfil {
         }
     }
 
-        protected void inicializarMeses(JComboBox entradaMeses) {
+    protected void inicializarMeses(JComboBox entradaMeses) {
 
         entradaMeses.setVisible(true);
         entradaMeses.setMaximumSize(new Dimension(200, 30));
@@ -210,7 +251,6 @@ public abstract class UiPerfil {
         }
     }
 
-    
     protected void inicializarAnios(JComboBox anios) {
 
         anios.setVisible(true);
@@ -419,4 +459,40 @@ public abstract class UiPerfil {
     public void setComboBoxMeses(JComboBox comboBoxMeses) {
         this.comboBoxMeses = comboBoxMeses;
     }
+
+    public JLabel getLabelGrafico() {
+        return labelGrafico;
+    }
+
+    public void setLabelGrafico(JLabel labelGrafico) {
+        this.labelGrafico = labelGrafico;
+    }
+
+    public JRadioButton getPieRadio() {
+        return pieRadio;
+    }
+
+    public void setPieRadio(JRadioButton pieRadio) {
+        this.pieRadio = pieRadio;
+    }
+
+    public JRadioButton getBarRadio() {
+        return barRadio;
+    }
+
+    public void setBarRadio(JRadioButton barRadio) {
+        this.barRadio = barRadio;
+    }
+
+    public JRadioButton getLineRadio() {
+        return lineRadio;
+    }
+
+    public void setLineRadio(JRadioButton lineRadio) {
+        this.lineRadio = lineRadio;
+    }
+    
+    
+    
+    
 }

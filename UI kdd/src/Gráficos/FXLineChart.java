@@ -18,17 +18,19 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Juan Olaya O
  */
-public class FXLineChart {
+public class FXLineChart extends JPanel{
 
     final String chartName, valuesName, tagName, legend;
     final ArrayList<String> tags;
     final ArrayList<Integer> values;
     static ObservableList<XYChart.Data> lineChartData;
+    static JFXPanel fxPanel;
 
     public FXLineChart(final String chartName, final String tagName, final ArrayList<String> tags, final String valuesName, final ArrayList<Integer> values, final String legend) {
 
@@ -39,18 +41,20 @@ public class FXLineChart {
         this.tagName = tagName;
         this.legend = legend;
 
-        final JFXPanel fxPanel = new JFXPanel();
-        Visualizador.panelPestanas.addTab("Line Chart", fxPanel);
-
+        fxPanel = new JFXPanel();
+        add(fxPanel);
+        //Visualizador.panelPestanas.removeAll();
+        //Visualizador.panelPestanas.addTab("Line Chart", fxPanel);
+        System.out.println("Se prepara Line chart");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                initFX(fxPanel, chartName, tags, tagName, values, valuesName, legend);
+                initFX(chartName, tags, tagName, values, valuesName, legend);
             }
         });
     }
 
-    private static void initFX(JFXPanel fxPanel, String chartName, ArrayList<String> tags, String tagName, ArrayList<Integer> values, String valuesName, String legend) {
+    private static void initFX(String chartName, ArrayList<String> tags, String tagName, ArrayList<Integer> values, String valuesName, String legend) {
         // This method is invoked on the JavaFX thread
         Scene scene = createScene(chartName, tags, tagName, values, valuesName, legend);
         fxPanel.setScene(scene);

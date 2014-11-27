@@ -19,18 +19,20 @@ import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Juan Olaya O
  */
-public class FXPieChart {
+public class FXPieChart extends JPanel{
 
     final String chartName;
     final ArrayList<String> tags;
     final ArrayList<Integer> values;
     static ObservableList<PieChart.Data> pieChartData;
     static PieChart chart;
+    static JFXPanel fxPanel;
 
     public FXPieChart(final String chartName, final ArrayList<String> tags, final ArrayList<Integer> values) {
 
@@ -38,22 +40,21 @@ public class FXPieChart {
         this.values = values;
         this.chartName = chartName;
 
-        final JFXPanel fxPanel = new JFXPanel();
-        JFXPanel PanelVisualizador = fxPanel;
-        PanelVisualizador.setVisible(true);
-        Visualizador.panelPestanas.removeAll();
-        Visualizador.panelPestanas.addTab("Pie Chart", PanelVisualizador);
+        fxPanel = new JFXPanel();
+        add(fxPanel);
+        //Visualizador.jTabbedPane1.removeAll();
+        //Visualizador.jTabbedPane1.addTab("Pie Chart", fxPanel);
         System.out.println("Se prepara PieChart");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                initFX(fxPanel, chartName, tags, values);
+                initFX(chartName, tags, values);
 
             }
         });
     }
 
-    private static void initFX(JFXPanel fxPanel, String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
+    private static void initFX(String chartName, ArrayList<String> tags, ArrayList<Integer> values) {
         // This method is invoked on the JavaFX thread
         System.out.println("Se inicia PieChart");
         Scene scene = createScene(chartName, tags, values);
@@ -102,16 +103,12 @@ public class FXPieChart {
     }
 
     //updates existing Data-Object if name matches
-    public void addData(String chartName, ArrayList<String> addTags, final ArrayList<Integer> addValues) {
+    public void addData(ArrayList<String> addTags, final ArrayList<Integer> addValues) {
 
         for (int i = 0; i < addTags.size(); i++) {
             for (Data d : pieChartData) {
                 if (d.getName().equals(addTags.get(i))) {
                     d.setPieValue(addValues.get(i));
-                    return;
-                } else {
-                    pieChartData.get(i).setName(addTags.get(i));
-                    pieChartData.get(i).setPieValue(addValues.get(i));
                     return;
                 }
             }

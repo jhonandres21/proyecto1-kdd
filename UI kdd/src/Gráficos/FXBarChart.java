@@ -18,17 +18,19 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Juan Olaya O
  */
-public class FXBarChart {
+public class FXBarChart extends JPanel{
 
     final String chartName, valuesName, tagName, legend;
     final ArrayList<String> tags;
     final ArrayList<Integer> values;
     static ObservableList<XYChart.Data> barChartData;
+    static JFXPanel fxPanel;
 
     public FXBarChart(final String chartName, final String tagName, final ArrayList<String> tags, final String valuesName, final ArrayList<Integer> values, final String legend) {
 
@@ -39,9 +41,11 @@ public class FXBarChart {
         this.tagName = tagName;
         this.legend = legend;
 
-        final JFXPanel fxPanel = new JFXPanel();
-        Visualizador.panelPestanas.addTab("Bar Chart", fxPanel);
-
+        fxPanel = new JFXPanel();
+        add(fxPanel);
+        //Visualizador.jTabbedPane1.removeAll();
+        //Visualizador.jTabbedPane1.addTab("Bar Chart", fxPanel);
+        System.out.println("Se prerpara Bar Chart");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
