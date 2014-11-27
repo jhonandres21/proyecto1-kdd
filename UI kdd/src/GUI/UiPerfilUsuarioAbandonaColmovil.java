@@ -98,8 +98,8 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
                                 @Override
                                 public void run() {
                                     PieChart = new FXPieChart("Abandonos Mes-a-Mes", meses, dataAbandonos);
-                                    Visualizador.jTabbedPane1.removeAll();
-                                    Visualizador.jTabbedPane1.add("Pie Chart", PieChart);
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Pie Chart", PieChart);
                                     perfilesPie = true;
                                     perfilesBar = false;
                                     perfilesLine = false;
@@ -110,8 +110,8 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
                                 @Override
                                 public void run() {
                                     BarChart = new FXBarChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
-                                    Visualizador.jTabbedPane1.removeAll();
-                                    Visualizador.jTabbedPane1.add("Bar Chart", BarChart);
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Bar Chart", BarChart);
                                     perfilesPie = false;
                                     perfilesBar = true;
                                     perfilesLine = false;
@@ -122,8 +122,8 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
                                 @Override
                                 public void run() {
                                     LineChart = new FXLineChart("Abandonos Mes-a-Mes", "meses", meses, "Abandonos", dataAbandonos, "Abandonos");
-                                    Visualizador.jTabbedPane1.removeAll();
-                                    Visualizador.jTabbedPane1.add("Line Chart", LineChart);
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Line Chart", LineChart);
                                     perfilesPie = false;
                                     perfilesBar = false;
                                     perfilesLine = true;
