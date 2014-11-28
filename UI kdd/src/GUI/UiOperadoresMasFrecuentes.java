@@ -1,6 +1,5 @@
 package GUI;
 
-import Controlador.ControladorFranjasUsoRed;
 import Controlador.ControladorOperadoresMasFrecuentes;
 import Gráficos.FXBarChart;
 import Gráficos.FXLineChart;
@@ -18,9 +17,6 @@ public class UiOperadoresMasFrecuentes extends UiPerfil {
 
     ControladorOperadoresMasFrecuentes controladorOperadoresMasFrecuentes;
     ArrayList<Integer> datosOperadores;
-    FXPieChart PieChart;
-    FXBarChart BarChart;
-    FXLineChart LineChart;
 
     public UiOperadoresMasFrecuentes() {
 
@@ -55,33 +51,82 @@ public class UiOperadoresMasFrecuentes extends UiPerfil {
             operadores.add("Vodafone");
 
             if (!datosOperadores.isEmpty()) {
-                /*if (!Visualizador.estadoInicial) {
-                 System.out.println("Update");
-                 SwingUtilities.invokeLater(new Runnable() {
-                 @Override
-                 public void run() {
-                 PieChart.addData("Operadores Mas Frecuentes", operadores, datosOperadores);
-                 BarChart.addData(operadores, datosOperadores);
-                 LineChart.addData(operadores, datosOperadores);
-                 }
-                 });
+                if (operadoresActivo && ((operadoresPie && pieRadio.isSelected()) || (operadoresBar && barRadio.isSelected()) || (operadoresLine && lineRadio.isSelected()))) {
+                    System.out.println("Update");
 
-                 } else {*/
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (pieRadio.isSelected()) {
-                            PieChart = new FXPieChart("Operadores Mas Frecuentes", operadores, datosOperadores);
-                        } else if (barRadio.isSelected()) {
-                            BarChart = new FXBarChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica de Barras");
-                        } else if (lineRadio.isSelected()) {
-                            LineChart = new FXLineChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica Lineal");
-                        }
-
+                    if (operadoresPie) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart.addData(operadores, datosOperadores);
+                            }
+                        });
+                    } else if (operadoresBar) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart.addData(operadores, datosOperadores);
+                            }
+                        });
+                    } else if (operadoresLine) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart.addData(operadores, datosOperadores);
+                            }
+                        });
                     }
-                });
+                } else {
+                    perfilesActivo = false;
+                    operadoresActivo = true;
+                    franjasActivo = false;
+                    tendenciaAniosActivo = false;
+                    datosYVozActivo = false;
+                    vozActivo = false;
+                    datosActivo = false;
+                    preVsPosActivo = false;
+                    corpActivo = false;
+                    preActivo = false;
+                    posActivo = false;
 
-                //}
+                    if (pieRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart = new FXPieChart("Operadores Mas Frecuentes", operadores, datosOperadores);
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Pie Chart", PieChart);
+                                operadoresPie = true;
+                                operadoresBar = false;
+                                operadoresLine = false;
+                            }
+                        });
+                    } else if (barRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart = new FXBarChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica de Barras");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Bar Chart", BarChart);
+                                operadoresPie = false;
+                                operadoresBar = true;
+                                operadoresLine = false;
+                            }
+                        });
+                    } else if (lineRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart = new FXLineChart("Operadores Mas Frecuentes", "Operadores", operadores, "Cantidad de Llamadas", datosOperadores, "Grafica Lineal");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Line Chart", LineChart);
+                                operadoresPie = false;
+                                operadoresBar = false;
+                                operadoresLine = true;
+                            }
+                        });
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

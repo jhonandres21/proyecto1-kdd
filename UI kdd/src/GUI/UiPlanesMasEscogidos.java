@@ -17,9 +17,6 @@ public class UiPlanesMasEscogidos extends UiPerfil {
 
     ControladorPlanesMasEscogidos controladorPlanesMasEscogidos;
     ArrayList<Integer> datosPlanes;
-    FXPieChart PieChart;
-    FXBarChart BarChart;
-    FXLineChart LineChart;
 
     public UiPlanesMasEscogidos() {
 
@@ -36,6 +33,11 @@ public class UiPlanesMasEscogidos extends UiPerfil {
                 String prepago = "" + checkBoxPrepagoVoz.isSelected();
                 String postpago = "" + checkBoxPostpagoVoz.isSelected();
                 String corporativo = "" + checkBoxCorporativo.isSelected();
+                
+                boolean datosBool = checkBoxDatos.isSelected();
+                boolean prepagoBool = checkBoxPrepagoVoz.isSelected();
+                boolean postpagoBool = checkBoxPostpagoVoz.isSelected();
+                boolean corporativoBool = checkBoxCorporativo.isSelected();
 
                 datosPlanes = controladorPlanesMasEscogidos.obtenerPlanes(datos, prepago, postpago, corporativo);
 
@@ -108,21 +110,141 @@ public class UiPlanesMasEscogidos extends UiPerfil {
                      }
                      });
 
-                     } else {*/
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
+                     } else {
+                    perfilesActivo = false;
+                    operadoresActivo = false;
+                    franjasActivo = false;
+                    tendenciaMesesActivo = false;
+                    tendenciaAniosActivo = false;
+                    if (datosBool && prepagoBool && postpagoBool && corporativoBool) {
+                        datosYVozActivo = true;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+                    }else if(!datosBool && prepagoBool && postpagoBool && corporativoBool){
+                        datosYVozActivo = false;
+                        vozActivo = true;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+                    }else if(datosBool && !prepagoBool && !postpagoBool && !corporativoBool){
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = true;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+                    }else if(!datosBool && prepagoBool && postpagoBool && !corporativoBool){
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = true;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+                    }else if((!datosBool && !prepagoBool && postpagoBool && corporativoBool) || (!datosBool && !prepagoBool && !postpagoBool && corporativoBool)){
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = true;
+                        preActivo = false;
+                        posActivo = false;
+                    }else if(!datosBool && prepagoBool && !postpagoBool && !corporativoBool){
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = true;
+                        posActivo = false;
+                    }else if(!datosBool && !prepagoBool && postpagoBool && !corporativoBool){
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = true;
+                    }*/
 
-                            if (pieRadio.isSelected()) {
+                    if (pieRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
                                 PieChart = new FXPieChart("Planes Más Escogidos Hasta la Fecha", parametros, datosPlanes);
-                            } else if (barRadio.isSelected()) {
-                                BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
-                            } else if (lineRadio.isSelected()) {
-                                LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Pie Chart", PieChart);
+                                /*if(datosYVozActivo){
+                                    datosYVozPie = true;
+                                   datosYVozBar = false;
+                                   datosYVozLine = false;
+                                   vozPie = false;
+                                   vozLine = false;
+                                   datosPie = false;
+                                   datosBar = false;
+                                   datosLine = false;
+                                   preVsPosPie = false;
+                                   preVsPosBar = false;
+                                   preVsPosLine = false;
+                                   corpPie = false;
+                                   corpBar = false;
+                                   corpLine = false;
+                                   prePie = false;
+                                   preBar = false;
+                                   preLine = false;
+                                   posPie = false;
+                                   posBar = false;
+                                   posLine = false;
+                                }else if(vozActivo){
+                                   datosYVozPie = false;
+                                   datosYVozBar = false;
+                                   datosYVozLine = false;
+                                   vozPie = true;
+                                   vozLine = false;
+                                   datosPie = false;
+                                   datosBar = false;
+                                   datosLine = false;
+                                   preVsPosPie = false;
+                                   preVsPosBar = false;
+                                   preVsPosLine = false;
+                                   corpPie = false;
+                                   corpBar = false;
+                                   corpLine = false;
+                                   prePie = false;
+                                   preBar = false;
+                                   preLine = false;
+                                   posPie = false;
+                                   posBar = false;
+                                   posLine = false;
+                                }*/
                             }
-
-                        }
-                    });
+                        });
+                    } else if (barRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart = new FXBarChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Bar Chart", BarChart);
+                            }
+                        });
+                    } else if (lineRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart = new FXLineChart("Planes Más Escogidos Hasta la Fecha", "", parametros, "Cantidad de Ventas", datosPlanes, "Planes más Escogidos");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Line Chart", LineChart);
+                            }
+                        });
+                    }
                     //}
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha extraido la información");

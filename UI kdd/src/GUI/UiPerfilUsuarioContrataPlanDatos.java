@@ -55,24 +55,34 @@ public class UiPerfilUsuarioContrataPlanDatos extends UiPerfil {
                 if (!dataContratos.isEmpty()) {
                     if (perfilesActivo && ((perfilesPie && pieRadio.isSelected()) || (perfilesBar && barRadio.isSelected()) || (perfilesLine && lineRadio.isSelected()))) {
                         System.out.println("Update");
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (perfilesPie) {
+
+                        if (perfilesPie) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
                                     PieChart.addData(meses, dataContratos);
-                                } else if (perfilesBar) {
+                                }
+                            });
+                        } else if (perfilesBar) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
                                     BarChart.addData(meses, dataContratos);
-                                } else if (perfilesLine) {
+                                }
+                            });
+                        } else if (perfilesLine) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+
                                     LineChart.addData(meses, dataContratos);
                                 }
-                            }
-                        });
-
+                            });
+                        }
                     } else {
                         perfilesActivo = true;
                         operadoresActivo = false;
                         franjasActivo = false;
-                        tendenciaMesesActivo = false;
                         tendenciaAniosActivo = false;
                         datosYVozActivo = false;
                         vozActivo = false;
@@ -81,32 +91,44 @@ public class UiPerfilUsuarioContrataPlanDatos extends UiPerfil {
                         corpActivo = false;
                         preActivo = false;
                         posActivo = false;
-                        System.out.println("pie: " + pieRadio.isSelected());
-                        System.out.println("bar: " + barRadio.isSelected());
-                        System.out.println("line: " + lineRadio.isSelected());
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (pieRadio.isSelected()) {
+
+                        if (pieRadio.isSelected()) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
                                     PieChart = new FXPieChart("Contratos Mes-a-Mes", meses, dataContratos);
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Pie Chart", PieChart);
                                     perfilesPie = true;
                                     perfilesBar = false;
                                     perfilesLine = false;
-                                } else if (barRadio.isSelected()) {
+                                }
+                            });
+                        } else if (barRadio.isSelected()) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
                                     BarChart = new FXBarChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos");
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Bar Chart", BarChart);
                                     perfilesPie = false;
                                     perfilesBar = true;
                                     perfilesLine = false;
-                                } else if (lineRadio.isSelected()) {
+                                }
+                            });
+                        } else if (lineRadio.isSelected()) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
                                     LineChart = new FXLineChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos");
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Line Chart", LineChart);
                                     perfilesPie = false;
                                     perfilesBar = false;
                                     perfilesLine = true;
                                 }
-
-                            }
-                        });
-
+                            });
+                        }
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha extraido la información");

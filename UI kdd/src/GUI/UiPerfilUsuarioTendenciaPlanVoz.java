@@ -22,9 +22,6 @@ public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
 
     ControladorTendenciaPlanVoz controladorTendenciaPLanVoz;
     ArrayList<Integer> dataLlamadas;
-    FXPieChart PieChart;
-    FXBarChart BarChart;
-    FXLineChart LineChart;
 
     public UiPerfilUsuarioTendenciaPlanVoz() {
 
@@ -33,6 +30,8 @@ public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
 
     @Override
     void hacerConsulta(ActionEvent evt) {
+        System.out.println(perfilesActivo);
+        System.out.println(tendenciaAniosActivo);
         if (pieRadio.isSelected() || barRadio.isSelected() || lineRadio.isSelected()) {
 
             //verificamos que el rango de estrato sea correcto
@@ -42,7 +41,6 @@ public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
             System.out.println(dataLlamadas.size());
             ArrayList<String> dataString = new ArrayList();
             if (dataLlamadas.size() == 12) {
-                System.out.println("meses");
                 dataString.add("Enero");
                 dataString.add("Febrero");
                 dataString.add("Marzo");
@@ -60,33 +58,138 @@ public class UiPerfilUsuarioTendenciaPlanVoz extends UiPerfil {
                     dataString.add(i + "");
                 }
             }
-            System.out.println("Tags size: " + dataString + " Values size: " + dataLlamadas);
             if (!dataLlamadas.isEmpty()) {
-                /*if (!Visualizador.estadoInicial) {
-                 System.out.println("Update");
-                 SwingUtilities.invokeLater(new Runnable() {
-                 @Override
-                 public void run() {
-                 PieChart.addData("Tendencia Llamadas Mes-a-Mes", dataString, dataLlamadas);
-                 BarChart.addData(dataString, dataLlamadas);
-                 LineChart.addData(dataString, dataLlamadas);
-                 }
-                 });
-                 } else {*/
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (pieRadio.isSelected()) {
-                            PieChart = new FXPieChart("Tendencia Llamadas Mes-a-Mes", dataString, dataLlamadas);
-                        } else if (barRadio.isSelected()) {
-                            BarChart = new FXBarChart("Tendencia Llamadas Mes-a-Mes", "Años", dataString, "Llamadas", dataLlamadas, "Llamadas");
-                        } else if (lineRadio.isSelected()) {
-                            LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "Años", dataString, "Llamadas", dataLlamadas, "Llamadas");
-                        }
-
+                if (perfilesActivo && !inicioAnio.equals("Escoger una Opción") && ((perfilesPie && pieRadio.isSelected()) || (perfilesBar && barRadio.isSelected()) || (perfilesLine && lineRadio.isSelected()))) {
+                    System.out.println("Update");
+                    if (perfilesPie) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart.addData(dataString, dataLlamadas);
+                            }
+                        });
+                    } else if (perfilesBar) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart.addData(dataString, dataLlamadas);
+                            }
+                        });
+                    } else if (perfilesLine) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart.addData(dataString, dataLlamadas);
+                            }
+                        });
                     }
-                });
-                //}
+                } else if (tendenciaAniosActivo && inicioAnio.equals("Escoger una Opción") && ((tendenciaAniosPie && pieRadio.isSelected()) || (tendenciaAniosBar && barRadio.isSelected()) || (tendenciaAniosLine && lineRadio.isSelected()))) {
+                    if (tendenciaAniosPie) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart.addData(dataString, dataLlamadas);
+                            }
+                        });
+                    } else if (tendenciaAniosBar) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart.addData(dataString, dataLlamadas);
+                            }
+                        });
+                    } else if (tendenciaAniosLine) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart.addData(dataString, dataLlamadas);
+                            }
+                        });
+                    }
+                } else {
+                    if (!inicioAnio.equals("Escoger una Opción")) {
+                        perfilesActivo = true;
+                        operadoresActivo = false;
+                        franjasActivo = false;
+                        tendenciaAniosActivo = false;
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+                    } else {
+                        perfilesActivo = false;
+                        operadoresActivo = false;
+                        franjasActivo = false;
+                        tendenciaAniosActivo = true;
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+                    }
+                    System.out.println(perfilesActivo);
+                    System.out.println(tendenciaAniosActivo);
+                    if (pieRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart = new FXPieChart("Tendencia Llamadas Mes-a-Mes", dataString, dataLlamadas);
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Pie Chart", PieChart);
+                                if (perfilesActivo) {
+                                    perfilesPie = true;
+                                    perfilesBar = false;
+                                    perfilesLine = false;
+                                } else if (tendenciaAniosActivo) {
+                                    tendenciaAniosPie = true;
+                                    tendenciaAniosBar = false;
+                                    tendenciaAniosLine = false;
+                                }
+                            }
+                        });
+                    } else if (barRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart = new FXBarChart("Tendencia Llamadas Mes-a-Mes", "Años", dataString, "Llamadas", dataLlamadas, "Llamadas");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Bar Chart", BarChart);
+                                if (perfilesActivo) {
+                                    perfilesPie = false;
+                                    perfilesBar = true;
+                                    perfilesLine = false;
+                                } else if (tendenciaAniosActivo) {
+                                    tendenciaAniosPie = false;
+                                    tendenciaAniosBar = true;
+                                    tendenciaAniosLine = false;
+                                }
+                            }
+                        });
+                    } else if (lineRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart = new FXLineChart("Uso Roamming Mes-a-Mes", "Años", dataString, "Llamadas", dataLlamadas, "Llamadas");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Line Chart", LineChart);
+                                if (perfilesActivo) {
+                                    perfilesPie = false;
+                                    perfilesBar = false;
+                                    perfilesLine = true;
+                                } else if (tendenciaAniosActivo) {
+                                    tendenciaAniosPie = false;
+                                    tendenciaAniosBar = false;
+                                    tendenciaAniosLine = true;
+                                }
+                            }
+                        });
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

@@ -7,7 +7,6 @@ public class Visualizador extends javax.swing.JFrame {
 
     String arregloPreguntas[][];
     JComboBox comboBoxPreguntas;
-    static boolean estadoInicial = true;
 
     public Visualizador() {
         super("Colmovil");
@@ -112,6 +111,9 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getInicioEstrato());
         panelOpciones.add(perfil.getLabelFinEstrato());
         panelOpciones.add(perfil.getFinEstrato());
+        panelOpciones.add(perfil.getPieRadio());
+        panelOpciones.add(perfil.getBarRadio());
+        panelOpciones.add(perfil.getLineRadio());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
@@ -122,6 +124,9 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getLabelOperador());
         panelOpciones.add(perfil.getLabelVacia());
         panelOpciones.add(perfil.getComboBoxOperador());
+        panelOpciones.add(perfil.getPieRadio());
+        panelOpciones.add(perfil.getBarRadio());
+        panelOpciones.add(perfil.getLineRadio());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
@@ -131,6 +136,9 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.removeAll();
         panelOpciones.add(perfil.getLabelMeses());
         panelOpciones.add(perfil.getComboBoxMeses());
+        panelOpciones.add(perfil.getPieRadio());
+        panelOpciones.add(perfil.getBarRadio());
+        panelOpciones.add(perfil.getLineRadio());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
@@ -144,6 +152,9 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getCheckBoxPrepagoVoz());
         panelOpciones.add(perfil.getCheckBoxPostpagoVoz());
         panelOpciones.add(perfil.getCheckBoxCorporativo());
+        panelOpciones.add(perfil.getPieRadio());
+        panelOpciones.add(perfil.getBarRadio());
+        panelOpciones.add(perfil.getLineRadio());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }
@@ -154,6 +165,9 @@ public class Visualizador extends javax.swing.JFrame {
         panelOpciones.add(perfil.getLabelAnioInicio());
         panelOpciones.add(perfil.getLabelVacia());
         panelOpciones.add(perfil.getComboBoxInicioAnios());
+        panelOpciones.add(perfil.getPieRadio());
+        panelOpciones.add(perfil.getBarRadio());
+        panelOpciones.add(perfil.getLineRadio());
         panelOpciones.add(perfil.getConsultar());
         panelOpciones.updateUI();
     }

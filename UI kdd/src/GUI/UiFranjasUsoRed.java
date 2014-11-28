@@ -17,9 +17,6 @@ public class UiFranjasUsoRed extends UiPerfil {
 
     ControladorFranjasUsoRed controladorFranjasUsoRed;
     ArrayList<Integer> datosFranjas;
-    FXPieChart PieChart;
-    FXBarChart BarChart;
-    FXLineChart LineChart;
 
     public UiFranjasUsoRed() {
 
@@ -42,31 +39,82 @@ public class UiFranjasUsoRed extends UiPerfil {
             franjas.add("PM");
 
             if (!datosFranjas.isEmpty()) {
-                /*if (!Visualizador.estadoInicial) {
-                 System.out.println("Update");
-                 SwingUtilities.invokeLater(new Runnable() {
-                 @Override
-                 public void run() {
-                 PieChart.addData("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
-                 BarChart.addData(franjas, datosFranjas);
-                 LineChart.addData(franjas, datosFranjas);
-                 }
-                 });
+                if (franjasActivo && ((franjasPie && pieRadio.isSelected()) || (franjasBar && barRadio.isSelected()) || (franjasLine && lineRadio.isSelected()))) {
+                    System.out.println("Update");
 
-                 } else {*/
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (pieRadio.isSelected()) {
-                            PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
-                        } else if (barRadio.isSelected()) {
-                            BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
-                        } else if (lineRadio.isSelected()) {
-                            LineChart = new FXLineChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
-                        }
+                    if (franjasPie) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart.addData(franjas, datosFranjas);
+                            }
+                        });
+                    } else if (franjasBar) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart.addData(franjas, datosFranjas);
+                            }
+                        });
+                    } else if (franjasLine) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart.addData(franjas, datosFranjas);
+                            }
+                        });
                     }
-                });
-                //}
+                } else {
+                    perfilesActivo = false;
+                    operadoresActivo = false;
+                    franjasActivo = true;
+                    tendenciaAniosActivo = false;
+                    datosYVozActivo = false;
+                    vozActivo = false;
+                    datosActivo = false;
+                    preVsPosActivo = false;
+                    corpActivo = false;
+                    preActivo = false;
+                    posActivo = false;
+
+                    if (pieRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PieChart = new FXPieChart("Franjas Más Usadas Hasta la Fecha", franjas, datosFranjas);
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Pie Chart", PieChart);
+                                franjasPie = true;
+                                franjasBar = false;
+                                franjasLine = false;
+                            }
+                        });
+                    } else if (barRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                BarChart = new FXBarChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Bar Chart", BarChart);
+                                franjasPie = false;
+                                franjasBar = true;
+                                franjasLine = false;
+                            }
+                        });
+                    } else if (lineRadio.isSelected()) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                LineChart = new FXLineChart("Franjas Más Usadas Hasta la Fecha", "Franjas", franjas, "Uso", datosFranjas, "Franjas");
+                                Visualizador.panelPestanas.removeAll();
+                                Visualizador.panelPestanas.add("Line Chart", LineChart);
+                                franjasPie = false;
+                                franjasBar = false;
+                                franjasLine = true;
+                            }
+                        });
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha extraido la información");
             }

@@ -30,8 +30,8 @@ public abstract class UiPerfil {
     static protected boolean operadoresPie = false, operadoresBar = false, operadoresLine = false;
     static protected boolean franjasActivo = false;
     static protected boolean franjasPie = false, franjasBar = false, franjasLine = false;
-    static protected boolean tendenciaAniosActivo = false, tendenciaMesesActivo = false;
-    static protected boolean tendenciaAniosPie = false, tendenciaAniosBar = false, tendenciaAniosLine = false, tendenciaMesesPie = false, tendenciaMesesBar = false, tendenciaMesesLine = false;
+    static protected boolean tendenciaAniosActivo = false;
+    static protected boolean tendenciaAniosPie = false, tendenciaAniosBar = false, tendenciaAniosLine = false;
     static protected boolean datosYVozActivo = false, vozActivo = false, datosActivo = false, preVsPosActivo = false, corpActivo = false, preActivo = false, posActivo = false;
     static protected boolean datosYVozPie = false, datosYVozBar = false, datosYVozLine = false, vozPie = false, vozBar = false, vozLine = false, datosPie = false, datosBar = false, datosLine = false;
     static protected boolean preVsPosPie = false, preVsPosBar = false, preVsPosLine = false, corpPie = false, corpBar = false, corpLine = false, prePie = false, preBar = false, preLine = false, posPie = false, posBar = false, posLine = false;

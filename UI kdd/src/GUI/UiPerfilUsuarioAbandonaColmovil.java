@@ -83,7 +83,6 @@ public class UiPerfilUsuarioAbandonaColmovil extends UiPerfil {
                         perfilesActivo = true;
                         operadoresActivo = false;
                         franjasActivo = false;
-                        tendenciaMesesActivo = false;
                         tendenciaAniosActivo = false;
                         datosYVozActivo = false;
                         vozActivo = false;

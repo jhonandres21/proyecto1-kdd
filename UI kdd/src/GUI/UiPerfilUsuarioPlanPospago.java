@@ -17,9 +17,6 @@ public class UiPerfilUsuarioPlanPospago extends UiPerfil {
 
     ControladorPerfilUsuarioPlanPospago controladorPlanesPospago;
     ArrayList dataContratos;
-    FXPieChart PieChart;
-    FXBarChart BarChart;
-    FXLineChart LineChart;
 
     public UiPerfilUsuarioPlanPospago() {
 
@@ -56,33 +53,85 @@ public class UiPerfilUsuarioPlanPospago extends UiPerfil {
                 meses.add("Diciembre");
 
                 if (!dataContratos.isEmpty()) {
-                    /*if (!Visualizador.estadoInicial) {
-                     System.out.println("Update");
-                     SwingUtilities.invokeLater(new Runnable() {
-                     @Override
-                     public void run() {
-                     PieChart.addData("Contratos Planes Pospago Mes-a-Mes", meses, dataContratos);
-                     BarChart.addData(meses, dataContratos);
-                     LineChart.addData(meses, dataContratos);
-                     }
-                     });
+                    if (perfilesActivo && ((perfilesPie && pieRadio.isSelected()) || (perfilesBar && barRadio.isSelected()) || (perfilesLine && lineRadio.isSelected()))) {
+                        if (perfilesPie) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    PieChart.addData(meses, dataContratos);
+                                }
+                            });
+                        } else if (perfilesBar) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    BarChart.addData(meses, dataContratos);
+                                }
+                            });
+                        } else if (perfilesLine) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LineChart.addData(meses, dataContratos);
+                                }
+                            });
+                        }
 
-                     } else {*/
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (pieRadio.isSelected()) {
-                                PieChart = new FXPieChart("Contratos Planes Pospago Mes-a-Mes", meses, dataContratos);
-                            } else if (barRadio.isSelected()) {
-                                BarChart = new FXBarChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
-                            } else if (lineRadio.isSelected()) {
-                                LineChart = new FXLineChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
-                            }
+                    } else {
+                        perfilesActivo = true;
+                        operadoresActivo = false;
+                        franjasActivo = false;
+                        tendenciaAniosActivo = false;
+                        datosYVozActivo = false;
+                        vozActivo = false;
+                        datosActivo = false;
+                        preVsPosActivo = false;
+                        corpActivo = false;
+                        preActivo = false;
+                        posActivo = false;
+
+                        if (pieRadio.isSelected()) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    PieChart = new FXPieChart("Contratos Planes Pospago Mes-a-Mes", meses, dataContratos);
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Pie Chart", PieChart);
+                                    perfilesPie = true;
+                                    perfilesBar = false;
+                                    perfilesLine = false;
+                                }
+                            });
+
+                        } else if (barRadio.isSelected()) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    BarChart = new FXBarChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Bar Chart", BarChart);
+                                    perfilesPie = false;
+                                    perfilesBar = true;
+                                    perfilesLine = false;
+                                }
+                            });
+
+                        } else if (lineRadio.isSelected()) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LineChart = new FXLineChart("Contratos Mes-a-Mes", "meses", meses, "Contratos", dataContratos, "Contratos Pospago");
+                                    Visualizador.panelPestanas.removeAll();
+                                    Visualizador.panelPestanas.add("Line Chart", LineChart);
+                                    perfilesPie = false;
+                                    perfilesBar = false;
+                                    perfilesLine = true;
+                                }
+                            });
 
                         }
-                    });
 
-                    //}
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha extraido la información");
                 }
